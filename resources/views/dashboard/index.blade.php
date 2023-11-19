@@ -13,7 +13,7 @@
           </div>
           <div class="stat-content">
             <div class="text-left dib">
-              <div class="stat-text">Rp<span class="count">2.000.000</span></div>
+              <div class="stat-text">Rp<span class="count">2000000</span></div>
               <div class="stat-heading">Pendapatan Kas Negara</div>
             </div>
           </div>
@@ -75,6 +75,8 @@
       </div>
     </div>
   </div>
+
+
 </div>
 
 @endsection
