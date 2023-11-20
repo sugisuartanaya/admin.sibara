@@ -84,7 +84,12 @@ jQuery(document).ready(function($) {
 			$('body').removeClass('small-device');  
 		} 
 		
-	});
-  
+	}); 
+
+
+  $(document).ready(function() {
+    $('#tabel').DataTable();
+  });
+
  
 });

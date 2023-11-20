@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\DashboardController;
 
 
 /*
@@ -24,4 +25,6 @@ Route::get('/logout', [LoginController::class, 'logout']);
 Route::get('/dashboard', function(){
   return view('dashboard.index');
 })->middleware('auth');
+
+Route::get('/pegawai', [PegawaiController::class, 'index']);
 

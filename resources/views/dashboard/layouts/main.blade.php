@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="css/dashboard.css">
 
 </head>
@@ -21,10 +22,10 @@
         <div id="main-menu" class="main-menu collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active">
-                <a href="index.html"><i class="menu-icon fa fa-laptop"></i>Dashboard</a>
+                <a href="/dashboard"><i class="menu-icon fa fa-laptop"></i>Dashboard</a>
             </li>
             <li>
-              <a href=""><i class="menu-icon fa fa-users"></i>Pegawai</a>
+              <a href="/pegawai"><i class="menu-icon fa fa-users"></i>Pegawai</a>
             </li>
             <li class="menu-item-has-children dropdown">
               <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="menu-icon fa fa-users"></i>Pembeli</a>
@@ -100,11 +101,9 @@
         <!-- /#header -->
 
         <!-- Content -->
-        <div class="content">
-          <div class="animated fadeIn">
-            @yield('container')
-          </div>
-        </div>    
+        @yield('container')
+
+           
         <!-- /.content -->
         
         <div class="clearfix"></div>
@@ -126,11 +125,17 @@
     <!-- /#right-panel -->
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Your Custom Script -->
     <script src="js/main.js"></script>
 
-</body>
+  </body>
 </html>
