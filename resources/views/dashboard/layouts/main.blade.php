@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 
 </head>
 
@@ -88,7 +88,7 @@
                 </div>
                 <div class="user-area dropdown float-right">
                   <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="user-avatar rounded-circle" style="margin-right: 10px" src="images/admin.jpg" alt="User Avatar">Hi, {{ auth()->user()->username }}
+                    <img class="user-avatar rounded-circle" style="margin-right: 10px" src="{{ asset('images/admin.jpg') }}" alt="User Avatar">Hi, {{ auth()->user()->username }}
                   </a>
                   <ul class="user-menu dropdown-menu">
                     <li><a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a></li>
@@ -135,7 +135,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
 
     <!-- Your Custom Script -->
-    <script src="js/main.js"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
 
   </body>
 </html>

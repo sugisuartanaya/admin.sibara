@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PegawaiController;
-use App\Http\Controllers\DashboardController;
 
 
 /*
@@ -26,5 +26,9 @@ Route::get('/dashboard', function(){
   return view('dashboard.index');
 })->middleware('auth');
 
-Route::get('/pegawai', [PegawaiController::class, 'index']);
+// Route::get('/pegawai', [PegawaiController::class, 'index']);
+// Route::get('/create', [PegawaiController::class, 'create']);
+Route::resource('pegawai', PegawaiController::class);
+
+Route::post('/user/store', [UserController::class, 'store']);
 

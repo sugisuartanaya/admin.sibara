@@ -34,37 +34,29 @@
           <div class="card">
               <div class="card-header d-flex justify-content-between align-items-center"">
                   <strong class="card-title mb-0">PEGAWAI TERDAFTAR</strong>
-                  <button class="btn btn-success ml-auto"><i class="fa fa-plus" style="margin-right: 10px"></i>Tambah</button>
+                  <a href="/pegawai/create"><button class="btn btn-success ml-auto"><i class="fa fa-plus" style="margin-right: 10px"></i>Tambah</button></a>
               </div>
               <div class="card-body">
                 <table id="tabel" class="table table-striped datatable">
                   <thead>
                     <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">First</th>
-                      <th scope="col">Last</th>
-                      <th scope="col">Handle</th>
+                      <th scope="col">No.</th>
+                      <th scope="col">Nama Lengkap</th>
+                      <th scope="col">NIP</th>
+                      <th scope="col">Pangkat</th>
+                      <th scope="col">Jabatan</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
-                      <td>@fat</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>Larry the Bird</td>
-                      <td></td>
-                      <td>@twitter</td>
-                    </tr>
+                    @foreach ($data_pegawai as $index => $pegawai)
+                      <tr>
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ $pegawai->nama_pegawai }}</td>
+                        <td>{{ $pegawai->nip }}</td>
+                        <td>{{ $pegawai->pangkat }}</td>
+                        <td>{{ $pegawai->jabatan }}</td>
+                      </tr>
+                    @endforeach                   
                   </tbody>
                 </table>
               </div>
