@@ -32,6 +32,16 @@
     <div class="row">
       <div class="col-12">
           <div class="card">
+
+            @if(session('success'))
+              <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            @endif
+
               <div class="card-header d-flex justify-content-between align-items-center"">
                   <strong class="card-title mb-0">PEGAWAI TERDAFTAR</strong>
                   <a href="/pegawai/create"><button class="btn btn-success ml-auto"><i class="fa fa-plus" style="margin-right: 10px"></i>Tambah</button></a>
@@ -42,9 +52,11 @@
                     <tr>
                       <th scope="col">No.</th>
                       <th scope="col">Nama Lengkap</th>
+                      <th scope="col">Status</th>
                       <th scope="col">NIP</th>
                       <th scope="col">Pangkat</th>
                       <th scope="col">Jabatan</th>
+                      <th scope="col">Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -52,15 +64,25 @@
                       <tr>
                         <td>{{ $index + 1 }}</td>
                         <td>{{ $pegawai->nama_pegawai }}</td>
+                        <td>
+                          @if($pegawai->is_admin == 1)
+                            <span class="badge badge-success">Admin</span>
+                          @elseif($pegawai->is_admin == 0)
+                            <span class="badge badge-info">Pegawai</span>
+                          @endif
+                        </td>
                         <td>{{ $pegawai->nip }}</td>
                         <td>{{ $pegawai->pangkat }}</td>
                         <td>{{ $pegawai->jabatan }}</td>
+                        <td>
+                          <a href="" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Edit"><i class="menu-icon fa fa-pencil"></i></a>
+                          <a href="" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Delete"><i class="menu-icon fa fa-trash-o"></i></a>
+                        </td>
                       </tr>
                     @endforeach                   
                   </tbody>
                 </table>
               </div>
-              
               
           </div>
       </div>

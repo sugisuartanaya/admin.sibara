@@ -39,13 +39,23 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // Validasi input jika diperlukan
+        // Validasi 
+        $validatedData = $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+            'role' => 'required',
+            'nama_pegawai' => 'required',
+            'nip' => 'required',
+            'pangkat' => 'required',
+            'jabatan' => 'required',
+            'foto_pegawai' => 'required',
+        ]);
 
         // Simpan data ke tabel 'users'
         $user = User::create([
-            'username' => $request->input('username'),
-            'password' => Hash::make($request->input('password')),
-            'role' => $request->input('role'),
+            'username' => $validatedData['username'],
+            'password' => bcrypt($validatedData['password']),
+            'role' => $validatedData['role'],
             // tambahkan kolom-kolom lain yang diperlukan
         ]);
 
@@ -57,22 +67,21 @@ class UserController extends Controller
         // }
 
         // Simpan data ke tabel 'pegawai' dengan user_id yang terkait
-        $pegawai = Pegawai::create([
+        Pegawai::create([
             'user_id' => $user->id,
-            'nama_pegawai' => $request->input('nama_pegawai'),
-            'nip' => $request->input('nip'),
-            'pangkat' => $request->input('pangkat'),
-            'jabatan' => $request->input('jabatan'),
-            'foto_pegawai' => $request->input('foto_pegawai'),
+            'nama_pegawai' => $validatedData['nama_pegawai'],
+            'nip' => $validatedData['nip'],
+            'pangkat' => $validatedData['pangkat'],
+            'jabatan' => $validatedData['jabatan'],
+            'foto_pegawai' => $validatedData['foto_pegawai'],
             // 'foto_pegawai' => $user->photo,
             // tambahkan kolom-kolom lain yang diperlukan
-            'is_admin' => $request->input('is_admin', false),
+            'is_admin' => isset($validatedData['is_admin']) ? true : false,
         ]);
 
         // Set flash message
         Session::flash('success', 'Pegawai berhasil ditambahkan.');
 
-        // Redirect ke halaman /pegawai
         return redirect('/pegawai');
     }
 

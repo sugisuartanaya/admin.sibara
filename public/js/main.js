@@ -91,5 +91,8 @@ jQuery(document).ready(function($) {
     $('#tabel').DataTable();
   });
 
- 
+	$(function () {
+		$('[data-toggle="tooltip"]').tooltip()
+})
+
 });

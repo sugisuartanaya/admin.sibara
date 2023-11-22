@@ -47,32 +47,42 @@
 
             <div class="form-group">
               <label for="username" class=" form-control-label">Username</label>
-              <input type="text" id="username" name="username" class="form-control">
+              <input type="text" id="username" name="username" class="form-control" required>
             </div>
             <div class="form-group">
               <label for="password" class=" form-control-label">Password</label>
-              <input type="password" id="password" name="password" class="form-control">
+              <input type="password" id="password" name="password" class="form-control" required>
             </div>
             
-              <input type="text" style="display:none;" id="role" name="role" class="form-control" value="2">
+              <input type="text" style="display:none;" id="role" name="role" class="form-control" value="1">
               {{-- <input type="text" style="display:none;" id="is_admin" name="is_admin" class="form-control" value="false"> --}}
               {{-- <input type="text" style="display:none;" id="user_id" name="user_id" class="form-control"> --}}
+            <div class="form-group">
+              <label for="select" class=" form-control-label">Admin</label>
+              <div class="form-check">
+                <div class="checkbox">
+                    <label for="checkbox1" class="form-check-label ">
+                      <input type="checkbox" id="checkbox1" name="is_admin">&nbsp; Hak Akses Administrator
+                    </label>
+              </div>
+            </div>
+            <br>
             
             <div class="form-group">
               <label for="nama_pegawai" class=" form-control-label">Nama Pegawai</label>
-              <input type="text" id="nama_pegawai" name="nama_pegawai" class="form-control">
+              <input type="text" id="nama_pegawai" name="nama_pegawai" class="form-control" required>
             </div>
             <div class="form-group">
               <label for="nip" class=" form-control-label">NIP</label>
-              <input type="text" id="nip" name="nip" class="form-control">
+              <input type="text" id="nip" name="nip" class="form-control" required>
             </div>
             <div class="form-group">
               <label for="pangkat" class=" form-control-label">Pangkat</label>
-              <input type="text" id="pangkat" name="pangkat" class="form-control">
+              <input type="text" id="pangkat" name="pangkat" class="form-control" required>
             </div>
             <div class="form-group">
               <label for="jabatan" class=" form-control-label">Jabatan</label>
-              <input type="text" id="jabatan" name="jabatan" class="form-control">
+              <input type="text" id="jabatan" name="jabatan" class="form-control" required>
             </div>
             <div class="form-group">
               <label for="foto_pegawai" class=" form-control-label">Foto</label>

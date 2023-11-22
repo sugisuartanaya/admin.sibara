@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('pangkat');
             $table->string('jabatan');
             $table->string('foto_pegawai');
-            $table->boolean('is_admin')->default(false);
+            $table->boolean('is_admin');
         });
     }
 
