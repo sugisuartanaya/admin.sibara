@@ -19,13 +19,14 @@
       <div class="col-lg-6 col-md-12">
         <div class="card">
           <div class="card-body">
-            <p>Hi, {{ auth()->user()->pegawai->nama_pegawai }}</p> 
+            <p>Hi, {{ auth()->user()->username }}</p> 
+            {{-- <p>Hi, {{ auth()->user()->pegawai->nama_pegawai }}</p>  --}}
             <hr>
             <p>Kejaksaan Negeri Denpasar</p>
             <hr>
-            <p>{{ auth()->user()->pegawai->jabatan }}</p>
+            {{-- <p>{{ auth()->user()->pegawai->jabatan }}</p>
             <hr>
-            <p>{{ auth()->user()->pegawai->pangkat }}</p>
+            <p>{{ auth()->user()->pegawai->pangkat }}</p> --}}
           </div>
         </div>
       </div>

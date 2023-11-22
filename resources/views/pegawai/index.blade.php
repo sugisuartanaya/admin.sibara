@@ -40,6 +40,13 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
               </div>
+            @elseif(session('updated'))
+              <div class="sufee-alert alert with-close alert-info alert-dismissible fade show">
+                {{ session('updated') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
             @endif
 
               <div class="card-header d-flex justify-content-between align-items-center"">
@@ -75,7 +82,7 @@
                         <td>{{ $pegawai->pangkat }}</td>
                         <td>{{ $pegawai->jabatan }}</td>
                         <td>
-                          <a href="" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Edit"><i class="menu-icon fa fa-pencil"></i></a>
+                          <a href="/editpegawai/{{ $pegawai->nip }}/edit" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Edit"><i class="menu-icon fa fa-pencil"></i></a>
                           <a href="" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Delete"><i class="menu-icon fa fa-trash-o"></i></a>
                         </td>
                       </tr>

@@ -58,7 +58,7 @@ class PegawaiController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
