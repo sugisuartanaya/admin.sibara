@@ -30,6 +30,8 @@ Route::get('/dashboard', function(){
   ]);
 })->middleware('auth');
 
+Route::get('/profile', [pegawaiController::class, 'myProfile']);
+
 Route::resource('pegawai', PegawaiController::class);
 
 Route::post('/admin/tambahPegawai', [AdminController::class, 'storePegawai']);

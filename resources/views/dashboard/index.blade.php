@@ -19,14 +19,13 @@
       <div class="col-lg-6 col-md-12">
         <div class="card">
           <div class="card-body">
-            <p>Hi, {{ auth()->user()->username }}</p> 
-            {{-- <p>Hi, {{ auth()->user()->pegawai->nama_pegawai }}</p>  --}}
+            <strong>Hi, {{ auth()->user()->pegawai->nama_pegawai }}</strong> 
             <hr>
             <p>Kejaksaan Negeri Denpasar</p>
             <hr>
-            {{-- <p>{{ auth()->user()->pegawai->jabatan }}</p>
+            <p>{{ auth()->user()->pegawai->jabatan }}</p>
             <hr>
-            <p>{{ auth()->user()->pegawai->pangkat }}</p> --}}
+            <p>{{ auth()->user()->pegawai->pangkat }}</p>
           </div>
         </div>
       </div>
@@ -34,7 +33,7 @@
       <div class="col-lg-6 col-md-12">
         <div class="card">
           <div class="card-body">
-            <h5 class="text-center">Jadwal Penjualan Langsung</h5>
+            <strong class="text-center">Jadwal Penjualan Langsung</strong>
             <hr>
             <p>Saat ini tidak ada jadwal</p>
             <button class="btn btn-success">Buat jadwal</button>

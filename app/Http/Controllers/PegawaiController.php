@@ -12,6 +12,14 @@ class PegawaiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function myProfile()
+    {
+        return view('pegawai.profile', [
+            'active' => 'active',
+            'title' => 'Profile',
+        ]);
+    }
+
     public function index()
     {
         $pegawai = Pegawai::all();

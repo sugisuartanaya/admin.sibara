@@ -91,8 +91,8 @@
                     <img class="user-avatar rounded-circle" style="margin-right: 10px" src="{{ asset('images/admin.jpg') }}" alt="User Avatar">Hi, {{ auth()->user()->username }}
                   </a>
                   <ul class="user-menu dropdown-menu">
-                    <li><a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a></li>
-                    <li><a class="nav-link" href="/logout"><i class="fa fa- user"></i>Logout</a></li>
+                    <li><a class="nav-link" href="/profile"><i class="fa fa-user"></i>My Profile</a></li>
+                    <li><a class="nav-link" href="/logout"><i class="fa fa-sign-out"></i>Logout</a></li>
                   </ul>
                 </div>
               </div>
