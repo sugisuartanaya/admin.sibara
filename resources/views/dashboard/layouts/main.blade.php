@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SIBARA | Dashboard</title>
+    <title>SIBARA | {{ $title }}</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -21,32 +21,32 @@
       <nav class="navbar navbar-expand-sm navbar-default">
         <div id="main-menu" class="main-menu collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active">
+            <li class="{{ ($title === "Dashboard") ? 'active' : '' }}">
                 <a href="/dashboard"><i class="menu-icon fa fa-laptop"></i>Dashboard</a>
             </li>
-            <li>
+            <li class="{{ ($title === "Pegawai") ? 'active' : '' }}">
               <a href="/pegawai"><i class="menu-icon fa fa-users"></i>Pegawai</a>
             </li>
-            <li class="menu-item-has-children dropdown">
+            <li class="menu-item-has-children dropdown {{ ($title === "Pembeli") ? 'active' : '' }}">
               <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="menu-icon fa fa-users"></i>Pembeli</a>
               <ul class="sub-menu children dropdown-menu">
                 <li><i class="menu-icon fa fa-address-card"></i><a href="forms-basic.html">Verifikasi Akun</a></li>
                 <li><i class="menu-icon fa fa-th"></i><a href="forms-basic.html">Daftar Pembeli</a></li>
               </ul>
             </li>
-            <li>
+            <li {{ ($title === "Jadwal") ? 'active' : '' }}>
               <a href=""><i class="menu-icon fa fa-calendar"></i>Jadwal</a>
             </li>
-            <li>
+            <li {{ ($title === "Kategori") ? 'active' : '' }}>
               <a href=""><i class="menu-icon fa fa-tags"></i>Kategori</a>
             </li>
-            <li>
+            <li {{ ($title === "Barang Rampasan") ? 'active' : '' }}>
               <a href=""><i class="menu-icon fa fa-cube"></i>Barang Rampasan</a>
             </li>
-            <li>
+            <li {{ ($title === "Transaksi") ? 'active' : '' }}>
               <a href=""><i class="menu-icon fa fa-shopping-bag"></i>Transaksi</a>
             </li>
-            <li>
+            <li {{ ($title === "Laporan Penjualan") ? 'active' : '' }}>
               <a href=""><i class="menu-icon fa fa-table"></i>Laporan Penjualan</a>
             </li>
           </ul>

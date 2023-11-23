@@ -15,7 +15,9 @@ class PegawaiController extends Controller
     public function index()
     {
         $pegawai = Pegawai::all();
-        return view('pegawai.index')->with('data_pegawai', $pegawai);
+        return view('pegawai.index')->with('data_pegawai', $pegawai)
+        ->with('active', 'active')
+        ->with('title', 'Pegawai');
     }
 
     /**

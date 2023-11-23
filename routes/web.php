@@ -24,11 +24,12 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 Route::get('/logout', [LoginController::class, 'logout']);
 
 Route::get('/dashboard', function(){
-  return view('dashboard.index');
+  return view('dashboard.index', [
+      'active' => 'active',
+      'title' => 'Dashboard',
+  ]);
 })->middleware('auth');
 
-// Route::get('/pegawai', [PegawaiController::class, 'index']);
-// Route::get('/create', [PegawaiController::class, 'create']);
 Route::resource('pegawai', PegawaiController::class);
 
 Route::post('/admin/tambahPegawai', [AdminController::class, 'storePegawai']);
