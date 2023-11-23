@@ -83,7 +83,43 @@
                         <td>{{ $pegawai->jabatan }}</td>
                         <td>
                           <a href="/editpegawai/{{ $pegawai->nip }}/edit" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Edit"><i class="menu-icon fa fa-pencil"></i></a>
-                          <a href="" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Delete"><i class="menu-icon fa fa-trash-o"></i></a>
+                          <form class="d-inline" action="/deletepegawai/{{ $pegawai->nip }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deletePegawai{{ $pegawai->nip }}"><i class="menu-icon fa fa-trash-o"></i>
+                            </button>
+
+                            <!-- The Modal -->
+                              <div class="modal" id="deletePegawai{{ $pegawai->nip }}">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+
+                                        <!-- Modal Header -->
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Hapus Pegawai</h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+
+                                        <!-- Modal Body -->
+                                        <div class="modal-body">
+                                            <p>Apakah anda yakin akan menghapus akun {{ $pegawai->nama_pegawai }}?</p>
+                                        </div>
+
+                                        <!-- Modal Footer -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" name="submit" class="btn btn-danger btn-sm">Confirm
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                          </form>
+                          {{-- <a href="" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Delete"><i class="menu-icon fa fa-trash-o"></i></a> --}}
                         </td>
                       </tr>
                     @endforeach                   

@@ -15,7 +15,7 @@ class AdminController extends Controller
         // Validasi 
         $validatedData = $request->validate([
             'username' => 'required',
-            'password' => 'required',
+            'password' => 'required|min:3',
             'role' => 'required',
             'nama_pegawai' => 'required',
             'nip' => 'required',
@@ -29,7 +29,6 @@ class AdminController extends Controller
             'username' => $validatedData['username'],
             'password' => bcrypt($validatedData['password']),
             'role' => $validatedData['role'],
-            // tambahkan kolom-kolom lain yang diperlukan
         ]);
 
         // Simpan foto
@@ -48,7 +47,6 @@ class AdminController extends Controller
             'jabatan' => $validatedData['jabatan'],
             'foto_pegawai' => $validatedData['foto_pegawai'],
             // 'foto_pegawai' => $user->photo,
-            // tambahkan kolom-kolom lain yang diperlukan
             'is_admin' => $request->has('is_admin')
         ]);
 
@@ -81,7 +79,6 @@ class AdminController extends Controller
         $user = User::find($pegawai->user_id);
         $user->username = $validatedData['username'];
         if (!empty($validatedData['password'])) {
-            // Jika diisi, hash password baru
             $user->password = bcrypt($validatedData['password']);
         }
         $user->save();
@@ -97,6 +94,18 @@ class AdminController extends Controller
 
         // Set flash message
         Session::flash('updated', 'Berhasil update data pegawai');
+
+        return redirect('/pegawai');
+    }
+
+    public function destroyPegawai($id)
+    {
+        $pegawai = Pegawai::where('nip', $id)->first();
+        User::find($pegawai->user_id)->delete();
+        $pegawai->delete();
+
+        // Set flash message
+        Session::flash('success', 'Pegawai berhasil dihapus.');
 
         return redirect('/pegawai');
     }

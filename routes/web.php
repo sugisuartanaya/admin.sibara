@@ -34,6 +34,7 @@ Route::resource('pegawai', PegawaiController::class);
 Route::post('/admin/tambahPegawai', [AdminController::class, 'storePegawai']);
 Route::get('/editpegawai/{nip}/edit', [AdminController::class, 'editPegawai']);
 Route::put('/updatepegawai/{nip}', [AdminController::class, 'updatePegawai']);
+Route::delete('/deletepegawai/{nip}', [AdminController::class, 'destroyPegawai']);
 
 
 

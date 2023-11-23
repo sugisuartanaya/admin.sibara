@@ -45,7 +45,7 @@
             </div>
             <div class="form-group">
               <label for="password" class=" form-control-label">Password</label>
-              <input type="password" id="password" name="password" class="form-control" placeholder="biarkan kosong jika tidak ingin mengubah password">
+              <input type="password" id="password" name="password" class="form-control" style="font-style: italic" placeholder="biarkan kosong jika tidak ingin mengubah password">
             </div>
             
             <div class="form-group">
@@ -80,7 +80,7 @@
               <input type="text" id="foto_pegawai" name="foto_pegawai" class="form-control" accept="image/*" value="{{ $data_pegawai->foto_pegawai }}">
             </div>
             <br>
-            <button class="btn btn-success" type="submit">Update</button>
+            <button class="btn btn-success" type="submit">Simpan</button>
                                 
             </form>
           </div>
