@@ -18,7 +18,7 @@ class AdminController extends Controller
             'password' => 'required|min:3',
             'role' => 'required',
             'nama_pegawai' => 'required',
-            'nip' => 'required',
+            'nip' => 'required|unique:pegawais',
             'pangkat' => 'required',
             'jabatan' => 'required',
             'foto_pegawai' => 'required',
@@ -59,7 +59,9 @@ class AdminController extends Controller
     public function editPegawai($id)
     {
         $pegawai = Pegawai::where('nip',$id)->first();
-        return view('pegawai.edit')->with('data_pegawai', $pegawai);        
+        return view('pegawai.edit')->with('data_pegawai', $pegawai)
+        ->with('active', 'active')
+        ->with('title', 'Pegawai');        
     }
 
     public function updatePegawai(Request $request, $id)
@@ -67,7 +69,7 @@ class AdminController extends Controller
         $validatedData = $request->validate([
             'username' => 'required',
             'nama_pegawai' => 'required',
-            'nip' => 'required',
+            'nip' => 'required|unique:pegawais',
             'pangkat' => 'required',
             'jabatan' => 'required',
             'foto_pegawai' => 'required',

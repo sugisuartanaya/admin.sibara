@@ -40,11 +40,21 @@
 
             <div class="form-group">
               <label for="username" class=" form-control-label">Username</label>
-              <input type="text" id="username" name="username" class="form-control" required>
+              <input type="text" id="username" name="username" class="form-control @error('username') is-invalid @enderror">
+              @error('username')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+              @enderror
             </div>
             <div class="form-group">
               <label for="password" class=" form-control-label">Password</label>
-              <input type="password" id="password" name="password" class="form-control" required>
+              <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror">
+              @error('password')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+              @enderror
             </div>
             
               <input type="text" style="display:none;" id="role" name="role" class="form-control" value="1">
@@ -63,19 +73,39 @@
             
             <div class="form-group">
               <label for="nama_pegawai" class=" form-control-label">Nama Pegawai</label>
-              <input type="text" id="nama_pegawai" name="nama_pegawai" class="form-control" required>
+              <input type="text" id="nama_pegawai" name="nama_pegawai" class="form-control @error('nama_pegawai') is-invalid @enderror">
+              @error('nama_pegawai')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+              @enderror
             </div>
             <div class="form-group">
               <label for="nip" class=" form-control-label">NIP</label>
-              <input type="text" id="nip" name="nip" class="form-control" required>
+              <input type="text" id="nip" name="nip" class="form-control @error('nip') is-invalid @enderror">
+              @error('nip')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+              @enderror
             </div>
             <div class="form-group">
               <label for="pangkat" class=" form-control-label">Pangkat</label>
-              <input type="text" id="pangkat" name="pangkat" class="form-control" required>
+              <input type="text" id="pangkat" name="pangkat" class="form-control @error('pangkat') is-invalid @enderror">
+              @error('pangkat')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+              @enderror
             </div>
             <div class="form-group">
               <label for="jabatan" class=" form-control-label">Jabatan</label>
-              <input type="text" id="jabatan" name="jabatan" class="form-control" required>
+              <input type="text" id="jabatan" name="jabatan" class="form-control @error('jabatan') is-invalid @enderror">
+              @error('jabatan')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+              @enderror
             </div>
             <div class="form-group">
               <label for="foto_pegawai" class=" form-control-label">Foto</label>

@@ -27,7 +27,10 @@ class PegawaiController extends Controller
      */
     public function create()
     {
-        return view('pegawai.create');
+        return view('pegawai.create', [
+            'active' => 'active',
+            'title' => 'Pegawai',
+        ]);
     }
 
     /**
