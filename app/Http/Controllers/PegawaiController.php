@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\Models\Pegawai;
 
 class PegawaiController extends Controller
@@ -71,7 +72,7 @@ class PegawaiController extends Controller
      */
     public function edit($id)
     {
-        
+        //
     }
 
     /**
@@ -83,7 +84,25 @@ class PegawaiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'nama_pegawai' => 'required',
+            'nip' => 'required',
+            'pangkat' => 'required',
+            'jabatan' => 'required',
+            'foto_pegawai' => 'required',
+            'password' => 'nullable|min:3'
+        ]);
+
+        $pegawai = Pegawai::where('nip', $id)->first();
+        $pegawai->nama_pegawai = $validatedData['nama_pegawai'];
+        $pegawai->nip = $validatedData['nip'];
+        $pegawai->pangkat = $validatedData['pangkat'];
+        $pegawai->jabatan = $validatedData['jabatan'];
+        $pegawai->foto_pegawai = $validatedData['foto_pegawai'];
+        $pegawai->save();
+
+        Session::flash('updated', 'Berhasil update profile');
+        return redirect('/profile');
     }
 
     /**

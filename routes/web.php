@@ -33,6 +33,7 @@ Route::get('/dashboard', function(){
 Route::get('/profile', [pegawaiController::class, 'myProfile']);
 
 Route::resource('pegawai', PegawaiController::class);
+Route::put('updateUser/{id}', [UserController::class, 'updateUser']);
 
 Route::post('/admin/tambahPegawai', [AdminController::class, 'storePegawai']);
 Route::get('/editpegawai/{nip}/edit', [AdminController::class, 'editPegawai']);

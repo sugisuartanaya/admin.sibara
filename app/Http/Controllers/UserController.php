@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\pegawai;
 
@@ -70,9 +72,27 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateUser(Request $request, $id)
     {
-        //
+        $validateddata = $request->validate([
+            'current_password' => 'required|string',
+            'password' => 'required|string|confirmed|min:3',
+        ], [
+            'password.confirmed' => 'The new password confirmation does not match.',
+        ]);
+    
+        $user = Auth::user();
+    
+        if (!Hash::check($request->current_password, $user->password)) {
+            Session::flash('error', 'Current password is incorrect');
+            return redirect()->back();
+        }
+    
+        $user->password = bcrypt($validateddata['password']);
+        /** @var \App\Models\User $user **/
+        $user->save();
+    
+        return redirect()->back()->with('success', 'Password changed successfully');
     }
 
     /**

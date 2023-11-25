@@ -54,7 +54,7 @@
                   <a href="/pegawai/create"><button class="btn btn-success ml-auto"><i class="fa fa-plus" style="margin-right: 10px"></i>Tambah</button></a>
               </div>
               <div class="card-body">
-                <table id="tabel" class="table table-striped datatable">
+                <table id="tabel" class="table table-striped table-bordered datatable">
                   <thead>
                     <tr>
                       <th scope="col">No.</th>
