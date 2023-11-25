@@ -24,9 +24,16 @@
             <li class="{{ ($title === "Dashboard") ? 'active' : '' }}">
                 <a href="/dashboard"><i class="menu-icon fa fa-laptop"></i>Dashboard</a>
             </li>
-            <li class="{{ ($title === "Pegawai") ? 'active' : '' }}">
+
+            @if(Auth::check() && Auth::user()->pegawai->is_admin == 1)
+              <li class="{{ ($title === "Pegawai") ? 'active' : '' }}">
+                <a href="/pegawai"><i class="menu-icon fa fa-users"></i>Pegawai</a>
+              </li>
+            @else
+            @endif
+            {{-- <li class="{{ ($title === "Pegawai") ? 'active' : '' }}">
               <a href="/pegawai"><i class="menu-icon fa fa-users"></i>Pegawai</a>
-            </li>
+            </li> --}}
             <li class="menu-item-has-children dropdown {{ ($title === "Pembeli") ? 'active' : '' }}">
               <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="menu-icon fa fa-users"></i>Pembeli</a>
               <ul class="sub-menu children dropdown-menu">

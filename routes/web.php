@@ -32,7 +32,8 @@ Route::get('/dashboard', function(){
 
 Route::get('/profile', [pegawaiController::class, 'myProfile']);
 
-Route::resource('pegawai', PegawaiController::class);
+Route::resource('pegawai', PegawaiController::class)->middleware('checkAdmin');
+
 Route::put('updateUser/{id}', [UserController::class, 'updateUser']);
 
 Route::post('/admin/tambahPegawai', [AdminController::class, 'storePegawai']);
