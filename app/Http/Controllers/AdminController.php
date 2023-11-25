@@ -69,7 +69,7 @@ class AdminController extends Controller
         $validatedData = $request->validate([
             'username' => 'required',
             'nama_pegawai' => 'required',
-            'nip' => 'required|unique:pegawais',
+            'nip' => 'required',
             'pangkat' => 'required',
             'jabatan' => 'required',
             'foto_pegawai' => 'required',

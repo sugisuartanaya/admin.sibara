@@ -75,8 +75,8 @@
             </div>
             <div class="form-group">
               <label for="nip" class=" form-control-label">NIP</label>
-              <input type="text" id="nip" name="nip" class="form-control @error('NIP') is-invalid @enderror" value="{{ $data_pegawai->nip }}">
-              @error('NIP')
+              <input type="text" id="nip" name="nip" class="form-control @error('nip') is-invalid @enderror" value="{{ $data_pegawai->nip }}">
+              @error('nip')
                 <div class="invalid-feedback">
                   {{ $message }}
                 </div>
@@ -85,7 +85,7 @@
             <div class="form-group">
               <label for="pangkat" class=" form-control-label">Pangkat</label>
               <input type="text" id="pangkat" name="pangkat" class="form-control @error('pangkat') is-invalid @enderror" value="{{ $data_pegawai->pangkat }}">
-              @error('jabatan')
+              @error('pangkat')
                 <div class="invalid-feedback">
                   {{ $message }}
                 </div>
