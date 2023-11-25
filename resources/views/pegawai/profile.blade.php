@@ -31,6 +31,7 @@
   <div class="animated fadeIn">
     <div class="row">
       <div class="col-12">
+        
         @if(session('success'))
         <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
           {{ session('success') }}
@@ -38,14 +39,14 @@
               <span aria-hidden="true">&times;</span>
           </button>
         </div>
-      @elseif(session('error'))
-        <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
-          {{ session('error') }}
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      @endif
+        @elseif(session('error'))
+          <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+            {{ session('error') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        @endif
 
       @if($errors->has('password'))
         <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
@@ -170,20 +171,17 @@
 
                   <div class="form-group">
                     <label for="current_password" class=" form-control-label">Current Password</label>
-                    <input type="password" name="current_password" class="form-control" required>
-                    {{-- <input type="password" id="password" name="password" class="form-control" style="font-style: italic"> --}}
+                    <input type="password" name="current_password" class="form-control" placeholder="masukkan password saat ini" required>
                   </div>
 
                   <div class="form-group">
                     <label for="password" class=" form-control-label">New Password</label>
-                    <input type="password" name="password" class="form-control" required>
-                    {{-- <input type="password" id="password" name="password" class="form-control" style="font-style: italic"> --}}
+                    <input type="password" name="password" class="form-control" placeholder="masukkan password baru" required>
                   </div>
 
                   <div class="form-group">
                     <label for="password_confirmation" class=" form-control-label">Confirm New Password Password</label>
-                    <input type="password" name="password_confirmation" class="form-control" required>
-                    {{-- <input type="password" id="password" name="password" class="form-control" style="font-style: italic"> --}}
+                    <input type="password" name="password_confirmation" class="form-control" placeholder="konfirmasi password baru" required>
                   </div>
 
                   <br>

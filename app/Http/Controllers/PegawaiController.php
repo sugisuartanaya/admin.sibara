@@ -101,7 +101,7 @@ class PegawaiController extends Controller
         $pegawai->foto_pegawai = $validatedData['foto_pegawai'];
         $pegawai->save();
 
-        Session::flash('updated', 'Berhasil update profile');
+        Session::flash('success', 'Berhasil update profile');
         return redirect('/profile');
     }
 

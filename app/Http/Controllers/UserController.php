@@ -92,7 +92,7 @@ class UserController extends Controller
         /** @var \App\Models\User $user **/
         $user->save();
     
-        return redirect()->back()->with('success', 'Password changed successfully');
+        return redirect()->back()->with('success', 'Berhasil ganti password');
     }
 
     /**
