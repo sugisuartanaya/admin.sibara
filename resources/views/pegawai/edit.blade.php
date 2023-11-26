@@ -102,7 +102,12 @@
             </div>
             <div class="form-group">
               <label for="foto_pegawai" class=" form-control-label">Foto</label>
-              <input type="file" id="foto_pegawai" name="foto_pegawai" class="form-control" accept="image/*" value="{{ $data_pegawai->foto_pegawai }}">
+              <input type="file" id="foto_pegawai" name="foto_pegawai" class="form-control @error('foto_pegawai') is-invalid @enderror" accept="image/*" value="{{ $data_pegawai->foto_pegawai }}">
+              @error('foto_pegawai')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+              @enderror
             </div>
             <br>
             <button class="btn btn-success" type="submit">Simpan</button>

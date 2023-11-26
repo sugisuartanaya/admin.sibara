@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
 use App\Models\pegawai;
@@ -21,7 +22,7 @@ class AdminController extends Controller
             'nip' => 'required|unique:pegawais',
             'pangkat' => 'required',
             'jabatan' => 'required',
-            'foto_pegawai' => 'required',
+            'foto_pegawai' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         // Simpan data ke tabel 'users'
@@ -33,7 +34,11 @@ class AdminController extends Controller
 
         // Simpan foto
         if ($request->hasFile('foto_pegawai')) {
-            $path = $request->file('foto_pegawai')->store('photos', 'public');
+            $image = $request->file('foto_pegawai');
+            $path = $image->storeAs('public/photos', time() . '.' . $image->getClientOriginalExtension());
+            // Resize gambar sebelum disimpan
+            Image::make($image)->fit(50, 50)->save(storage_path('app/' . $path));
+            $url = Storage::url($path);
         }
 
         // Simpan data ke tabel 'pegawai' dengan user_id yang terkait
@@ -43,8 +48,7 @@ class AdminController extends Controller
             'nip' => $validatedData['nip'],
             'pangkat' => $validatedData['pangkat'],
             'jabatan' => $validatedData['jabatan'],
-            // 'foto_pegawai' => $validatedData['foto_pegawai'],
-            'foto_pegawai' => $path,
+            'foto_pegawai' => $url,
             'is_admin' => $request->has('is_admin')
         ]);
 
@@ -70,7 +74,8 @@ class AdminController extends Controller
             'nip' => 'required',
             'pangkat' => 'required',
             'jabatan' => 'required',
-            'password' => 'nullable|min:3'
+            'password' => 'nullable|min:3',
+            'foto_pegawai' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         // Update data pada tabel user
@@ -83,8 +88,12 @@ class AdminController extends Controller
         $user->save();
 
         if ($request->hasFile('foto_pegawai')) {
-            $path = $request->file('foto_pegawai')->store('photos', 'public');
-            $pegawai->foto_pegawai = $path;
+            $image = $request->file('foto_pegawai');
+            $path = $image->storeAs('public/photos', time() . '.' . $image->getClientOriginalExtension());
+            // Resize gambar sebelum disimpan
+            Image::make($image)->fit(50, 50)->save(storage_path('app/' . $path));
+            $url = Storage::url($path);
+            $pegawai->foto_pegawai = $url;
         }
 
         // Update data pada tabel pegawai
