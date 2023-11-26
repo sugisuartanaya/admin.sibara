@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 use App\Models\Pegawai;
 
 class PegawaiController extends Controller
@@ -89,16 +91,26 @@ class PegawaiController extends Controller
             'nip' => 'required',
             'pangkat' => 'required',
             'jabatan' => 'required',
-            'foto_pegawai' => 'required',
+            'foto_pegawai' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'password' => 'nullable|min:3'
         ]);
 
         $pegawai = Pegawai::where('nip', $id)->first();
+
+        if ($request->hasFile('foto_pegawai')) {
+            $image = $request->file('foto_pegawai');
+            $path = $image->storeAs('public/photos', time() . '.' . $image->getClientOriginalExtension());
+            // Resize gambar sebelum disimpan
+            Image::make($image)->fit(150, 150)->save(storage_path('app/' . $path));
+            $url = Storage::url($path);
+            $pegawai->foto_pegawai = $url;  
+
+        }
+
         $pegawai->nama_pegawai = $validatedData['nama_pegawai'];
         $pegawai->nip = $validatedData['nip'];
         $pegawai->pangkat = $validatedData['pangkat'];
         $pegawai->jabatan = $validatedData['jabatan'];
-        $pegawai->foto_pegawai = $validatedData['foto_pegawai'];
         $pegawai->save();
 
         Session::flash('success', 'Berhasil update profile');

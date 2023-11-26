@@ -95,7 +95,7 @@
                 </div>
                 <div class="user-area dropdown float-right">
                   <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="user-avatar rounded-circle" style="margin-right: 10px" src="{{ asset('images/admin.jpg') }}" alt="User Avatar">Hi, {{ auth()->user()->pegawai->nama_pegawai }}
+                    <img class="user-avatar rounded-circle" style="margin-right: 10px" src="{{ asset(auth()->user()->pegawai->foto_pegawai) }}" alt="User Avatar">Hi, {{ auth()->user()->pegawai->nama_pegawai }}
                   </a>
                   <ul class="user-menu dropdown-menu">
                     <li><a class="nav-link" href="/profile"><i class="fa fa-user"></i>My Profile</a></li>

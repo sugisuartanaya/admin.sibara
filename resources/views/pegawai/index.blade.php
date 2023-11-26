@@ -74,7 +74,8 @@
                         <td class="avatar">
                           @if ($pegawai->foto_pegawai)
                             <div class="round-img">
-                              <a href="#"><img class="rounded-circle" src="{{ asset($pegawai->foto_pegawai) }}" alt="{{ $pegawai->nama_pegawai }}"></a>
+                              <a href="#"><img class="rounded-circle" style="width: 50px; height: 50px;"
+                                src="{{ asset($pegawai->foto_pegawai) }}" alt="{{ $pegawai->nama_pegawai }}"></a>
                             </div>
                           @else
                             <p>Tidak Ada Foto</p>

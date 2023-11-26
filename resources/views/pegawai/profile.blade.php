@@ -64,8 +64,25 @@
             <strong class="card-title mb-0 text-center">{{ auth()->user()->pegawai->nama_pegawai }}</strong>
           </div> --}}
           <div class="card-body">
+
+            @if (auth()->user()->pegawai->foto_pegawai)
+              <div class="round-img" style="text-align: center">
+                <a href="#">
+                  <img style="width: 150px; height: 150px; object-fit: cover;"
+                   src="{{ asset(auth()->user()->pegawai->foto_pegawai) }}" alt="{{ auth()->user()->pegawai->nama_pegawai }}"></a>
+              </div>
+              <br>
+            @else
+              <p>Tidak Ada Foto</p>
+            @endif  
+
             <table class="table table-striped">
               <tbody>
+                <tr>
+                  <td>Username</td>
+                  <td></td>
+                  <td>{{ auth()->user()->username }}</td>
+                </tr>
                 <tr>
                   <td>Nama</td>
                   <td></td>
@@ -113,7 +130,7 @@
             <div class="tab-content pl-3 p-1" id="myTabContent">
               <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <br>
-                <form action="/pegawai/{{ auth()->user()->pegawai->nip }}" method="post">
+                <form action="/pegawai/{{ auth()->user()->pegawai->nip }}" method="post" enctype="multipart/form-data">
                   @csrf
                   @method('PUT')
       
@@ -155,7 +172,12 @@
                   </div>
                   <div class="form-group">
                     <label for="foto_pegawai" class=" form-control-label">Foto</label>
-                    <input type="text" id="foto_pegawai" name="foto_pegawai" class="form-control" accept="image/*" value="{{ auth()->user()->pegawai->foto_pegawai }}">
+                    <input type="file" id="foto_pegawai" name="foto_pegawai" class="form-control @error('foto_pegawai') is-invalid @enderror" accept="image/*" value="{{ auth()->user()->pegawai->foto_pegawai }}">
+                    @error('foto_pegawai')
+                      <div class="invalid-feedback">
+                        {{ $message }}
+                      </div>
+                    @enderror
                   </div>
                   <br>
                   <button class="btn btn-success" type="submit">Simpan</button>

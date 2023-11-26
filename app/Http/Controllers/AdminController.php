@@ -37,7 +37,7 @@ class AdminController extends Controller
             $image = $request->file('foto_pegawai');
             $path = $image->storeAs('public/photos', time() . '.' . $image->getClientOriginalExtension());
             // Resize gambar sebelum disimpan
-            Image::make($image)->fit(50, 50)->save(storage_path('app/' . $path));
+            Image::make($image)->fit(150, 150)->save(storage_path('app/' . $path));
             $url = Storage::url($path);
         }
 
@@ -91,7 +91,7 @@ class AdminController extends Controller
             $image = $request->file('foto_pegawai');
             $path = $image->storeAs('public/photos', time() . '.' . $image->getClientOriginalExtension());
             // Resize gambar sebelum disimpan
-            Image::make($image)->fit(50, 50)->save(storage_path('app/' . $path));
+            Image::make($image)->fit(150, 150)->save(storage_path('app/' . $path));
             $url = Storage::url($path);
             $pegawai->foto_pegawai = $url;
         }
