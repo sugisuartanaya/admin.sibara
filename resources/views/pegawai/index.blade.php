@@ -70,8 +70,8 @@
                   <tbody>
                     @foreach ($data_pegawai as $index => $pegawai)
                       <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td class="avatar">
+                        <td style="vertical-align: middle;">{{ $index + 1 }}</td>
+                        <td class="avatar" style="vertical-align: middle;">
                           @if ($pegawai->foto_pegawai)
                             <div class="round-img">
                               <a href="#"><img class="rounded-circle" style="width: 50px; height: 50px;"
@@ -81,18 +81,18 @@
                             <p>Tidak Ada Foto</p>
                           @endif  
                         </td>
-                        <td>{{ $pegawai->nama_pegawai }}</td>
-                        <td>
+                        <td style="vertical-align: middle;">{{ $pegawai->nama_pegawai }}</td>
+                        <td style="vertical-align: middle;">
                           @if($pegawai->is_admin == 1)
                             <span class="badge badge-success">Admin</span>
                           @elseif($pegawai->is_admin == 0)
                             <span class="badge badge-info">Pegawai</span>
                           @endif
                         </td>
-                        <td>{{ $pegawai->nip }}</td>
-                        <td>{{ $pegawai->pangkat }}</td>
-                        <td>{{ $pegawai->jabatan }}</td>
-                        <td>
+                        <td style="vertical-align: middle;">{{ $pegawai->nip }}</td>
+                        <td style="vertical-align: middle;">{{ $pegawai->pangkat }}</td>
+                        <td style="vertical-align: middle;">{{ $pegawai->jabatan }}</td>
+                        <td style="vertical-align: middle;">
                           <a href="/editpegawai/{{ $pegawai->nip }}/edit" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Edit"><i class="menu-icon fa fa-pencil"></i></a>
                           <form class="d-inline" action="/deletepegawai/{{ $pegawai->nip }}" method="post">
                             @csrf
