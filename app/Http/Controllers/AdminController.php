@@ -32,11 +32,9 @@ class AdminController extends Controller
         ]);
 
         // Simpan foto
-        // if ($request->hasFile('foto_pegawai')) {
-        //     $path = $request->file('foto_pegawai')->store('photos', 'public');
-        //     $user->foto_pegawai = $path;
-        //     $user->save();
-        // }
+        if ($request->hasFile('foto_pegawai')) {
+            $path = $request->file('foto_pegawai')->store('photos', 'public');
+        }
 
         // Simpan data ke tabel 'pegawai' dengan user_id yang terkait
         Pegawai::create([
@@ -45,8 +43,8 @@ class AdminController extends Controller
             'nip' => $validatedData['nip'],
             'pangkat' => $validatedData['pangkat'],
             'jabatan' => $validatedData['jabatan'],
-            'foto_pegawai' => $validatedData['foto_pegawai'],
-            // 'foto_pegawai' => $user->photo,
+            // 'foto_pegawai' => $validatedData['foto_pegawai'],
+            'foto_pegawai' => $path,
             'is_admin' => $request->has('is_admin')
         ]);
 
@@ -72,7 +70,6 @@ class AdminController extends Controller
             'nip' => 'required',
             'pangkat' => 'required',
             'jabatan' => 'required',
-            'foto_pegawai' => 'required',
             'password' => 'nullable|min:3'
         ]);
 
@@ -85,12 +82,16 @@ class AdminController extends Controller
         }
         $user->save();
 
+        if ($request->hasFile('foto_pegawai')) {
+            $path = $request->file('foto_pegawai')->store('photos', 'public');
+            $pegawai->foto_pegawai = $path;
+        }
+
         // Update data pada tabel pegawai
         $pegawai->nama_pegawai = $validatedData['nama_pegawai'];
         $pegawai->nip = $validatedData['nip'];
         $pegawai->pangkat = $validatedData['pangkat'];
         $pegawai->jabatan = $validatedData['jabatan'];
-        $pegawai->foto_pegawai = $validatedData['foto_pegawai'];
         $pegawai->is_admin = $request->has('is_admin');
         $pegawai->save();
 

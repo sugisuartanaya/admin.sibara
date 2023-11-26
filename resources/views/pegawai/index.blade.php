@@ -58,6 +58,7 @@
                   <thead>
                     <tr>
                       <th scope="col">No.</th>
+                      <th scope="col">Foto</th>
                       <th scope="col">Nama Lengkap</th>
                       <th scope="col">Status</th>
                       <th scope="col">NIP</th>
@@ -70,6 +71,15 @@
                     @foreach ($data_pegawai as $index => $pegawai)
                       <tr>
                         <td>{{ $index + 1 }}</td>
+                        <td class="avatar">
+                          @if ($pegawai->foto_pegawai)
+                            <div class="round-img">
+                              <a href="#"><img class="rounded-circle" src="{{ asset('storage/' . $pegawai->foto_pegawai) }}" alt="{{ $pegawai->nama_pegawai }}"></a>
+                            </div>
+                          @else
+                            <p>Tidak Ada Foto</p>
+                          @endif  
+                        </td>
                         <td>{{ $pegawai->nama_pegawai }}</td>
                         <td>
                           @if($pegawai->is_admin == 1)

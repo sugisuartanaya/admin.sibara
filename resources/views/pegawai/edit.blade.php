@@ -35,7 +35,7 @@
             <strong>Edit Pegawai</strong>
           </div>
           <div class="card-body card-block">           
-            <form action="/updatepegawai/{{ $data_pegawai->nip }}" method="post">
+            <form action="/updatepegawai/{{ $data_pegawai->nip }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -102,7 +102,7 @@
             </div>
             <div class="form-group">
               <label for="foto_pegawai" class=" form-control-label">Foto</label>
-              <input type="text" id="foto_pegawai" name="foto_pegawai" class="form-control" accept="image/*" value="{{ $data_pegawai->foto_pegawai }}">
+              <input type="file" id="foto_pegawai" name="foto_pegawai" class="form-control" accept="image/*" value="{{ $data_pegawai->foto_pegawai }}">
             </div>
             <br>
             <button class="btn btn-success" type="submit">Simpan</button>

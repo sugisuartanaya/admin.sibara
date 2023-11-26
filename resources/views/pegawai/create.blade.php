@@ -35,7 +35,7 @@
             <strong>Tambah Pegawai</strong>
           </div>
           <div class="card-body card-block">
-            <form action="/admin/tambahPegawai" method="post">
+            <form action="/admin/tambahPegawai" method="post" enctype="multipart/form-data">
             @csrf
 
               <div class="form-group">
@@ -116,7 +116,7 @@
 
               <div class="form-group">
                 <label for="foto_pegawai" class=" form-control-label">Foto</label>
-                <input type="text" id="foto_pegawai" name="foto_pegawai" class="form-control" accept="image/*">
+                <input type="file" id="foto_pegawai" name="foto_pegawai" class="form-control" accept="image/*">
               </div>
 
               <br>
