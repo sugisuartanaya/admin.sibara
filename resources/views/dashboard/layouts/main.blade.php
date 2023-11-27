@@ -44,8 +44,8 @@
             <li {{ ($title === "Jadwal") ? 'active' : '' }}>
               <a href=""><i class="menu-icon fa fa-calendar"></i>Jadwal</a>
             </li>
-            <li {{ ($title === "Kategori") ? 'active' : '' }}>
-              <a href=""><i class="menu-icon fa fa-tags"></i>Kategori</a>
+            <li class="{{ ($title === "Kategori") ? 'active' : '' }}">
+              <a href="/kategori"><i class="menu-icon fa fa-tags"></i>Kategori</a>
             </li>
             <li {{ ($title === "Barang Rampasan") ? 'active' : '' }}>
               <a href=""><i class="menu-icon fa fa-cube"></i>Barang Rampasan</a>
