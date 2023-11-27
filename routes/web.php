@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BarangRampasanController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PegawaiController;
@@ -43,6 +44,8 @@ Route::put('/updatepegawai/{nip}', [AdminController::class, 'updatePegawai']);
 Route::delete('/deletepegawai/{nip}', [AdminController::class, 'destroyPegawai']);
 
 Route::resource('kategori', KategoriController::class);
+
+Route::resource('barang-rampasan', BarangRampasanController::class);
 
 
 
