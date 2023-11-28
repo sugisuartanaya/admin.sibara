@@ -25,11 +25,7 @@ class BarangRampasanController extends Controller
         ->with('title', 'Barang Rampasan');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
         $kategori = Kategori::all();
@@ -38,12 +34,7 @@ class BarangRampasanController extends Controller
         ->with('title', 'Barang Rampasan');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -83,48 +74,72 @@ class BarangRampasanController extends Controller
         return redirect('/barang-rampasan');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit($id)
     {
-        //
+        $kategori = Kategori::all();
+        $barang = Barang_rampasan::where('nama_barang', $id)->first();
+        return view('barangRampasan.edit')
+            ->with('data_barang', $barang)
+            ->with('data_kategori', $kategori)
+            ->with('active', 'active')
+            ->with('title', 'Barang Rampasan'); 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'nama_barang' => 'required',
+            'no_putusan' => 'required',
+            'kategori_id' => ['required',
+                            function ($attribute, $value, $fail) {
+                                if ($value === '0') {
+                                    $fail('Please select a valid category.');
+                                }
+                            },],
+            'deskripsi' => 'required',
+            'foto_thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'foto_barang' => 'required',
+        ]);
+
+        $barang = Barang_rampasan::find($id);
+
+        if ($request->hasFile('foto_thumbnail')) {
+            $image = $request->file('foto_thumbnail');
+            $path = $image->storeAs('public/photos', time() . '.' . $image->getClientOriginalExtension());
+            // Resize gambar sebelum disimpan
+            Image::make($image)->fit(150, 150)->save(storage_path('app/' . $path));
+            $url = Storage::url($path);
+            $barang->foto_thumbnail = $url;
+        }
+
+        $barang->nama_barang = $validatedData['nama_barang'];
+        $barang->no_putusan = $validatedData['no_putusan'];
+        $barang->kategori_id = $validatedData['kategori_id'];
+        $barang->deskripsi = $validatedData['deskripsi'];
+        $barang->foto_barang = $validatedData['foto_barang'];
+        $barang->save();
+        // Set flash message
+        Session::flash('updated', 'Berhasil update data barang rampasan.');
+
+        return redirect('/barang-rampasan');
+
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        Barang_rampasan::find($id)->delete();
+        // Set flash message
+        Session::flash('success', 'Barang rampasan berhasil dihapus.');
+
+        return redirect('/barang-rampasan');
     }
 }
