@@ -57,7 +57,7 @@
                   <thead>
                     <tr>
                       <th scope="col">No.</th>
-                      <th scope="col">Foto Barang</th>
+                      <th scope="col">Thumbnail Barang</th>
                       <th scope="col">Nama Barang</th>
                       <th scope="col">Kategori</th>
                       <th scope="col">No Putusan Pengadilan</th>
@@ -68,7 +68,14 @@
                     @foreach ($data_barang as $index => $barang)
                       <tr>
                         <td style="vertical-align: middle;">{{ $index + 1 }}</td>
-                        <td style="vertical-align: middle;">{{ $barang->foto_thumbnail }}</td>
+                        <td style="vertical-align: middle;">
+                          @if ($barang->foto_thumbnail)
+                            <a href="#"><img style="width: 150px; height: 150px;"
+                            src="{{ asset($barang->foto_thumbnail) }}" alt="{{ $barang->nama_barang }}"></a>
+                          @else
+                            <p>Tidak Ada Foto</p>
+                          @endif  
+                        </td>
                         <td style="vertical-align: middle;">{{ $barang->nama_barang }}</td>
                         <td style="vertical-align: middle;">{{ $barang->kategori->nama_kategori }}</td>
                         <td style="vertical-align: middle;">{{ $barang->no_putusan }}</td>
@@ -88,20 +95,20 @@
 
                                         <!-- Modal Header -->
                                         <div class="modal-header">
-                                            <h4 class="modal-title">Hapus Barang Rampasan</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                          <h4 class="modal-title">Hapus Barang Rampasan</h4>
+                                          <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
 
                                         <!-- Modal Body -->
                                         <div class="modal-body">
-                                            <p>Apakah anda yakin akan menghapus {{ $barang->nama_barang }}?</p>
+                                          <p>Apakah anda yakin akan menghapus {{ $barang->nama_barang }}?</p>
                                         </div>
 
                                         <!-- Modal Footer -->
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="submit" name="submit" class="btn btn-danger btn-sm">Confirm
-                                            </button>
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                          <button type="submit" name="submit" class="btn btn-danger btn-sm">Confirm
+                                          </button>
                                         </div>
 
                                     </div>
