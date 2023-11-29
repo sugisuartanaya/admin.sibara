@@ -3,10 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\BarangRampasanController;
-use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\BarangRampasanController;
 
 
 /*
@@ -46,6 +47,8 @@ Route::delete('/deletepegawai/{nip}', [AdminController::class, 'destroyPegawai']
 Route::resource('kategori', KategoriController::class);
 
 Route::resource('barang-rampasan', BarangRampasanController::class);
+
+Route::resource('jadwal', JadwalController::class);
 
 
 

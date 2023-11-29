@@ -10,7 +10,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css" />
+
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 
 </head>
@@ -41,8 +45,8 @@
                 <li><i class="menu-icon fa fa-th"></i><a href="forms-basic.html">Daftar Pembeli</a></li>
               </ul>
             </li>
-            <li {{ ($title === "Jadwal") ? 'active' : '' }}>
-              <a href=""><i class="menu-icon fa fa-calendar"></i>Jadwal</a>
+            <li class="{{ ($title === "Jadwal") ? 'active' : '' }}">
+              <a href="/jadwal"><i class="menu-icon fa fa-calendar"></i>Jadwal</a>
             </li>
             <li class="{{ ($title === "Kategori") ? 'active' : '' }}">
               <a href="/kategori"><i class="menu-icon fa fa-tags"></i>Kategori</a>
@@ -140,6 +144,12 @@
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+
+    <!-- DatePicker JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js"></script>
+
 
     <!-- Your Custom Script -->
     <script src="{{ asset('js/main.js') }}"></script>

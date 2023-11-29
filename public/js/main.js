@@ -93,6 +93,26 @@ jQuery(document).ready(function($) {
 
 	$(function () {
 		$('[data-toggle="tooltip"]').tooltip()
-})
+	})
+
+	$(document).ready(function(){
+		// Inisialisasi datepicker
+		$('#tanggal').datetimepicker({
+      format: 'L'
+    });
+
+		$('#datetimepicker1').datetimepicker({
+      format: 'YYYY-MM-DD HH:mm',
+			sideBySide: true,
+			date: 'fa fa-calendar',
+    });
+		
+		$('#datetimepicker').datetimepicker({
+      format: 'YYYY-MM-DD HH:mm',
+			sideBySide: true,
+    });
+	
+	});
+
 
 });
