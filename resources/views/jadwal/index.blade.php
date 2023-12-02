@@ -94,7 +94,7 @@
 
                                         <!-- Modal Body -->
                                         <div class="modal-body">
-                                            <p>Apakah anda yakin akan menghapus {{ $jadwal->nama_jadwal }}?</p>
+                                            <p>Apakah anda yakin akan menghapus {{ $jadwal->no_sprint }}?</p>
                                         </div>
 
                                         <!-- Modal Footer -->

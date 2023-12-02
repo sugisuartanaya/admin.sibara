@@ -98,7 +98,7 @@ jQuery(document).ready(function($) {
 	$(document).ready(function(){
 		// Inisialisasi datepicker
 		$('#tanggal').datetimepicker({
-      format: 'L'
+      format: 'YYYY-MM-DD'
     });
 
 		$('#datetimepicker1').datetimepicker({
