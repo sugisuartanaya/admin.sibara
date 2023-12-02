@@ -16,12 +16,14 @@ return new class extends Migration
         Schema::create('barang_rampasans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('kategori_id');
+            $table->string('nama_terdakwa');
             $table->string('nama_barang');
             $table->text('deskripsi');
             $table->string('foto_thumbnail');
             $table->string('foto_barang');
             $table->string('no_putusan');
-        });
+            $table->string('tgl_putusan');
+    });
     }
 
     /**

@@ -39,7 +39,9 @@ class BarangRampasanController extends Controller
     {
         $validatedData = $request->validate([
             'nama_barang' => 'required',
+            'nama_terdakwa' => 'required',
             'no_putusan' => 'required',
+            'tgl_putusan' => 'required',
             'kategori_id' => ['required',
                             function ($attribute, $value, $fail) {
                                 if ($value === '0') {
@@ -62,7 +64,9 @@ class BarangRampasanController extends Controller
 
         barang_rampasan::create([
             'nama_barang' => $validatedData['nama_barang'],
+            'nama_terdakwa' => $validatedData['nama_terdakwa'],
             'no_putusan' => $validatedData['no_putusan'],
+            'tgl_putusan' => $validatedData['tgl_putusan'],
             'kategori_id' => $validatedData['kategori_id'],
             'deskripsi' => $validatedData['deskripsi'],
             'foto_thumbnail' => $url,
@@ -97,7 +101,9 @@ class BarangRampasanController extends Controller
     {
         $validatedData = $request->validate([
             'nama_barang' => 'required',
+            'nama_terdakwa' => 'required',
             'no_putusan' => 'required',
+            'tgl_putusan' => 'required',
             'kategori_id' => ['required',
                             function ($attribute, $value, $fail) {
                                 if ($value === '0') {
@@ -121,7 +127,9 @@ class BarangRampasanController extends Controller
         }
 
         $barang->nama_barang = $validatedData['nama_barang'];
+        $barang->nama_terdakwa = $validatedData['nama_terdakwa'];
         $barang->no_putusan = $validatedData['no_putusan'];
+        $barang->tgl_putusan = $validatedData['tgl_putusan'];
         $barang->kategori_id = $validatedData['kategori_id'];
         $barang->deskripsi = $validatedData['deskripsi'];
         $barang->foto_barang = $validatedData['foto_barang'];

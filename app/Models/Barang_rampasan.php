@@ -17,7 +17,9 @@ class Barang_rampasan extends Model
 
     protected $fillable = [
         'nama_barang',
+        'nama_terdakwa',
         'no_putusan',
+        'tgl_putusan',
         'kategori_id',
         'deskripsi',
         'foto_thumbnail',

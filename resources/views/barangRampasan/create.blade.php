@@ -51,6 +51,26 @@
               </div>
 
               <div class="form-group">
+                <label for="tgl_putusan" class=" form-control-label">Tanggal Putusan Pengadilan</label>
+                <input type="text" id="tanggal" name="tgl_putusan" class="form-control datetimepicker-input @error('tgl_putusan') is-invalid @enderror" value="{{ old('tgl_putusan') }}" placeholder="Pilih Tanggal" data-target="#tanggal" data-toggle="datetimepicker">
+                @error('tgl_putusan')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
+              </div>
+
+              <div class="form-group">
+                <label for="nama_terdakwa" class=" form-control-label">Nama Terdakwa</label>
+                <input type="text" id="nama_terdakwa" name="nama_terdakwa" class="form-control @error('nama_terdakwa') is-invalid @enderror" value="{{ old('nama_terdakwa') }}">
+                @error('nama_terdakwa')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
+              </div>
+              
+              <div class="form-group">
                 <label for="nama_barang" class=" form-control-label">Nama Barang</label>
                 <input type="text" id="nama_barang" name="nama_barang" class="form-control @error('nama_barang') is-invalid @enderror" value="{{ old('nama_barang') }}">
                 @error('nama_barang')
