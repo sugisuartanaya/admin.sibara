@@ -65,9 +65,9 @@ class BarangRampasanController extends Controller
         if ($request->hasfile('foto_barang')) {
             $foto_paths = [];
             foreach ($request->file('foto_barang') as $image) {
-                $path = $image->storeAs('public/photos/products', time() . '.' . $image->getClientOriginalExtension());
+                $path = $image->storeAs('public/photos/products', uniqid() . '.' . $image->getClientOriginalExtension());
                 // Resize gambar sebelum disimpan
-                Image::make($image)->fit(150, 150)->save(storage_path('app/' . $path));
+                Image::make($image)->fit(800, 650)->save(storage_path('app/' . $path));
                 $url_foto_barang = Storage::url($path);
 
                 $foto_paths[] = $url_foto_barang;
@@ -95,9 +95,11 @@ class BarangRampasanController extends Controller
    
     public function show($id)
     {
-        $barang = Barang_rampasan::find($id)->first();
+        $barang = Barang_rampasan::find($id);
+        $fotoBarangArray = json_decode($barang->foto_barang, true);
         return view('barangRampasan.show')
             ->with('data_barang', $barang)
+            ->with('foto_barang', $fotoBarangArray)
             ->with('active', 'active')
             ->with('title', 'Barang Rampasan'); 
     }
@@ -130,7 +132,7 @@ class BarangRampasanController extends Controller
                             },],
             'deskripsi' => 'required',
             'foto_thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'foto_barang' => 'required',
+            'foto_barang.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $barang = Barang_rampasan::find($id);
@@ -139,9 +141,24 @@ class BarangRampasanController extends Controller
             $image = $request->file('foto_thumbnail');
             $path = $image->storeAs('public/photos', time() . '.' . $image->getClientOriginalExtension());
             // Resize gambar sebelum disimpan
-            Image::make($image)->fit(150, 150)->save(storage_path('app/' . $path));
+            Image::make($image)->fit(800, 600)->save(storage_path('app/' . $path));
             $url = Storage::url($path);
             $barang->foto_thumbnail = $url;
+        }
+
+        if ($request->hasfile('foto_barang')) {
+            $foto_paths = [];
+            foreach ($request->file('foto_barang') as $image) {
+                $path = $image->storeAs('public/photos/products', uniqid() . '.' . $image->getClientOriginalExtension());
+                // Resize gambar sebelum disimpan
+                Image::make($image)->fit(800, 600)->save(storage_path('app/' . $path));
+                $url_foto_barang = Storage::url($path);
+
+                $foto_paths[] = $url_foto_barang;
+            }
+            $url_foto_barang = json_encode($foto_paths);
+            $url_foto_barang = stripslashes($url_foto_barang);
+            $barang->foto_barang = $url_foto_barang;
         }
 
         $barang->nama_barang = $validatedData['nama_barang'];
@@ -150,7 +167,6 @@ class BarangRampasanController extends Controller
         $barang->tgl_putusan = $validatedData['tgl_putusan'];
         $barang->kategori_id = $validatedData['kategori_id'];
         $barang->deskripsi = $validatedData['deskripsi'];
-        $barang->foto_barang = $validatedData['foto_barang'];
         $barang->save();
         // Set flash message
         Session::flash('updated', 'Berhasil update data barang rampasan.');

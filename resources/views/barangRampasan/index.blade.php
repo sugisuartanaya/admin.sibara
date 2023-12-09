@@ -73,7 +73,7 @@
                         <td style="vertical-align: middle;">{{ $index + 1 }}</td>
                         <td style="vertical-align: middle;">
                           @if ($barang->foto_thumbnail)
-                            <a href="#"><img style="width: 150px; height: 150px;"
+                            <a href="#"><img style="width: 200px; height: 150px;"
                             src="{{ asset($barang->foto_thumbnail) }}" alt="{{ $barang->nama_barang }}"></a>
                           @else
                             <p>Tidak Ada Foto</p>

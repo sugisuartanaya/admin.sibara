@@ -39,12 +39,29 @@
           <div class="card-body">
             <div class="row">
               <div class="col-md-6">
-                @if ($data_barang->foto_thumbnail)
-                  <a href="#"><img style="width: 450px; height: 450px;"
-                  src="{{ asset($data_barang->foto_thumbnail) }}" alt="{{ $data_barang->nama_barang }}"></a>
-                @else
-                  <p>Tidak Ada Foto</p>
-                @endif
+                <div id="produkCarousel" class="carousel slide" data-ride="carousel">
+                  <div class="magnifying-glass"></div>
+                  <div class="carousel-inner">
+                      @foreach($foto_barang as $index => $foto)
+                        <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                            <img class="d-block w-100" src="{{ asset($foto) }}" alt="Foto {{ $index + 1 }}">
+                        </div>
+                      @endforeach
+                  </div>
+                  {{-- <a class="carousel-control-prev" href="#produkCarousel" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next" href="#produkCarousel" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                  </a> --}}
+                </div>
+                <div class="image-preview" id="thumbnailCarousel">
+                  @foreach ($foto_barang as $index => $foto)
+                    <img src="{{ asset($foto) }}" class="thumbnail" data-target="#produkCarousel" data-slide-to="{{ $index }}" alt="Thumbnail {{ $index + 1 }}">
+                  @endforeach
+                </div>
               </div>
               
             </div>

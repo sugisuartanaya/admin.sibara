@@ -118,9 +118,10 @@
                 @enderror
               </div>
 
-              <div class="form-group">
+              <div class="form-group" id="tambahanFotoBarang">
                 <label for="foto_barang" class=" form-control-label">Foto Barang</label>
-                <input type="text" id="foto_barang" name="foto_barang" value="{{ $data_barang->foto_barang }}" class="form-control @error('foto_barang') is-invalid @enderror">
+                <input type="file" id="foto_barang" name="foto_barang[]" class="form-control foto_barang @error('foto_barang') is-invalid @enderror" multiple accept="image/*">
+                <br>
                 @error('foto_barang')
                   <div class="invalid-feedback">
                     {{ $message }}
