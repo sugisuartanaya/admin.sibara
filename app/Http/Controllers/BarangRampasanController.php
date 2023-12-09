@@ -50,7 +50,7 @@ class BarangRampasanController extends Controller
                             },],
             'deskripsi' => 'required',
             'foto_thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'foto_barang' => 'required',
+            'foto_barang.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
         
         // Simpan foto
@@ -59,7 +59,21 @@ class BarangRampasanController extends Controller
             $path = $image->storeAs('public/photos', time() . '.' . $image->getClientOriginalExtension());
             // Resize gambar sebelum disimpan
             Image::make($image)->fit(150, 150)->save(storage_path('app/' . $path));
-            $url = Storage::url($path);
+            $url_foto_thumbnail = Storage::url($path);
+        }
+
+        if ($request->hasfile('foto_barang')) {
+            $foto_paths = [];
+            foreach ($request->file('foto_barang') as $image) {
+                $path = $image->storeAs('public/photos/products', time() . '.' . $image->getClientOriginalExtension());
+                // Resize gambar sebelum disimpan
+                Image::make($image)->fit(150, 150)->save(storage_path('app/' . $path));
+                $url_foto_barang = Storage::url($path);
+
+                $foto_paths[] = $url_foto_barang;
+            }
+            $url_foto_barang = json_encode($foto_paths);
+            $url_foto_barang = stripslashes($url_foto_barang);
         }
 
         barang_rampasan::create([
@@ -69,8 +83,8 @@ class BarangRampasanController extends Controller
             'tgl_putusan' => $validatedData['tgl_putusan'],
             'kategori_id' => $validatedData['kategori_id'],
             'deskripsi' => $validatedData['deskripsi'],
-            'foto_thumbnail' => $url,
-            'foto_barang' => $validatedData['foto_barang'],
+            'foto_thumbnail' => $url_foto_thumbnail,
+            'foto_barang' => $url_foto_barang,
         ]);
         // Set flash message
         Session::flash('success', 'Barang rampasan berhasil ditambahkan.');

@@ -97,7 +97,7 @@
 
               <div class="form-group">
                 <label for="deskripsi" class=" form-control-label">Deskripsi</label>
-                <textarea name="deskripsi" id="deskripsi" rows="9" placeholder="Deskripsi..." class="form-control @error('deskripsi') is-invalid @enderror"></textarea>
+                <textarea name="deskripsi" id="deskripsi" rows="9" placeholder="Deskripsi..." class="form-control @error('deskripsi') is-invalid @enderror">{{ old('deskripsi') }}</textarea>
                 @error('deskripsi')
                   <div class="invalid-feedback">
                     {{ $message }}
@@ -115,17 +115,16 @@
                 @enderror
               </div>
 
-              <div class="form-group">
+              <div class="form-group" id="tambahanFotoBarang">
                 <label for="foto_barang" class=" form-control-label">Foto Barang</label>
-                <input type="text" id="foto_barang" name="foto_barang" class="form-control @error('foto_barang') is-invalid @enderror">
+                <input type="file" id="foto_barang" name="foto_barang[]" class="form-control foto_barang @error('foto_barang') is-invalid @enderror" multiple accept="image/*">
+                <br>
                 @error('foto_barang')
                   <div class="invalid-feedback">
                     {{ $message }}
                   </div>
                 @enderror
               </div>
-              
-              <br>
               
               <button class="btn btn-success" type="submit">Proses</button>
                                 

@@ -111,7 +111,31 @@ jQuery(document).ready(function($) {
       format: 'YYYY-MM-DD HH:mm',
 			sideBySide: true,
     });
-	
+	});
+
+	$(document).ready(function() {
+		var maxFileCount = 6;
+
+        $('#tambahanFotoBarang').on('change', '.foto_barang', function() {
+            // Jika pengguna memilih satu file
+            if (this.files.length === 1) {
+                // Jika belum mencapai batas maksimal file
+                if ($('.foto_barang').length < maxFileCount) {
+                    // Tambahkan input file baru
+                    addNewInputFile();
+                } else {
+                    alert('Anda telah mencapai batas maksimal file (5 foto).');
+                    // Hapus file yang baru dipilih karena sudah mencapai batas
+                    $(this).val('');
+                }
+            }
+        });
+
+		function addNewInputFile() {
+				var newInput = 
+				'<input type="file" id="foto_barang" name="foto_barang[]" class="form-control foto_barang" multiple accept="image/*"> <br>';
+				$('#tambahanFotoBarang').append(newInput);
+		}
 	});
 
 
