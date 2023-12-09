@@ -53,16 +53,20 @@ class JadwalController extends Controller
 
     public function show($id)
     {
-        //
+        $jadwal = Jadwal::find($id)->first();
+        return view('jadwal.show')
+            ->with('jadwal', $jadwal)
+            ->with('active', 'active')
+            ->with('title', 'Jadwal');
     }
 
     public function edit($id)
     {
-        $jadwal = Jadwal::where('no_sprint', $id)->first();
+        $jadwal = Jadwal::find($id)->first();
         return view('jadwal.edit')
             ->with('jadwal', $jadwal)
             ->with('active', 'active')
-            ->with('title', 'Jadwal'); ;
+            ->with('title', 'Jadwal');
     }
 
     public function update(Request $request, $id)

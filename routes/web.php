@@ -49,6 +49,7 @@ Route::resource('kategori', KategoriController::class);
 Route::resource('barang-rampasan', BarangRampasanController::class);
 
 Route::resource('jadwal', JadwalController::class);
+Route::get('/jadwal/{no_sprint}', [JadwalController::class, 'show']);
 
 
 
