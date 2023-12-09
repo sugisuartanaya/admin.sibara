@@ -81,7 +81,11 @@ class BarangRampasanController extends Controller
    
     public function show($id)
     {
-        //
+        $barang = Barang_rampasan::find($id)->first();
+        return view('barangRampasan.show')
+            ->with('data_barang', $barang)
+            ->with('active', 'active')
+            ->with('title', 'Barang Rampasan'); 
     }
 
     

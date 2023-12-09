@@ -15,6 +15,10 @@ class Barang_rampasan extends Model
         return $this->belongsTo(Kategori::class, 'kategori_id');
     }
 
+    public function izin(){
+        return $this->hasOne(Izin::class);
+    }
+
     protected $fillable = [
         'nama_barang',
         'nama_terdakwa',

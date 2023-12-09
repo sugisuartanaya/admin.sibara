@@ -63,6 +63,7 @@
                       <th scope="col">Kategori</th>
                       <th scope="col">No Putusan Pengadilan</th>
                       <th scope="col">Tgl Putusan Pengadilan</th>
+                      <th scope="col">Izin Penjualan</th>
                       <th scope="col">Aksi</th>
                     </tr>
                   </thead>
@@ -83,9 +84,11 @@
                         <td style="vertical-align: middle;">{{ $barang->kategori->nama_kategori }}</td>
                         <td style="vertical-align: middle;">{{ $barang->no_putusan }}</td>
                         <td style="vertical-align: middle;">{{ $barang->tgl_putusan }}</td>
+                        <td style="vertical-align: middle;">728/Pid.Sus/2023/PN Dps</td>
                         
                         <td style="vertical-align: middle;">
                           <a href="/barang-rampasan/{{ $barang->nama_barang }}/edit" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Edit"><i class="menu-icon fa fa-pencil"></i></a>
+                          <a href="/barang-rampasan/{{ $barang->id }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-original-title="Show"><i class="menu-icon fa fa-eye"></i></a>
                           <form class="d-inline" action="/barang-rampasan/{{ $barang->id }}" method="post">
                             @csrf
                             @method('DELETE')

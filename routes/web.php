@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\IzinController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
@@ -47,6 +48,8 @@ Route::delete('/deletepegawai/{nip}', [AdminController::class, 'destroyPegawai']
 Route::resource('kategori', KategoriController::class);
 
 Route::resource('barang-rampasan', BarangRampasanController::class);
+
+Route::resource('izin', IzinController::class);
 
 Route::resource('jadwal', JadwalController::class);
 Route::get('/jadwal/{no_sprint}', [JadwalController::class, 'show']);
