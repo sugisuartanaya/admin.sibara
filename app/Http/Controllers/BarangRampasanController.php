@@ -8,6 +8,7 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Session;
 use App\Models\Barang_rampasan;
 use App\Models\Kategori;
+use App\Models\Izin;
 
 
 class BarangRampasanController extends Controller

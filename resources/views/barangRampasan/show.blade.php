@@ -33,9 +33,25 @@
     <div class="row">
       <div class="col-12">
         <div class="card">
+          @if(session('success'))
+              <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            @elseif(session('updated'))
+              <div class="sufee-alert alert with-close alert-info alert-dismissible fade show">
+                {{ session('updated') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            @endif
+
           <div class="card-header d-flex justify-content-between align-items-center">
             <strong>Product Detail</strong>
-            <a href="/barang-rampasan/create"><button class="btn btn-success ml-auto"><i class="fa fa-pencil" style="margin-right: 10px"></i>Edit</button></a>
+            {{-- <a href="/barang-rampasan/{{ $data_barang->nama_barang }}/edit"><button class="btn btn-success ml-auto"><i class="fa fa-pencil" style="margin-right: 10px"></i>Edit</button></a> --}}
           </div>
           <div class="card-body">
             <div class="row">
@@ -63,7 +79,7 @@
                     <img src="{{ asset($foto) }}" class="thumbnail" data-target="#produkCarousel" data-slide-to="{{ $index }}" alt="Thumbnail {{ $index + 1 }}">
                   @endforeach
                 </div>
-                <br>
+                <br><br>
               </div>
 
               <div class="col-md-6">
@@ -89,29 +105,28 @@
                       <td scope="col">Tgl Putusan Pengadilan: </td>
                       <td scope="col">{{ $data_barang->tgl_putusan }}</td>
                     </tr>
-                    <tr>
-                      <td scope="col">Izin Penjualan: </td>
-                      <td scope="col">{{ $data_barang->nama_terdakwa }}</td>
-                    </tr>           
-                    <tr>
-                      <td scope="col">Tgl Izin Penjualan: </td>
-                      <td scope="col">{{ $data_barang->nama_terdakwa }}</td>
-                    </tr>           
+                    @if ($data_barang->izin)
+                      <tr>
+                        <td scope="col">Izin Penjualan: </td>
+                        <td scope="col">{{ $data_barang->izin->no_sk }}</td>
+                      </tr>           
+                      <tr>
+                        <td scope="col">Tgl Izin Penjualan: </td>
+                        <td scope="col">{{ $data_barang->izin->tgl_sk }}</td>
+                      </tr> 
+                    @else
+                      <tr>
+                        <td scope="col">Izin Penjualan: </td>
+                        <td scope="col">
+                          <span class="badge badge-warning">Belum memiliki izin</span>
+                        </td>
+                      </tr> 
+                    @endif
                   </tbody>
                 </table>
               </div>
 
               <div class="col-12">
-                {{-- <div class="custom-tab">
-                  <ul class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Update Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Update Password</a>
-                    </li>
-                  </ul>
-                </div> --}}
                 <div class="custom-tab">
 
                   <nav>
@@ -125,11 +140,68 @@
                           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias ad aspernatur recusandae aut eaque exercitationem vel, laboriosam asperiores cumque hic, sint dolor earum. Nam aspernatur esse, totam aliquam aperiam quas nisi sapiente, ad voluptatibus consectetur nulla perferendis veritatis error dolores labore praesentium fuga voluptatem. Voluptatum, vel rem sequi veniam placeat sunt repellat doloremque nihil modi facere nisi cum enim nulla.</p>
                       </div>
                       <div class="tab-pane fade" id="custom-nav-izin" role="tabpanel" aria-labelledby="custom-nav-izin-tab">
-                          <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, irure terry richardson ex sd. Alip placeat salvia cillum iphone. Seitan alip s cardigan american apparel, butcher voluptate nisi .</p>
+
+                        <table class="table table-striped table-bordered">
+                          <thead>
+                            <tr>
+                              <th scope="col">No. Surat Keterangan Izin Penjualan</th>
+                              <th scope="col">Tgl Surat Keterangan Izin Penjualan</th>
+                              <th scope="col">Aksi</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              @if ($data_barang->izin)
+                                <td style="vertical-align: middle;">{{ $data_barang->izin->no_sk }}</td>
+                                <td style="vertical-align: middle;">{{ $data_barang->izin->tgl_sk }}</td>
+                                <td style="vertical-align: middle;">
+                                  <a href="/izin/{{ $data_barang->izin->no_sk }}/edit" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Edit"><i class="menu-icon fa fa-pencil"></i></a>
+                                  <form class="d-inline" action="/deleteIzin/{{ $data_barang->izin->id }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteBarang{{ $data_barang->izin->no_sk }}"><i class="menu-icon fa fa-trash-o"></i>
+                                    </button>
+        
+                                    <!-- The Modal -->
+                                      <div class="modal" id="deleteBarang{{ $data_barang->izin->no_sk }}">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+        
+                                                <!-- Modal Header -->
+                                                <div class="modal-header">
+                                                  <h4 class="modal-title">Hapus Barang Rampasan</h4>
+                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+        
+                                                <!-- Modal Body -->
+                                                <div class="modal-body">
+                                                  <p>Apakah anda yakin akan menghapus {{ $data_barang->izin->no_sk }}?</p>
+                                                </div>
+        
+                                                <!-- Modal Footer -->
+                                                <div class="modal-footer">
+                                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                  <button type="submit" name="submit" class="btn btn-danger btn-sm">Confirm
+                                                  </button>
+                                                </div>
+        
+                                            </div>
+                                        </div>
+                                    </div>
+                                  </form>
+                                </td>
+                              @else
+                                <td style="vertical-align: middle;">Belum memiliki izin</td>
+                                <td style="vertical-align: middle;">Belum memiliki izin</td>
+                                <td><a href="/izin/create/{{ $data_barang->id }}"><button class="btn btn-success ml-auto"><i class="fa fa-plus" style="margin-right: 10px"></i>Tambah Izin</button></a></td>
+                              @endif
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                   </div>
 
-              </div>
+                </div>
               </div>
             </div>
           </div>

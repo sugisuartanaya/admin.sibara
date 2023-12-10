@@ -16,7 +16,7 @@ class Barang_rampasan extends Model
     }
 
     public function izin(){
-        return $this->hasOne(Izin::class);
+        return $this->hasOne(Izin::class, 'id_barang');
     }
 
     protected $fillable = [

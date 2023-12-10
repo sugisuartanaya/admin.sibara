@@ -14,4 +14,10 @@ class Izin extends Model
     public function barang_rampasan(){
         return $this->belongsTo(Barang_rampasan::class, 'id_barang');
     }
+
+    protected $fillable = [
+        'no_sk',
+        'tgl_sk',
+        'id_barang'
+    ];
 }

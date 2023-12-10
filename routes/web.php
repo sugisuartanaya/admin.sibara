@@ -49,7 +49,11 @@ Route::resource('kategori', KategoriController::class);
 
 Route::resource('barang-rampasan', BarangRampasanController::class);
 
-Route::resource('izin', IzinController::class);
+Route::get('izin/create/{id}',[ IzinController::class, 'create']);
+Route::post('izin/create/{id}',[ IzinController::class, 'store']);
+Route::get('izin/{no_sk}/edit',[ IzinController::class, 'edit']);
+Route::put('izin/{no_sk}',[ IzinController::class, 'update']);
+Route::delete('/deleteIzin/{id}', [IzinController::class, 'destroy']);
 
 Route::resource('jadwal', JadwalController::class);
 Route::get('/jadwal/{no_sprint}', [JadwalController::class, 'show']);
