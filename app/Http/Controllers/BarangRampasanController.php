@@ -6,9 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
 use App\Models\Barang_rampasan;
 use App\Models\Kategori;
-use App\Models\Izin;
+use App\Models\Harga_wajar;
 
 
 class BarangRampasanController extends Controller
@@ -98,9 +99,17 @@ class BarangRampasanController extends Controller
     {
         $barang = Barang_rampasan::find($id);
         $fotoBarangArray = json_decode($barang->foto_barang, true);
+        $harga = Harga_wajar::where('id_barang', $id)
+            ->orderBy('tgl_laporan_penilaian', 'desc')    
+            ->first();
+        $tglHarga = $harga->tgl_laporan_penilaian;
+        $selisih = Carbon::now()->diffInMonths($tglHarga);
+        $expired = $selisih >= 6;
+
         return view('barangRampasan.show')
             ->with('data_barang', $barang)
             ->with('foto_barang', $fotoBarangArray)
+            ->with('expired', $expired)
             ->with('active', 'active')
             ->with('title', 'Barang Rampasan'); 
     }

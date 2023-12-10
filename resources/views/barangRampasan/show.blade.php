@@ -85,7 +85,14 @@
               <div class="col-md-6">
                 <h3>{{ $data_barang->nama_barang}}</h3>
                 @if ($data_barang->harga_wajar->count() > 0 )
-                  <h3>Rp. {{ number_format($data_barang->harga_wajar->last()->harga, 0, ',', '.') }}</h3>
+                  @if ($expired)
+                    <h3 style="text-decoration: line-through;">
+                      Rp. {{ number_format($data_barang->harga_wajar->last()->harga, 0, ',', '.') }}
+                    </h3>
+                    <p>Harga Expired, tambahkan harga wajar terbaru</p>
+                  @else
+                    <h3>Rp. {{ number_format($data_barang->harga_wajar->last()->harga, 0, ',', '.') }}</h3>
+                  @endif
                 @else
                   <h4>Belum ada penilaian harga wajar</h4>
                 @endif
