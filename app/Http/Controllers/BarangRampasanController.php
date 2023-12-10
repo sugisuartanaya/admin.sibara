@@ -102,9 +102,17 @@ class BarangRampasanController extends Controller
         $harga = Harga_wajar::where('id_barang', $id)
             ->orderBy('tgl_laporan_penilaian', 'desc')    
             ->first();
-        $tglHarga = $harga->tgl_laporan_penilaian;
-        $selisih = Carbon::now()->diffInMonths($tglHarga);
-        $expired = $selisih >= 6;
+
+        //cek apakah harga ada
+        if ($harga){
+            $tglHarga = $harga->tgl_laporan_penilaian;
+            $selisih = Carbon::now()->diffInMonths($tglHarga);
+            $expired = $selisih >= 6;
+        } else {
+            $tglHarga = null;
+            $selisih = null;
+            $expired = false;
+        }
 
         return view('barangRampasan.show')
             ->with('data_barang', $barang)
