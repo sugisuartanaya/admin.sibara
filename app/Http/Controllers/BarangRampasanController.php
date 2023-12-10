@@ -64,9 +64,10 @@ class BarangRampasanController extends Controller
             $url_foto_thumbnail = Storage::url($path);
         }
 
-        if ($request->hasfile('foto_barang')) {
-            $foto_paths = [];
-            foreach ($request->file('foto_barang') as $image) {
+        if ($request->hasFile('foto_barang')) {
+            if (count($request->file('foto_barang')) <= 5) {
+                $foto_paths = [];
+                foreach ($request->file('foto_barang') as $image) {
                 $path = $image->storeAs('public/photos/products', uniqid() . '.' . $image->getClientOriginalExtension());
                 // Resize gambar sebelum disimpan
                 Image::make($image)->fit(800, 650)->save(storage_path('app/' . $path));
@@ -76,8 +77,18 @@ class BarangRampasanController extends Controller
             }
             $url_foto_barang = json_encode($foto_paths);
             $url_foto_barang = stripslashes($url_foto_barang);
-        }
+            } else{
+                Session::flash('error', 'Foto tidak boleh lebih dari 5 file');
 
+                return redirect('/barang-rampasan/create');
+            }
+            
+        } else {
+            Session::flash('errorKosong', 'Anda belum upload foto barang');
+
+            return redirect('/barang-rampasan/create');
+        }
+        
         barang_rampasan::create([
             'nama_barang' => $validatedData['nama_barang'],
             'nama_terdakwa' => $validatedData['nama_terdakwa'],
@@ -164,21 +175,26 @@ class BarangRampasanController extends Controller
             $barang->foto_thumbnail = $url;
         }
 
-        if ($request->hasfile('foto_barang')) {
-            $foto_paths = [];
-            foreach ($request->file('foto_barang') as $image) {
-                $path = $image->storeAs('public/photos/products', uniqid() . '.' . $image->getClientOriginalExtension());
-                // Resize gambar sebelum disimpan
-                Image::make($image)->fit(800, 600)->save(storage_path('app/' . $path));
-                $url_foto_barang = Storage::url($path);
+        if ($request->hasfile('foto_barang')){
+            if (count($request->file('foto_barang')) <= 5){
+                $foto_paths = [];
+                foreach ($request->file('foto_barang') as $image) {
+                    $path = $image->storeAs('public/photos/products', uniqid() . '.' . $image->getClientOriginalExtension());
+                    // Resize gambar sebelum disimpan
+                    Image::make($image)->fit(800, 600)->save(storage_path('app/' . $path));
+                    $url_foto_barang = Storage::url($path);
 
-                $foto_paths[] = $url_foto_barang;
+                    $foto_paths[] = $url_foto_barang;
+                }
+                $url_foto_barang = json_encode($foto_paths);
+                $url_foto_barang = stripslashes($url_foto_barang);
+                $barang->foto_barang = $url_foto_barang;
+            } else {
+                Session::flash('Error', 'Foto tidak boleh lebih dari 5 file');
+                return redirect('/barang-rampasan/'.$barang->nama_barang.'/edit');
             }
-            $url_foto_barang = json_encode($foto_paths);
-            $url_foto_barang = stripslashes($url_foto_barang);
-            $barang->foto_barang = $url_foto_barang;
-        }
-
+        } 
+            
         $barang->nama_barang = $validatedData['nama_barang'];
         $barang->nama_terdakwa = $validatedData['nama_terdakwa'];
         $barang->no_putusan = $validatedData['no_putusan'];

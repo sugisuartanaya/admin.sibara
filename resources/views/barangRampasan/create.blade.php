@@ -33,6 +33,23 @@
     <div class="row">
       <div class="col-12">
         <div class="card">
+          
+          @if(session('error'))
+            <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+              {{ session('error') }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          @elseif(session('errorKosong'))
+            <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+              {{ session('errorKosong') }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          @endif
+          
           <div class="card-header">
             <strong>Tambah Barang Rampasan</strong>
           </div>

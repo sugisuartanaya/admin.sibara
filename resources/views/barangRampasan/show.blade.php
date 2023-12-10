@@ -51,7 +51,6 @@
 
           <div class="card-header d-flex justify-content-between align-items-center">
             <strong>Product Detail</strong>
-            {{-- <a href="/barang-rampasan/{{ $data_barang->nama_barang }}/edit"><button class="btn btn-success ml-auto"><i class="fa fa-pencil" style="margin-right: 10px"></i>Edit</button></a> --}}
           </div>
           <div class="card-body">
             <div class="row">
@@ -79,6 +78,7 @@
                     <img src="{{ asset($foto) }}" class="thumbnail" data-target="#produkCarousel" data-slide-to="{{ $index }}" alt="Thumbnail {{ $index + 1 }}">
                   @endforeach
                 </div>
+
                 <br><br>
               </div>
 
