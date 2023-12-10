@@ -48,7 +48,7 @@
               </div>
             @endif
 
-              <div class="card-header d-flex justify-content-between align-items-center"">
+              <div class="card-header d-flex justify-content-between align-items-center">
                   <strong class="card-title mb-0">List Barang Rampasan Negara</strong>
                   <a href="/barang-rampasan/create"><button class="btn btn-success ml-auto"><i class="fa fa-plus" style="margin-right: 10px"></i>Tambah</button></a>
               </div>
@@ -63,7 +63,6 @@
                       <th scope="col">Kategori</th>
                       <th scope="col">No Putusan Pengadilan</th>
                       <th scope="col">Tgl Putusan Pengadilan</th>
-                      <th scope="col">Izin Penjualan</th>
                       <th scope="col">Aksi</th>
                     </tr>
                   </thead>
@@ -84,7 +83,6 @@
                         <td style="vertical-align: middle;">{{ $barang->kategori->nama_kategori }}</td>
                         <td style="vertical-align: middle;">{{ $barang->no_putusan }}</td>
                         <td style="vertical-align: middle;">{{ $barang->tgl_putusan }}</td>
-                        <td style="vertical-align: middle;">728/Pid.Sus/2023/PN Dps</td>
                         
                         <td style="vertical-align: middle;">
                           <a href="/barang-rampasan/{{ $barang->nama_barang }}/edit" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Edit"><i class="menu-icon fa fa-pencil"></i></a>
