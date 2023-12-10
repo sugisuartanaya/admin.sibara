@@ -8,6 +8,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\HargaWajarController;
 use App\Http\Controllers\BarangRampasanController;
 
 
@@ -54,6 +55,12 @@ Route::post('izin/create/{id}',[ IzinController::class, 'store']);
 Route::get('izin/{no_sk}/edit',[ IzinController::class, 'edit']);
 Route::put('izin/{no_sk}',[ IzinController::class, 'update']);
 Route::delete('/deleteIzin/{id}', [IzinController::class, 'destroy']);
+
+Route::get('harga-wajar/create/{id}',[ HargaWajarController::class, 'create']);
+Route::post('harga-wajar/create/{id}',[ HargaWajarController::class, 'store']);
+Route::get('harga-wajar/{no_laporan_penilaian}/edit',[ HargaWajarController::class, 'edit']);
+Route::put('harga-wajar/{no_laporan_penilaian}',[ HargaWajarController::class, 'update']);
+Route::delete('deleteHarga/{id}',[ HargaWajarController::class, 'destroy']);
 
 Route::resource('jadwal', JadwalController::class);
 Route::get('/jadwal/{no_sprint}', [JadwalController::class, 'show']);

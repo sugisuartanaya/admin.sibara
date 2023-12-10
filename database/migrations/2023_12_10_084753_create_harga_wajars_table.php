@@ -13,11 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('izins', function (Blueprint $table) {
+        Schema::create('harga_wajars', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_barang');
-            $table->string('no_sk');
-            $table->date('tgl_sk');
+            $table->integer('harga');
+            $table->string('no_laporan_penilaian');
+            $table->date('tgl_laporan_penilaian');
         });
     }
 
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('izins');
+        Schema::dropIfExists('harga_wajars');
     }
 };

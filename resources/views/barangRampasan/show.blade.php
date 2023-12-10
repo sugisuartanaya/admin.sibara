@@ -83,8 +83,12 @@
               </div>
 
               <div class="col-md-6">
-                <h3>{{ $data_barang->nama_barang }}</h3>
-                <h4>Harga Barang: Rp. 2.000.000</h4>
+                <h3>{{ $data_barang->nama_barang}}</h3>
+                @if ($data_barang->harga_wajar->count() > 0 )
+                  <h3>Rp. {{ number_format($data_barang->harga_wajar->last()->harga, 0, ',', '.') }}</h3>
+                @else
+                  <h4>Belum ada penilaian harga wajar</h4>
+                @endif
                 <span class="badge badge-success">{{ $data_barang->kategori->nama_kategori }}</span>
                 <hr>
                 <h4>Deskripsi</h4>
@@ -137,7 +141,76 @@
                   </nav>
                   <div class="tab-content pl-3 pt-2" id="nav-tabContent">
                       <div class="tab-pane fade show active" id="custom-nav-harga" role="tabpanel" aria-labelledby="custom-nav-harga-tab">
-                          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias ad aspernatur recusandae aut eaque exercitationem vel, laboriosam asperiores cumque hic, sint dolor earum. Nam aspernatur esse, totam aliquam aperiam quas nisi sapiente, ad voluptatibus consectetur nulla perferendis veritatis error dolores labore praesentium fuga voluptatem. Voluptatum, vel rem sequi veniam placeat sunt repellat doloremque nihil modi facere nisi cum enim nulla.</p>
+                        <table class="table table-striped table-bordered">
+                          <thead>
+                            <tr>
+                              <th scope="col">No. </th>
+                              <th scope="col">Harga Wajar</th>
+                              <th scope="col">No. Laporan Penilaian</th>
+                              <th scope="col">Tgl. Laporan Penilaian</th>
+                              <th scope="col">Aksi</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            @if ($data_barang->harga_wajar->count() > 0)
+                              @foreach ($data_barang->harga_wajar as $index => $harga)
+                              <tr>
+                                <td style="vertical-align: middle;">{{ $index + 1 }}</td>
+                                <td style="vertical-align: middle;">Rp. {{ number_format($harga->harga, 0, ',', '.') }}</td>
+                                <td style="vertical-align: middle;">{{ $harga->no_laporan_penilaian }}</td>
+                                <td style="vertical-align: middle;">{{ $harga->tgl_laporan_penilaian }}</td>
+                                <td style="vertical-align: middle;">
+                                  <a href="/harga-wajar/create/{{ $data_barang->id }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-original-title="Tambah"><i class="menu-icon fa fa-plus"></i></a>
+                                  <a href="/harga-wajar/{{ $harga->no_laporan_penilaian }}/edit" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Edit"><i class="menu-icon fa fa-pencil"></i></a>
+                                  <form class="d-inline" action="/deleteHarga/{{ $harga->id }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteHarga{{ $harga->no_laporan_penilaian }}"><i class="menu-icon fa fa-trash-o"></i>
+                                    </button>
+        
+                                    <!-- The Modal -->
+                                      <div class="modal" id="deleteHarga{{ $harga->no_laporan_penilaian }}">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+        
+                                                <!-- Modal Header -->
+                                                <div class="modal-header">
+                                                  <h4 class="modal-title">Hapus Harga Wajar</h4>
+                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+        
+                                                <!-- Modal Body -->
+                                                <div class="modal-body">
+                                                  <p>Apakah anda yakin akan menghapus {{ $harga->no_laporan_penilaian }}?</p>
+                                                </div>
+        
+                                                <!-- Modal Footer -->
+                                                <div class="modal-footer">
+                                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                  <button type="submit" name="submit" class="btn btn-danger btn-sm">Confirm
+                                                  </button>
+                                                </div>
+        
+                                            </div>
+                                        </div>
+                                    </div>
+                                  </form>
+                                </td>
+                              </tr>
+                              @endforeach
+
+                            @else
+                              <tr>
+                                <td style="vertical-align: middle;">-</td>
+                                <td style="vertical-align: middle;">-</td>
+                                <td style="vertical-align: middle;">-</td>
+                                <td style="vertical-align: middle;">-</td>
+                                <td style="vertical-align: middle;"><a href="/harga-wajar/create/{{ $data_barang->id }}"><button class="btn btn-success ml-auto"><i class="fa fa-plus" style="margin-right: 10px"></i>Tambah Penilaian</button></a></td>
+                              </tr>
+                            @endif
+
+                          </tbody>
+                        </table>
                       </div>
                       <div class="tab-pane fade" id="custom-nav-izin" role="tabpanel" aria-labelledby="custom-nav-izin-tab">
 
@@ -169,7 +242,7 @@
         
                                                 <!-- Modal Header -->
                                                 <div class="modal-header">
-                                                  <h4 class="modal-title">Hapus Barang Rampasan</h4>
+                                                  <h4 class="modal-title">Hapus Izin Penjualan</h4>
                                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                 </div>
         
