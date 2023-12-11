@@ -57,7 +57,13 @@
                         <td style="vertical-align: middle;">{{ $index + 1 }}</td>
                         <td style="vertical-align: middle;">{{ $barang->barang_rampasan->nama_barang }}</td>
                         <td style="vertical-align: middle;">{{ $barang->barang_rampasan->kategori->nama_kategori }}</td>
-                        <td style="vertical-align: middle;">{{ $barang->barang_rampasan->harga_wajar->first()->harga }}</td>
+                        <td style="vertical-align: middle;">
+                          @if ($barang->barang_rampasan->harga_wajar->isNotEmpty())
+                            Rp. {{ number_format($barang->barang_rampasan->harga_wajar->last()->harga, 0, ',', '.') }}
+                          @else
+                            -
+                          @endif
+                      </td>
                         <td style="vertical-align: middle;">aksi</td>
                       </tr>
                     @endforeach
