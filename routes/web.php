@@ -69,6 +69,7 @@ Route::get('/jadwal/{no_sprint}', [JadwalController::class, 'show']);
 Route::get('daftar-barang/{id}', [DaftarBarangController::class, 'show']);
 Route::get('daftar-barang/create/{id}', [DaftarBarangController::class, 'create']);
 Route::post('daftar-barang/create', [DaftarBarangController::class, 'store']);
+Route::delete('daftar-barang/{id}', [DaftarBarangController::class, 'destroy']);
 
 
 

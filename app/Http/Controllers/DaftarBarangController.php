@@ -95,6 +95,12 @@ class DaftarBarangController extends Controller
    
     public function destroy($id)
     {
-        //
+        $h = Daftar_barang::find($id);
+        $id_jadwal = Jadwal::find($h->id_jadwal);
+
+        Daftar_barang::find($id)->delete();
+        // // Set flash message
+        Session::flash('success', 'Barang rampasan berhasil dihapus.');
+        return redirect('/daftar-barang/'.$id_jadwal->id);
     }
 }

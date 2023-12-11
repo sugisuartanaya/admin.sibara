@@ -30,46 +30,19 @@
     <div class="row">
       <div class="col-12">
         <div class="card">
+          @if(session('success'))
+            <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
+              {{ session('success') }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          @endif
           <div class="card-header">
             <strong>Informasi Jadwal Penjualan Langsung</strong>
           </div>
           <div class="card-body">
             <div class="row">
-              <div class="col-md-7">
-                <div class="d-flex justify-content-between align-items-center">
-                  <strong>Daftar Barang yang akan Dijual</strong>
-                  <a href="/daftar-barang/create/{{ $jadwal->id }}"><button class="btn btn-success btn-sm ml-auto"><i class="fa fa-plus" style="margin-right: 10px"></i>Tambah Barang</button></a>
-                </div>
-                <br>
-                <table id="tabel" class="table table-striped table-bordered datatable">
-                  <thead>
-                    <tr>
-                      <th scope="col">No.</th>
-                      <th scope="col">Nama Barang</th>
-                      <th scope="col">Kategori</th>
-                      <th scope="col">Harga</th>
-                      <th scope="col">Aksi</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @foreach ($daftar as $index => $barang)
-                      <tr>
-                        <td style="vertical-align: middle;">{{ $index + 1 }}</td>
-                        <td style="vertical-align: middle;">{{ $barang->barang_rampasan->nama_barang }}</td>
-                        <td style="vertical-align: middle;">{{ $barang->barang_rampasan->kategori->nama_kategori }}</td>
-                        <td style="vertical-align: middle;">
-                          @if ($barang->barang_rampasan->harga_wajar->isNotEmpty())
-                            Rp. {{ number_format($barang->barang_rampasan->harga_wajar->last()->harga, 0, ',', '.') }}
-                          @else
-                            -
-                          @endif
-                      </td>
-                        <td style="vertical-align: middle;">aksi</td>
-                      </tr>
-                    @endforeach
-                  </tbody>
-                </table>
-              </div>
               <div class="col-md-5">
                 <table class="table table-borderless table-sm table-compact">
                   <tbody>
@@ -97,6 +70,87 @@
                       <td scope="col">{{ $jadwal->start_date->format('H:i') }} - {{ $jadwal->end_date->format('H:i') }}</td>
                     </tr>
                 </table>
+                <br>
+              </div>
+              <div class="col-md-12">
+                <div class="d-flex justify-content-between align-items-center">
+                  <strong>Daftar Barang yang akan Dijual</strong>
+                  <a href="/daftar-barang/create/{{ $jadwal->id }}"><button class="btn btn-success btn-sm ml-auto"><i class="fa fa-plus" style="margin-right: 10px"></i>Tambah Barang</button></a>
+                </div>
+                <br>
+                <table id="tabel" class="table table-striped table-bordered datatable">
+                  <thead>
+                    <tr>
+                      <th scope="col">No.</th>
+                      <th scope="col">Nama Barang</th>
+                      <th scope="col">Kategori</th>
+                      <th scope="col">Izin Penjualan</th>
+                      <th scope="col">Harga</th>
+                      <th scope="col">Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach ($daftar as $index => $barang)
+                      <tr>
+                        <td style="vertical-align: middle;">{{ $index + 1 }}</td>
+                        <td style="vertical-align: middle;">{{ $barang->barang_rampasan->nama_barang }}</td>
+                        <td style="vertical-align: middle;">{{ $barang->barang_rampasan->kategori->nama_kategori }}</td>
+                        <td style="vertical-align: middle;">
+                          @if ($barang->barang_rampasan->izin)
+                            {{ $barang->barang_rampasan->izin->no_sk }}
+                          @else
+                            -
+                          @endif
+                        </td>
+                        <td style="vertical-align: middle;">
+                          @if ($barang->barang_rampasan->harga_wajar->isNotEmpty())
+                            Rp. {{ number_format($barang->barang_rampasan->harga_wajar->last()->harga, 0, ',', '.') }}
+                          @else
+                            -
+                          @endif
+                        </td>
+                        <td style="vertical-align: middle; text-align: center;">
+                          <form class="d-inline" action="/daftar-barang/{{ $barang->id }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteBarang{{ $barang->id }}"><i class="menu-icon fa fa-trash-o"></i>
+                            </button>
+
+                            <!-- The Modal -->
+                              <div class="modal" id="deleteBarang{{ $barang->id }}">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+
+                                        <!-- Modal Header -->
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Hapus barang</h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+
+                                        <!-- Modal Body -->
+                                        <div class="modal-body">
+                                            <p>Apakah anda yakin akan menghapus {{ $barang->barang_rampasan->nama_barang }}?</p>
+                                        </div>
+
+                                        <!-- Modal Footer -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" name="submit" class="btn btn-danger btn-sm">Confirm
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                          </form>
+                        </td>
+                      </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-md-4">
+                
               </div>
             </div>
           </div>
