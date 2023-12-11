@@ -33,11 +33,36 @@
       <div class="col-lg-6 col-md-12">
         <div class="card">
           <div class="card-body">
-            <strong class="text-center">Jadwal Penjualan Langsung</strong>
+            <strong class="text-center">Pelaksanaan Penjualan Langsung</strong>
             <hr>
-            <p>Saat ini tidak ada jadwal</p>
-            <button class="btn btn-success">Buat jadwal</button>
-            <br><br><br><br>
+            @if($jadwal && !$jadwal->isEmpty())
+              <table class="table table-borderless table-sm table-compact">
+                <tbody>
+                  @foreach($jadwal as $index => $jadwal_penjualan)
+                    <tr>
+                      <td scope="col">Hari : </td>
+                      <td scope="col">{{ $jadwal_penjualan->start_date->format('l') }} - {{ $jadwal_penjualan->end_date->format('l') }}</td>
+                    </tr>
+                    <tr>
+                      <td scope="col">Tanggal : </td>
+                      <td scope="col">{{ $jadwal_penjualan->start_date->format('j F Y') }} - {{ $jadwal_penjualan->end_date->format('j F Y') }}</td>
+                    </tr>
+                    <tr>
+                      <td scope="col">Waktu Pelaksanaan : </td>
+                      <td scope="col">{{ $jadwal_penjualan->start_date->format('H:i') }} - {{ $jadwal_penjualan->end_date->format('H:i') }} WITA</td>
+                    </tr>
+                    <tr>
+                      <td scope="col">Tempat : </td>
+                      <td scope="col">Kejaksaan Negeri Denpasar</td>
+                    </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            @else
+              <p>Saat ini tidak ada jadwal</p>
+              <button class="btn btn-success">Buat jadwal</button>
+            @endif
+            <br><br>
           </div>
         </div>
       </div>
@@ -51,7 +76,7 @@
               </div>
               <div class="stat-content">
                 <div class="text-left dib">
-                  <div class="stat-text">Rp<span class="count">2000000</span></div>
+                  <div class="stat-text"><span class="count">-</span></div>
                   <div class="stat-heading">Pendapatan Kas Negara</div>
                 </div>
               </div>
@@ -69,7 +94,7 @@
               </div>
               <div class="stat-content">
                 <div class="text-left dib">
-                  <div class="stat-text"><span class="count">349</span></div>
+                  <div class="stat-text"><span class="count">-</span></div>
                   <div class="stat-heading">Terjual</div>
                 </div>
               </div>
@@ -87,8 +112,12 @@
               </div>
               <div class="stat-content">
                 <div class="text-left dib">
-                  <div class="stat-text"><span class="count">3435</span></div>
-                  <div class="stat-heading">Barang Rampasan Negara</div>
+                  <div class="stat-text">
+                    @if($barang && !$barang->isEmpty())
+                      <span class="count">{{ $barang->count() }}</span>
+                    @endif
+                  </div>
+                  <div class="stat-heading">Barang Rampasan</div>
                 </div>
               </div>
             </div>
@@ -105,7 +134,7 @@
               </div>
               <div class="stat-content">
                 <div class="text-left dib">
-                  <div class="stat-text"><span class="count">2986</span></div>
+                  <div class="stat-text"><span class="count">-</span></div>
                   <div class="stat-heading">Pembeli</div>
                 </div>
               </div>

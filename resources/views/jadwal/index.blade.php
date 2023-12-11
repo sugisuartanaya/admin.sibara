@@ -50,7 +50,14 @@
 
               <div class="card-header d-flex justify-content-between align-items-center"">
                   <strong class="card-title mb-0">List Jadwal</strong>
-                  <a href="/jadwal/create"><button class="btn btn-success ml-auto"><i class="fa fa-plus" style="margin-right: 10px"></i>Tambah</button></a>
+                  @if($filter->isEmpty())
+                    <a href="/jadwal/create">
+                      <button class="btn btn-success ml-auto">
+                        <i class="fa fa-plus" style="margin-right: 10px"></i>Tambah
+                      </button>
+                    </a>
+                  @endif
+                 
               </div>
               <div class="card-body">
                 <table id="tabel" class="table table-striped table-bordered datatable">
@@ -61,6 +68,7 @@
                       <th scope="col">Tgl Surat Perintah</th>
                       <th scope="col">Tanggal Dimulai</th>
                       <th scope="col">Tanggal Berakhir</th>
+                      <th scope="col">Waktu</th>
                       <th scope="col">Aksi</th>
                     </tr>
                   </thead>
@@ -69,9 +77,12 @@
                       <tr>
                         <td style="vertical-align: middle;">{{ $index + 1 }}</td>
                         <td style="vertical-align: middle;">{{ $jadwal->no_sprint }}</td>
-                        <td style="vertical-align: middle;">{{ $jadwal->tgl_sprint }}</td>
-                        <td style="vertical-align: middle;">{{ $jadwal->start_date }}</td>
-                        <td style="vertical-align: middle;">{{ $jadwal->end_date }}</td>
+                        <td style="vertical-align: middle;">{{ $jadwal->tgl_sprint->format('j F Y') }}</td>
+                        <td style="vertical-align: middle;">{{ $jadwal->start_date->format('j F Y') }}</td>
+                        <td style="vertical-align: middle;">{{ $jadwal->end_date->format('j F Y') }}</td>
+                        <td style="vertical-align: middle;">
+                          {{ $jadwal->start_date->format('H:i') }} - {{ $jadwal->end_date->format('H:i') }} WITA
+                        </td>
                         
                         <td style="vertical-align: middle;">
                           <a href="/jadwal/{{ $jadwal->id }}/edit" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Edit"><i class="menu-icon fa fa-pencil"></i></a>

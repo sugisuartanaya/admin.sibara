@@ -52,18 +52,18 @@
                     </tr>
                     <tr>
                       <td scope="col">Tgl. Surat Perintah Penjualan langsung: </td>
-                      <td scope="col">{{ $jadwal->tgl_sprint->format('F j, Y') }}</td>
+                      <td scope="col">{{ $jadwal->tgl_sprint->format('j F Y') }}</td>
                     </tr>
                     <tr><td>
                       <strong>Dilaksanakan pada</strong>
                     </td></tr>
                     <tr>
                       <td scope="col">Tgl Dimulai: </td>
-                      <td scope="col">{{ $jadwal->start_date->format('F j, Y') }}</td>
+                      <td scope="col">{{ $jadwal->start_date->format('j F Y') }}</td>
                     </tr>
                     <tr>
                       <td scope="col">Tgl Berakhir: </td>
-                      <td scope="col">{{ $jadwal->end_date->format('F j, Y') }}</td>
+                      <td scope="col">{{ $jadwal->end_date->format('j F Y') }}</td>
                     </tr>
                     <tr>
                       <td scope="col">Waktu: </td>

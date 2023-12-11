@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Daftar_barang;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IzinController;
 use App\Http\Controllers\UserController;
@@ -8,10 +9,10 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HargaWajarController;
-use App\Http\Controllers\BarangRampasanController;
 use App\Http\Controllers\DaftarBarangController;
-use App\Models\Daftar_barang;
+use App\Http\Controllers\BarangRampasanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,12 +30,14 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 //Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/logout', [LoginController::class, 'logout']);
 
-Route::get('/dashboard', function(){
-  return view('dashboard.index', [
-      'active' => 'active',
-      'title' => 'Dashboard',
-  ]);
-})->middleware('auth');
+// Route::get('/dashboard', function(){
+//   return view('dashboard.index', [
+//       'active' => 'active',
+//       'title' => 'Dashboard',
+//   ]);
+// })->middleware('auth');
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
 Route::get('/profile', [pegawaiController::class, 'myProfile']);
 

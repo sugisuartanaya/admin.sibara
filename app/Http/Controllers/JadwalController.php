@@ -5,21 +5,32 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Jadwal;
 use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
 
 
 class JadwalController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $jadwal = Jadwal::all();
-        return view('jadwal.index')->with('data_jadwal', $jadwal)
-        ->with('active', 'active')
-        ->with('title', 'Jadwal');
+        foreach ($jadwal as $format_jadwal) {
+            $format_jadwal->start_date = Carbon::parse($format_jadwal->start_date);
+            $format_jadwal->end_date = Carbon::parse($format_jadwal->end_date);
+            $format_jadwal->tgl_sprint = Carbon::parse($format_jadwal->tgl_sprint);
+        }
+
+        //filter tanggal berakhir
+        $today = Carbon::now();
+        $filteredJadwal = $jadwal->filter(function ($item) use ($today) {
+            return $item->end_date >= $today;
+        });
+
+        return view('jadwal.index')
+            ->with('data_jadwal', $jadwal)
+            ->with('filter', $filteredJadwal)
+            ->with('active', 'active')
+            ->with('title', 'Jadwal');
     }
 
     public function create()
