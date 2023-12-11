@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css" />
 
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/chosen.min.css') }}">
 
 </head>
 
@@ -153,6 +154,8 @@
 
     <!-- Your Custom Script -->
     <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('js/chosen.jquery.min.js') }}"></script>
+
 
   </body>
 </html>

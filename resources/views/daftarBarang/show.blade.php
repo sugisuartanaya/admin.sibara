@@ -31,11 +31,16 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <strong>Detail Jadwal Penjualan Langsung</strong>
+            <strong>Informasi Jadwal Penjualan Langsung</strong>
           </div>
           <div class="card-body">
             <div class="row">
               <div class="col-md-7">
+                <div class="d-flex justify-content-between align-items-center">
+                  <strong>Daftar Barang yang akan Dijual</strong>
+                  <a href="/daftar-barang/create/{{ $jadwal->id }}"><button class="btn btn-success btn-sm ml-auto"><i class="fa fa-plus" style="margin-right: 10px"></i>Tambah Barang</button></a>
+                </div>
+                <br>
                 <table id="tabel" class="table table-striped table-bordered datatable">
                   <thead>
                     <tr>
@@ -47,15 +52,15 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {{-- @foreach ($daftar_barang as $index => $barang) --}}
+                    @foreach ($daftar as $index => $barang)
                       <tr>
-                        {{-- <td style="vertical-align: middle;">{{ $index + 1 }}</td>
+                        <td style="vertical-align: middle;">{{ $index + 1 }}</td>
                         <td style="vertical-align: middle;">{{ $barang->barang_rampasan->nama_barang }}</td>
                         <td style="vertical-align: middle;">{{ $barang->barang_rampasan->kategori->nama_kategori }}</td>
-                        <td style="vertical-align: middle;">{{ $barang->barang_rampasan->harga_wajar->harga }}</td>
-                        <td style="vertical-align: middle;">aksi</td> --}}
+                        <td style="vertical-align: middle;">{{ $barang->barang_rampasan->harga_wajar->first()->harga }}</td>
+                        <td style="vertical-align: middle;">aksi</td>
                       </tr>
-                    {{-- @endforeach --}}
+                    @endforeach
                   </tbody>
                 </table>
               </div>

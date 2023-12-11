@@ -2487,6 +2487,19 @@ footer.site-footer {
     padding-bottom: 5px; }
   .right-panel .menutoggle {
     width: 20px; } }
+
+
+  .table-compact {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 0; /* Menghilangkan margin bawah */
+  }
+
+  .table-compact th,
+  .table-compact td {
+    padding: 0.3rem; /* Sesuaikan padding sel */
+    margin: 0; /* Menghilangkan margin sel */
+  }
   
   #produkCarousel {
       /* lebar maksimum  */

@@ -16,4 +16,9 @@ class Jadwal extends Model
         'start_date',
         'end_date',
     ];
+
+    public function daftar_barang()
+    {
+        return $this->hasMany(Daftar_barang::class, 'id_jadwal');
+    }
 }

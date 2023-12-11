@@ -10,7 +10,8 @@ use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\HargaWajarController;
 use App\Http\Controllers\BarangRampasanController;
-
+use App\Http\Controllers\DaftarBarangController;
+use App\Models\Daftar_barang;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,6 +65,10 @@ Route::delete('deleteHarga/{id}',[ HargaWajarController::class, 'destroy']);
 
 Route::resource('jadwal', JadwalController::class);
 Route::get('/jadwal/{no_sprint}', [JadwalController::class, 'show']);
+
+Route::get('daftar-barang/{id}', [DaftarBarangController::class, 'show']);
+Route::get('daftar-barang/create/{id}', [DaftarBarangController::class, 'create']);
+Route::post('daftar-barang/create', [DaftarBarangController::class, 'store']);
 
 
 

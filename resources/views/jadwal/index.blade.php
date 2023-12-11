@@ -75,7 +75,7 @@
                         
                         <td style="vertical-align: middle;">
                           <a href="/jadwal/{{ $jadwal->id }}/edit" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Edit"><i class="menu-icon fa fa-pencil"></i></a>
-                          <a href="/jadwal/{{ $jadwal->id }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-original-title="Show"><i class="menu-icon fa fa-eye"></i></a>
+                          <a href="{{ 'daftar-barang/'.$jadwal->id }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-original-title="Show"><i class="menu-icon fa fa-eye"></i></a>
                           <form class="d-inline" action="/jadwal/{{ $jadwal->id }}" method="post">
                             @csrf
                             @method('DELETE')
