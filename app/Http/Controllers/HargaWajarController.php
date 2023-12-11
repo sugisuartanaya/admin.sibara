@@ -42,7 +42,7 @@ class HargaWajarController extends Controller
 
     public function edit($id)
     {
-        $harga = Harga_wajar::where('no_laporan_penilaian', $id)->first();
+        $harga = Harga_wajar::find($id);
         return view('hargaWajar.edit')->with('harga', $harga)
         ->with('active', 'active')
         ->with('title', 'Barang Rampasan');

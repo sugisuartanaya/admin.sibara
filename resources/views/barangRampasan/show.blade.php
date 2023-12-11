@@ -148,6 +148,11 @@
                   </nav>
                   <div class="tab-content pl-3 pt-2" id="nav-tabContent">
                       <div class="tab-pane fade show active" id="custom-nav-harga" role="tabpanel" aria-labelledby="custom-nav-harga-tab">
+                        <div class="d-flex justify-content-between align-items-center" style="margin-top: 10px">
+                          <strong>Data Penyusutan Harga Wajar</strong>
+                          <a href="/harga-wajar/create/{{ $data_barang->id }}"><button class="btn btn-success ml-auto btn-sm "><i class="fa fa-plus" style="margin-right: 10px"></i>Tambah Penilaian Harga</button></a>
+                        </div>
+                        <br>
                         <table class="table table-striped table-bordered">
                           <thead>
                             <tr>
@@ -167,16 +172,15 @@
                                 <td style="vertical-align: middle;">{{ $harga->no_laporan_penilaian }}</td>
                                 <td style="vertical-align: middle;">{{ $harga->tgl_laporan_penilaian }}</td>
                                 <td style="vertical-align: middle;">
-                                  <a href="/harga-wajar/create/{{ $data_barang->id }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-original-title="Tambah"><i class="menu-icon fa fa-plus"></i></a>
-                                  <a href="/harga-wajar/{{ $harga->no_laporan_penilaian }}/edit" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Edit"><i class="menu-icon fa fa-pencil"></i></a>
+                                  <a href="/harga-wajar/{{ $harga->id }}/edit" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Edit"><i class="menu-icon fa fa-pencil"></i></a>
                                   <form class="d-inline" action="/deleteHarga/{{ $harga->id }}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteHarga{{ $harga->no_laporan_penilaian }}"><i class="menu-icon fa fa-trash-o"></i>
+                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteHarga{{ $harga->id }}"><i class="menu-icon fa fa-trash-o"></i>
                                     </button>
         
                                     <!-- The Modal -->
-                                      <div class="modal" id="deleteHarga{{ $harga->no_laporan_penilaian }}">
+                                      <div class="modal" id="deleteHarga{{ $harga->id }}">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
         
@@ -212,7 +216,7 @@
                                 <td style="vertical-align: middle;">-</td>
                                 <td style="vertical-align: middle;">-</td>
                                 <td style="vertical-align: middle;">-</td>
-                                <td style="vertical-align: middle;"><a href="/harga-wajar/create/{{ $data_barang->id }}"><button class="btn btn-success ml-auto"><i class="fa fa-plus" style="margin-right: 10px"></i>Tambah Penilaian</button></a></td>
+                                <td style="vertical-align: middle;">-</td>
                               </tr>
                             @endif
 
@@ -235,15 +239,15 @@
                                 <td style="vertical-align: middle;">{{ $data_barang->izin->no_sk }}</td>
                                 <td style="vertical-align: middle;">{{ $data_barang->izin->tgl_sk }}</td>
                                 <td style="vertical-align: middle;">
-                                  <a href="/izin/{{ $data_barang->izin->no_sk }}/edit" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Edit"><i class="menu-icon fa fa-pencil"></i></a>
+                                  <a href="/izin/{{ $data_barang->izin->id }}/edit" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Edit"><i class="menu-icon fa fa-pencil"></i></a>
                                   <form class="d-inline" action="/deleteIzin/{{ $data_barang->izin->id }}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteBarang{{ $data_barang->izin->no_sk }}"><i class="menu-icon fa fa-trash-o"></i>
+                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteBarang{{ $data_barang->izin->id }}"><i class="menu-icon fa fa-trash-o"></i>
                                     </button>
         
                                     <!-- The Modal -->
-                                      <div class="modal" id="deleteBarang{{ $data_barang->izin->no_sk }}">
+                                      <div class="modal" id="deleteBarang{{ $data_barang->izin->id }}">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
         

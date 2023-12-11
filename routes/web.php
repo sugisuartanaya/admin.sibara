@@ -53,13 +53,13 @@ Route::resource('barang-rampasan', BarangRampasanController::class);
 
 Route::get('izin/create/{id}',[ IzinController::class, 'create']);
 Route::post('izin/create/{id}',[ IzinController::class, 'store']);
-Route::get('izin/{no_sk}/edit',[ IzinController::class, 'edit']);
+Route::get('izin/{id}/edit',[ IzinController::class, 'edit']);
 Route::put('izin/{no_sk}',[ IzinController::class, 'update']);
 Route::delete('/deleteIzin/{id}', [IzinController::class, 'destroy']);
 
 Route::get('harga-wajar/create/{id}',[ HargaWajarController::class, 'create']);
 Route::post('harga-wajar/create/{id}',[ HargaWajarController::class, 'store']);
-Route::get('harga-wajar/{no_laporan_penilaian}/edit',[ HargaWajarController::class, 'edit']);
+Route::get('harga-wajar/{id}/edit',[ HargaWajarController::class, 'edit']);
 Route::put('harga-wajar/{no_laporan_penilaian}',[ HargaWajarController::class, 'update']);
 Route::delete('deleteHarga/{id}',[ HargaWajarController::class, 'destroy']);
 

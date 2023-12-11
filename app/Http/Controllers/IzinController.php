@@ -42,7 +42,7 @@ class IzinController extends Controller
     
     public function edit($id)
     {
-        $izin = Izin::where('no_sk', $id)->first();
+        $izin = Izin::find($id);
         return view('izin.edit')->with('izin', $izin)
         ->with('active', 'active')
         ->with('title', 'Barang Rampasan'); 
