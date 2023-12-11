@@ -46,7 +46,7 @@
             <strong>Tambah Barang Rampasan</strong>
           </div>
           <div class="card-body card-block">
-            <form action="/daftar-barang/create" method="post" enctype="multipart/form-data">
+            <form action="/jadwal/detail/create" method="post" enctype="multipart/form-data">
             @csrf
 
               <input type="hidden" name="id_jadwal" value={{ $jadwal->id }}>

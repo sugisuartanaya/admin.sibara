@@ -66,9 +66,9 @@ Route::delete('deleteHarga/{id}',[ HargaWajarController::class, 'destroy']);
 Route::resource('jadwal', JadwalController::class);
 Route::get('/jadwal/{no_sprint}', [JadwalController::class, 'show']);
 
-Route::get('daftar-barang/{id}', [DaftarBarangController::class, 'show']);
-Route::get('daftar-barang/create/{id}', [DaftarBarangController::class, 'create']);
-Route::post('daftar-barang/create', [DaftarBarangController::class, 'store']);
+Route::get('jadwal/detail/{id}', [DaftarBarangController::class, 'show']);
+Route::get('/jadwal/detail/create/{id}', [DaftarBarangController::class, 'create']);
+Route::post('/jadwal/detail/create', [DaftarBarangController::class, 'store']);
 Route::delete('daftar-barang/{id}', [DaftarBarangController::class, 'destroy']);
 
 

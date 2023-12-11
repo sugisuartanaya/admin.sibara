@@ -14,13 +14,7 @@ use App\Models\izin;
 
 class DaftarBarangController extends Controller
 {
-    
-    public function index()
-    {
-        //
-    }
-
-    
+       
     public function create($id)
     {
         $jadwal = Jadwal::where('id', $id)->first();
@@ -61,7 +55,7 @@ class DaftarBarangController extends Controller
         // Set flash message
         Session::flash('success', 'Barang rampasan berhasil ditambahkan.');
 
-        return redirect('/daftar-barang/'.$id_jadwal->id);
+        return redirect('/jadwal/detail/'.$id_jadwal->id);
     }
 
     public function show($id)
@@ -80,19 +74,7 @@ class DaftarBarangController extends Controller
             ->with('title', 'Jadwal');
     }
 
-    
-    public function edit($id)
-    {
-        //
-    }
-
-    
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-   
+      
     public function destroy($id)
     {
         $h = Daftar_barang::find($id);
@@ -101,6 +83,6 @@ class DaftarBarangController extends Controller
         Daftar_barang::find($id)->delete();
         // // Set flash message
         Session::flash('success', 'Barang rampasan berhasil dihapus.');
-        return redirect('/daftar-barang/'.$id_jadwal->id);
+        return redirect('/jadwal/detail/'.$id_jadwal->id);
     }
 }

@@ -75,7 +75,7 @@
               <div class="col-md-12">
                 <div class="d-flex justify-content-between align-items-center">
                   <strong>Daftar Barang yang akan Dijual</strong>
-                  <a href="/daftar-barang/create/{{ $jadwal->id }}"><button class="btn btn-success btn-sm ml-auto"><i class="fa fa-plus" style="margin-right: 10px"></i>Tambah Barang</button></a>
+                  <a href="/jadwal/detail/create/{{ $jadwal->id }}"><button class="btn btn-success btn-sm ml-auto"><i class="fa fa-plus" style="margin-right: 10px"></i>Tambah Barang</button></a>
                 </div>
                 <br>
                 <table id="tabel" class="table table-striped table-bordered datatable">
