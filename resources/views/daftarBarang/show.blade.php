@@ -74,8 +74,13 @@
               </div>
               <div class="col-md-12">
                 <div class="d-flex justify-content-between align-items-center">
-                  <strong>Daftar Barang yang akan Dijual</strong>
-                  <a href="/jadwal/detail/create/{{ $jadwal->id }}"><button class="btn btn-success btn-sm ml-auto"><i class="fa fa-plus" style="margin-right: 10px"></i>Tambah Barang</button></a>
+                  @if(!$filter)
+                    <strong>Daftar Barang yang akan Dijual</strong>
+                    <a href="/jadwal/detail/create/{{ $jadwal->id }}"><button class="btn btn-success btn-sm ml-auto"><i class="fa fa-plus" style="margin-right: 10px"></i>Tambah Barang</button></a>
+                  @else
+                    <strong>Daftar Barang pada penjualan langsung</strong>
+                  @endif
+                  
                 </div>
                 <br>
                 <table id="tabel" class="table table-striped table-bordered datatable">
@@ -86,7 +91,9 @@
                       <th scope="col">Kategori</th>
                       <th scope="col">Izin Penjualan</th>
                       <th scope="col">Harga</th>
-                      <th scope="col">Aksi</th>
+                      @if(!$filter)
+                        <th scope="col">Aksi</th>
+                      @endif
                     </tr>
                   </thead>
                   <tbody>
@@ -109,41 +116,43 @@
                             -
                           @endif
                         </td>
-                        <td style="vertical-align: middle; text-align: center;">
-                          <form class="d-inline" action="/daftar-barang/{{ $barang->id }}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteBarang{{ $barang->id }}"><i class="menu-icon fa fa-trash-o"></i>
-                            </button>
+                        @if (!$filter)
+                          <td style="vertical-align: middle; text-align: center;">
+                            <form class="d-inline" action="/daftar-barang/{{ $barang->id }}" method="post">
+                              @csrf
+                              @method('DELETE')
+                              <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteBarang{{ $barang->id }}"><i class="menu-icon fa fa-trash-o"></i>
+                              </button>
 
-                            <!-- The Modal -->
-                              <div class="modal" id="deleteBarang{{ $barang->id }}">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
+                              <!-- The Modal -->
+                                <div class="modal" id="deleteBarang{{ $barang->id }}">
+                                  <div class="modal-dialog">
+                                      <div class="modal-content">
 
-                                        <!-- Modal Header -->
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Hapus barang</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
+                                          <!-- Modal Header -->
+                                          <div class="modal-header">
+                                              <h4 class="modal-title">Hapus barang</h4>
+                                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                          </div>
 
-                                        <!-- Modal Body -->
-                                        <div class="modal-body">
-                                            <p>Apakah anda yakin akan menghapus {{ $barang->barang_rampasan->nama_barang }}?</p>
-                                        </div>
+                                          <!-- Modal Body -->
+                                          <div class="modal-body">
+                                              <p>Apakah anda yakin akan menghapus {{ $barang->barang_rampasan->nama_barang }}?</p>
+                                          </div>
 
-                                        <!-- Modal Footer -->
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="submit" name="submit" class="btn btn-danger btn-sm">Confirm
-                                            </button>
-                                        </div>
+                                          <!-- Modal Footer -->
+                                          <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                              <button type="submit" name="submit" class="btn btn-danger btn-sm">Confirm
+                                              </button>
+                                          </div>
 
-                                    </div>
-                                </div>
-                            </div>
-                          </form>
-                        </td>
+                                      </div>
+                                  </div>
+                              </div>
+                            </form>
+                          </td>
+                        @endif
                       </tr>
                     @endforeach
                   </tbody>

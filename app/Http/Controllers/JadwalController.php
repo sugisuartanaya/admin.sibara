@@ -74,7 +74,7 @@ class JadwalController extends Controller
 
     public function edit($id)
     {
-        $jadwal = Jadwal::find($id)->first();
+        $jadwal = Jadwal::find($id);
         return view('jadwal.edit')
             ->with('jadwal', $jadwal)
             ->with('active', 'active')

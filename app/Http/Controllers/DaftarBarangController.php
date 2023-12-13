@@ -20,10 +20,17 @@ class DaftarBarangController extends Controller
         $jadwal = Jadwal::where('id', $id)->first();
 
         $barangRampasanData = Barang_rampasan::whereDoesntHave('daftar_barang')
+        ->whereHas('harga_wajar', function ($query) {
+            $query->where(function ($subquery) {
+                $subquery->whereNull('tgl_laporan_penilaian')
+                    ->orWhere('tgl_laporan_penilaian', '>=', now()->subMonths(6));
+            });
+        })
+        ->orWhereHas('daftar_barang', function ($query) {
+            $query->where('status', '=', 1);
+        })
         ->with('izin', 'harga_wajar')
-        ->has('harga_wajar')
         ->get();
-
 
         return view('daftarBarang.create')
             ->with('active', 'active')
@@ -63,11 +70,15 @@ class DaftarBarangController extends Controller
         $jadwal->end_date = Carbon::parse($jadwal->end_date);
         $jadwal->tgl_sprint = Carbon::parse($jadwal->tgl_sprint);
 
+        $today = Carbon::now();
+        $filteredJadwal = $jadwal->end_date->isBefore($today);
+
         $daftar = Daftar_barang::where('id_jadwal', $id)->get();
 
         return view('daftarBarang.show')
             ->with('jadwal', $jadwal)
             ->with('daftar', $daftar)
+            ->with('filter', $filteredJadwal)
             ->with('active', 'active')
             ->with('title', 'Jadwal');
     }
