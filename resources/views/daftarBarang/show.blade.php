@@ -100,7 +100,13 @@
                     @foreach ($daftar as $index => $barang)
                       <tr>
                         <td style="vertical-align: middle;">{{ $index + 1 }}</td>
-                        <td style="vertical-align: middle;">{{ $barang->barang_rampasan->nama_barang }}</td>
+                        <td style="vertical-align: middle;">
+                          @if($barang->status === 2)
+                          <span class="badge badge-success">Terjual</span>{{ $barang->barang_rampasan->nama_barang }}
+                          @else 
+                            {{ $barang->barang_rampasan->nama_barang }}
+                          @endif
+                        </td>
                         <td style="vertical-align: middle;">{{ $barang->barang_rampasan->kategori->nama_kategori }}</td>
                         <td style="vertical-align: middle;">
                           @if ($barang->barang_rampasan->izin)

@@ -17,20 +17,20 @@ class DaftarBarangController extends Controller
        
     public function create($id)
     {
-        $jadwal = Jadwal::where('id', $id)->first();
+        $jadwal = Jadwal::find($id);
 
-        $barangRampasanData = Barang_rampasan::whereDoesntHave('daftar_barang')
-        ->whereHas('harga_wajar', function ($query) {
-            $query->where(function ($subquery) {
-                $subquery->whereNull('tgl_laporan_penilaian')
-                    ->orWhere('tgl_laporan_penilaian', '>=', now()->subMonths(6));
+        $barangRampasanData = Barang_rampasan::where(function ($query) use ($jadwal) {
+            $query->whereDoesntHave('daftar_barang', function ($subQuery) use ($jadwal) {
+                $subQuery->where('id_jadwal', $jadwal->id)
+                         ->orWhere('status', 2);
             });
         })
-        ->orWhereHas('daftar_barang', function ($query) {
-            $query->where('status', '=', 1);
-        })
         ->with('izin', 'harga_wajar')
+        ->whereHas('izin')
+        ->whereHas('harga_wajar')   
         ->get();
+    
+    
 
         return view('daftarBarang.create')
             ->with('active', 'active')
