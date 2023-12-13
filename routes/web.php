@@ -39,40 +39,40 @@ Route::get('/logout', [LoginController::class, 'logout']);
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
-Route::get('/profile', [pegawaiController::class, 'myProfile']);
+Route::get('/profile', [pegawaiController::class, 'myProfile'])->middleware('auth');
 
-Route::resource('pegawai', PegawaiController::class)->middleware('checkAdmin');
+Route::resource('pegawai', PegawaiController::class)->middleware('checkAdmin')->middleware('auth');
 
-Route::put('updateUser/{id}', [UserController::class, 'updateUser']);
+Route::put('updateUser/{id}', [UserController::class, 'updateUser'])->middleware('auth');
 
-Route::post('/admin/tambahPegawai', [AdminController::class, 'storePegawai']);
-Route::get('/editpegawai/{nip}/edit', [AdminController::class, 'editPegawai']);
-Route::put('/updatepegawai/{nip}', [AdminController::class, 'updatePegawai']);
-Route::delete('/deletepegawai/{nip}', [AdminController::class, 'destroyPegawai']);
+Route::post('/admin/tambahPegawai', [AdminController::class, 'storePegawai'])->middleware('auth');
+Route::get('/editpegawai/{nip}/edit', [AdminController::class, 'editPegawai'])->middleware('auth');
+Route::put('/updatepegawai/{nip}', [AdminController::class, 'updatePegawai'])->middleware('auth');
+Route::delete('/deletepegawai/{nip}', [AdminController::class, 'destroyPegawai'])->middleware('auth');
 
-Route::resource('kategori', KategoriController::class);
+Route::resource('kategori', KategoriController::class)->middleware('auth');
 
-Route::resource('barang-rampasan', BarangRampasanController::class);
+Route::resource('barang-rampasan', BarangRampasanController::class)->middleware('auth');
 
-Route::get('izin/create/{id}',[ IzinController::class, 'create']);
-Route::post('izin/create/{id}',[ IzinController::class, 'store']);
-Route::get('izin/{id}/edit',[ IzinController::class, 'edit']);
-Route::put('izin/{no_sk}',[ IzinController::class, 'update']);
-Route::delete('/deleteIzin/{id}', [IzinController::class, 'destroy']);
+Route::get('izin/create/{id}',[ IzinController::class, 'create'])->middleware('auth');
+Route::post('izin/create/{id}',[ IzinController::class, 'store'])->middleware('auth');
+Route::get('izin/{id}/edit',[ IzinController::class, 'edit'])->middleware('auth');
+Route::put('izin/{no_sk}',[ IzinController::class, 'update'])->middleware('auth');
+Route::delete('/deleteIzin/{id}', [IzinController::class, 'destroy'])->middleware('auth');
 
-Route::get('harga-wajar/create/{id}',[ HargaWajarController::class, 'create']);
-Route::post('harga-wajar/create/{id}',[ HargaWajarController::class, 'store']);
-Route::get('harga-wajar/{id}/edit',[ HargaWajarController::class, 'edit']);
-Route::put('harga-wajar/{no_laporan_penilaian}',[ HargaWajarController::class, 'update']);
-Route::delete('deleteHarga/{id}',[ HargaWajarController::class, 'destroy']);
+Route::get('harga-wajar/create/{id}',[ HargaWajarController::class, 'create'])->middleware('auth');
+Route::post('harga-wajar/create/{id}',[ HargaWajarController::class, 'store'])->middleware('auth');
+Route::get('harga-wajar/{id}/edit',[ HargaWajarController::class, 'edit'])->middleware('auth');
+Route::put('harga-wajar/{no_laporan_penilaian}',[ HargaWajarController::class, 'update'])->middleware('auth');
+Route::delete('deleteHarga/{id}',[ HargaWajarController::class, 'destroy'])->middleware('auth');
 
-Route::resource('jadwal', JadwalController::class);
-Route::get('/jadwal/{no_sprint}', [JadwalController::class, 'show']);
+Route::resource('jadwal', JadwalController::class)->middleware('auth');
+Route::get('/jadwal/{no_sprint}', [JadwalController::class, 'show'])->middleware('auth');
 
-Route::get('jadwal/detail/{id}', [DaftarBarangController::class, 'show']);
-Route::get('/jadwal/detail/create/{id}', [DaftarBarangController::class, 'create']);
-Route::post('/jadwal/detail/create', [DaftarBarangController::class, 'store']);
-Route::delete('daftar-barang/{id}', [DaftarBarangController::class, 'destroy']);
+Route::get('jadwal/detail/{id}', [DaftarBarangController::class, 'show'])->middleware('auth');
+Route::get('/jadwal/detail/create/{id}', [DaftarBarangController::class, 'create'])->middleware('auth');
+Route::post('/jadwal/detail/create', [DaftarBarangController::class, 'store'])->middleware('auth');
+Route::delete('daftar-barang/{id}', [DaftarBarangController::class, 'destroy'])->middleware('auth');
 
 
 
