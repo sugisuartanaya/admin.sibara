@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Daftar_barang;
 use App\Models\Jadwal;
 use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
@@ -104,7 +105,12 @@ class JadwalController extends Controller
 
     public function destroy($id)
     {
+
+        $jadwal = Jadwal::find($id);
+        $id_daftar = Daftar_barang::where('id_jadwal', $jadwal->id)->delete();
         Jadwal::find($id)->delete();
+ 
+
         // Set flash message
         Session::flash('success', 'Jadwal berhasil dihapus.');
 

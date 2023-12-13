@@ -41,9 +41,6 @@ class DaftarBarangController extends Controller
             'status' => 'required',
         ]);
 
-        $jadwal = $request->id_jadwal;
-        $id_jadwal = Barang_rampasan::find($jadwal);
-
         foreach ($validatedData['id_barang'] as $key => $value) {
             Daftar_barang::create([
                 'id_barang' => $validatedData['id_barang'][$key],
@@ -51,11 +48,12 @@ class DaftarBarangController extends Controller
                 'status' => $validatedData['status'],
             ]);
         }
-
+        
+        $jadwal = $request->id_jadwal;
         // Set flash message
         Session::flash('success', 'Barang rampasan berhasil ditambahkan.');
 
-        return redirect('/jadwal/detail/'.$id_jadwal->id);
+        return redirect('/jadwal/detail/'.$jadwal);
     }
 
     public function show($id)

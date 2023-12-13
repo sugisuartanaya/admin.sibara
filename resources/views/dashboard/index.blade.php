@@ -60,7 +60,11 @@
               </table>
             @else
               <p>Saat ini tidak ada jadwal</p>
-              <button class="btn btn-success">Buat jadwal</button>
+              <a href="/jadwal/create">
+                <button class="btn btn-success">
+                  <i class="fa fa-plus" style="margin-right: 10px"></i>Buat jadwal
+                </button>
+              </a>
             @endif
             <br><br>
           </div>
