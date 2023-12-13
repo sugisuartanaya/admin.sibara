@@ -35,27 +35,27 @@
           <div class="card-body">
             <strong class="text-center">Pelaksanaan Penjualan Langsung</strong>
             <hr>
-            @if($jadwal && !$jadwal->isEmpty())
+            @if($jadwal->count() > 0)
               <table class="table table-borderless table-sm table-compact">
                 <tbody>
-                  @foreach($jadwal as $index => $jadwal_penjualan)
+                  {{-- @foreach($jadwal as $index => $jadwal_penjualan) --}}
                     <tr>
                       <td scope="col">Hari : </td>
-                      <td scope="col">{{ $jadwal_penjualan->start_date->format('l') }} - {{ $jadwal_penjualan->end_date->format('l') }}</td>
+                      <td scope="col">{{ $jadwal->start_date->format('l') }} - {{ $jadwal->end_date->format('l') }}</td>
                     </tr>
                     <tr>
                       <td scope="col">Tanggal : </td>
-                      <td scope="col">{{ $jadwal_penjualan->start_date->format('j F Y') }} - {{ $jadwal_penjualan->end_date->format('j F Y') }}</td>
+                      <td scope="col">{{ $jadwal->start_date->format('j F Y') }} - {{ $jadwal->end_date->format('j F Y') }}</td>
                     </tr>
                     <tr>
                       <td scope="col">Waktu Pelaksanaan : </td>
-                      <td scope="col">{{ $jadwal_penjualan->start_date->format('H:i') }} - {{ $jadwal_penjualan->end_date->format('H:i') }} WITA</td>
+                      <td scope="col">{{ $jadwal->start_date->format('H:i') }} - {{ $jadwal->end_date->format('H:i') }} WITA</td>
                     </tr>
                     <tr>
                       <td scope="col">Tempat : </td>
                       <td scope="col">Kejaksaan Negeri Denpasar</td>
                     </tr>
-                  @endforeach
+                  {{-- @endforeach --}}
                 </tbody>
               </table>
             @else

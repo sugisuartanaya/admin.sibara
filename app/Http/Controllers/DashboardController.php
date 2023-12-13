@@ -15,6 +15,7 @@ class DashboardController extends Controller
     {
         $barang = Barang_rampasan::all();
         $datajadwal = Jadwal::all();
+        $jadwal = $datajadwal->last();
         foreach ($datajadwal as $jadwal) {
             $jadwal->start_date = Carbon::parse($jadwal->start_date);
             $jadwal->end_date = Carbon::parse($jadwal->end_date);
@@ -24,7 +25,7 @@ class DashboardController extends Controller
             'title' => 'Dashboard',
             'active' => 'active',
             'barang' => $barang, 
-            'jadwal' => $datajadwal, 
+            'jadwal' => $jadwal, 
         ]);
     }
 }
