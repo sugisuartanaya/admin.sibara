@@ -69,8 +69,9 @@ Route::get('/jadwal/detail/create/{id}', [DaftarBarangController::class, 'create
 Route::post('/jadwal/detail/create', [DaftarBarangController::class, 'store'])->middleware('auth');
 Route::delete('daftar-barang/{id}', [DaftarBarangController::class, 'destroy'])->middleware('auth');
 
-Route::get('pembeli/verifikasi/{id}', [VerifikasiController::class, 'index']);
 Route::get('pembeli', [PembeliController::class, 'index']);
+Route::get('pembeli/verifikasi/{username}', [VerifikasiController::class, 'show']);
+Route::put('pembeli/verifikasi/{id}/', [VerifikasiController::class, 'update']);
 
 
 

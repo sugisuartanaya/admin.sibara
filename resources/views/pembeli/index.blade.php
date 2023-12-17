@@ -83,7 +83,7 @@
                         </td>
                         <td style="vertical-align: middle;">
                           @unless($pembeli->verifikasi->status === 'verified')
-                            <a href="/editpegawai/{{ $pembeli->id }}/edit" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Verifikasi"><i class="menu-icon fa fa-check-square-o"></i></a>
+                            <a href="/pembeli/verifikasi/{{ $pembeli->id }}" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Verifikasi"><i class="menu-icon fa fa-check-square-o"></i></a>
                           @endunless
                           <form class="d-inline" action="/deletepembeli/{{ $pembeli->id }}" method="post">
                             @csrf
