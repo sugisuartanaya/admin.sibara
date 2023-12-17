@@ -8,9 +8,11 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\PembeliController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HargaWajarController;
+use App\Http\Controllers\VerifikasiController;
 use App\Http\Controllers\DaftarBarangController;
 use App\Http\Controllers\BarangRampasanController;
 
@@ -29,13 +31,6 @@ Route::get('/', [LoginController::class, 'index'])->name('login')->middleware('g
 Route::post('/login', [LoginController::class, 'authenticate']);
 //Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/logout', [LoginController::class, 'logout']);
-
-// Route::get('/dashboard', function(){
-//   return view('dashboard.index', [
-//       'active' => 'active',
-//       'title' => 'Dashboard',
-//   ]);
-// })->middleware('auth');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
@@ -73,6 +68,9 @@ Route::get('jadwal/detail/{id}', [DaftarBarangController::class, 'show'])->middl
 Route::get('/jadwal/detail/create/{id}', [DaftarBarangController::class, 'create'])->middleware('auth');
 Route::post('/jadwal/detail/create', [DaftarBarangController::class, 'store'])->middleware('auth');
 Route::delete('daftar-barang/{id}', [DaftarBarangController::class, 'destroy'])->middleware('auth');
+
+Route::get('pembeli/verifikasi/{id}', [VerifikasiController::class, 'index']);
+Route::get('pembeli', [PembeliController::class, 'index']);
 
 
 

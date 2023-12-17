@@ -36,15 +36,9 @@
               </li>
             @else
             @endif
-            {{-- <li class="{{ ($title === "Pegawai") ? 'active' : '' }}">
-              <a href="/pegawai"><i class="menu-icon fa fa-users"></i>Pegawai</a>
-            </li> --}}
-            <li class="menu-item-has-children dropdown {{ ($title === "Pembeli") ? 'active' : '' }}">
-              <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="menu-icon fa fa-users"></i>Pembeli</a>
-              <ul class="sub-menu children dropdown-menu">
-                <li><i class="menu-icon fa fa-address-card"></i><a href="forms-basic.html">Verifikasi Akun</a></li>
-                <li><i class="menu-icon fa fa-th"></i><a href="forms-basic.html">Daftar Pembeli</a></li>
-              </ul>
+            
+            <li class="{{ ($title === "Pembeli") ? 'active' : '' }}">
+              <a href="/pembeli"><i class="menu-icon fa fa-users"></i>Pembeli</a>
             </li>
             <li class="{{ ($title === "Jadwal") ? 'active' : '' }}">
               <a href="/jadwal"><i class="menu-icon fa fa-calendar"></i>Jadwal</a>
