@@ -154,7 +154,7 @@
                       </div>
 
                       <div class="modal-body">
-                        <form action="/pembeli/verifikasi/{{ $pembeli->id }}" method="post" enctype="multipart/form-data">
+                        <form action="/pembeli/verifikasi/{{ $last_verify->id }}" method="post" enctype="multipart/form-data">
                           @csrf
                           @method('PUT')
             

@@ -35,7 +35,7 @@ class VerifikasiController extends Controller
             'komentar' => 'required',
         ]);
 
-        $verifikasi = Verifikasi::where('id_pembeli', $id)->first();
+        $verifikasi = Verifikasi::find($id);
 
         // $verifikasi->id_pembeli = $request->id;
         $verifikasi->status = $request->status;
