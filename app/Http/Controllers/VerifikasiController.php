@@ -11,18 +11,6 @@ use Illuminate\Support\Facades\Session;
 class VerifikasiController extends Controller
 {
     
-    public function create()
-    {
-        //
-    }
-
-    
-    public function store(Request $request)
-    {
-        //
-    }
-
-   
     public function show($id)
     {
         $pembeli = Pembeli::find($id);
@@ -49,6 +37,19 @@ class VerifikasiController extends Controller
         $verifikasi->status = $request->status;
         $verifikasi->jenis_kesalahan = $validatedData['jenis_kesalahan'];
         $verifikasi->komentar = $validatedData['komentar'];
+        $verifikasi->save();
+
+        Session::flash('success', 'Berhasil verifikasi akun.');
+
+        return redirect('/pembeli');
+    }
+
+    public function verified(Request $request, $id)
+    {
+
+        $verifikasi = Verifikasi::where('id_pembeli', $id)->first();
+
+        $verifikasi->status = $request->status;
         $verifikasi->save();
 
         Session::flash('success', 'Berhasil verifikasi akun.');

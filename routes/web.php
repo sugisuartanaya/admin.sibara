@@ -72,6 +72,7 @@ Route::delete('daftar-barang/{id}', [DaftarBarangController::class, 'destroy'])-
 Route::get('pembeli', [PembeliController::class, 'index']);
 Route::get('pembeli/verifikasi/{username}', [VerifikasiController::class, 'show']);
 Route::put('pembeli/verifikasi/{id}/', [VerifikasiController::class, 'update']);
+Route::put('pembeli/verified/{id}/', [VerifikasiController::class, 'verified']);
 
 
 

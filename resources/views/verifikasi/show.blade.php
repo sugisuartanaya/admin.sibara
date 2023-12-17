@@ -137,11 +137,11 @@
                   <br>
                   <button id="kesalahan" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalKesalahan">
                     <i class="menu-icon fa fa-times"></i>&nbsp;Ya, terjadi kesalahan data</button>
-                  <button id="btnApprove" class="btn btn-success btn-sm">
+                  <button id="approve" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalApprove">
                     <i class="menu-icon fa fa-check-square-o"></i>&nbsp;Tidak, data sudah benar</button>
                 </div>
 
-                <!-- Modal -->
+                <!-- Modal Kesalahan-->
                 <div class="modal fade" id="modalKesalahan" tabindex="-1" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
@@ -191,7 +191,12 @@
                             </div>
                             <div class="col col-md-9">
                               <br>
-                              <textarea name="komentar" id="textarea-input" rows="4" placeholder="Kesalahan..." class="form-control"></textarea>
+                              <textarea name="komentar" id="textarea-input" rows="4" placeholder="Kesalahan..." class="form-control @error('komentar') is-invalid @enderror">{{ old('komentar') }}</textarea>
+                              @error('komentar')
+                                <div class="invalid-feedback">
+                                  {{ $message }}
+                                </div>
+                              @enderror
                             </div>
                           </div>
                       </div>
@@ -205,16 +210,47 @@
                     </div>
                   </div>
                 </div>
+
+                <!-- Modal Approve-->
+                <div class="modal fade" id="modalApprove" tabindex="-1" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+
+                      <div class="modal-header">
+                        <h5 class="modal-title mr-auto" id="modalApprove">Konfirmasi</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+
+                      <div class="modal-body">
+                        <form action="/pembeli/verified/{{ $pembeli->id }}" method="post" enctype="multipart/form-data">
+                          @csrf
+                          @method('PUT')
+                          Apakah anda yakin data sudah benar?
+                          <input type="text" style="display:none;" id="role" name="status" class="form-control" value="verified">
+                      </div>
+
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-success">Simpan Verifikasi</button>
+                      </div>
+                        </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
     
                 
 
-              </div>
-
             </div>
-          </div>
 
-        </div> 
-        
+          </div>
+        </div>
+
+      </div> 
+      
+      <div class="col-md-12">
         <div class="card">
           <div class="card-header d-flex justify-content-between align-items-center"">
             <strong class="card-title mb-0">Riwayat Verifikasi</strong>
@@ -224,7 +260,7 @@
 
           </div>
         </div>
-      </div>  
+      </div>
     </div>  
   </div>  
 </div>  
