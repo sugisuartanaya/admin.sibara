@@ -73,16 +73,22 @@
                         <td style="vertical-align: middle;">+62{{ $pembeli->no_telepon }}</td>
                         <td style="vertical-align: middle;">{{ $pembeli->alamat }}</td>
                         <td style="vertical-align: middle;">
-                          @if($pembeli->verifikasi->status === 'verified')
+                          @php
+                              $latestVerification = $pembeli->verifikasi()->orderBy('id', 'desc')->first();
+                          @endphp
+
+                          @if($latestVerification->status === 'verified')
                             <span class="badge badge-success"> Akun verified</span>
-                          @elseif($pembeli->verifikasi->status === 'data_salah')
-                            <span class="badge badge-info">Data masih salah</span>
+                          @elseif($latestVerification->status === 'data_salah')
+                            <span class="badge badge-warning">Data masih salah</span>
+                          @elseif($latestVerification->status === 'revisi')
+                            <span class="badge badge-info">Data sudah diperbarui</span>
                           @else
-                            <span class="badge badge-warning">Belum di verifikasi</span>
+                            <span class="badge badge-danger">Belum di verifikasi</span>
                           @endif
                         </td>
                         <td style="vertical-align: middle;">
-                          @unless($pembeli->verifikasi->status === 'verified')
+                          @unless($latestVerification->status === 'verified')
                             <a href="/pembeli/verifikasi/{{ $pembeli->id }}" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Verifikasi"><i class="menu-icon fa fa-check-square-o"></i></a>
                           @endunless
                           <form class="d-inline" action="/deletepembeli/{{ $pembeli->id }}" method="post">

@@ -14,12 +14,16 @@ class VerifikasiController extends Controller
     public function show($id)
     {
         $pembeli = Pembeli::find($id);
-        $user = User::where('id', $pembeli->user_id)->first();
+        $verifikasi = Verifikasi::where('id_pembeli', $pembeli->id)->get();
+        $last_verify = Verifikasi::where('id_pembeli', $pembeli->id)->orderBy('id', 'desc')->first();
+        $komentarweb = rawurlencode($last_verify->komentar);
 
         return view('verifikasi.show')
         ->with('active', 'active')
         ->with('title', 'Pembeli')
-        ->with('user', $user)
+        ->with('verifikasi', $verifikasi)
+        ->with('last_verify', $last_verify)
+        ->with('waKomentar', $komentarweb)
         ->with('pembeli', $pembeli);
     }
     
@@ -46,8 +50,8 @@ class VerifikasiController extends Controller
 
     public function verified(Request $request, $id)
     {
-
-        $verifikasi = Verifikasi::where('id_pembeli', $id)->first();
+        
+        $verifikasi = Verifikasi::find($id);
 
         $verifikasi->status = $request->status;
         $verifikasi->save();

@@ -224,7 +224,7 @@
                       </div>
 
                       <div class="modal-body">
-                        <form action="/pembeli/verified/{{ $pembeli->id }}" method="post" enctype="multipart/form-data">
+                        <form action="/pembeli/verified/{{ $last_verify->id }}" method="post" enctype="multipart/form-data">
                           @csrf
                           @method('PUT')
                           Apakah anda yakin data sudah benar?
@@ -257,7 +257,45 @@
           </div>
 
           <div class="card-body">
+            <table id="tabel" class="table table-striped table-bordered datatable">
+              <thead>
+                <tr>
+                  <th scope="col">No.</th>
+                  <th scope="col">Jenis Kesalahan</th>
+                  <th scope="col">Deskripsi Kesalahan</th>
+                  <th scope="col">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($verifikasi as $index => $verif)
+                  @if ($verif->status === 'data_salah')
+                    <tr>
+                      <td style="vertical-align: middle;">{{ $index + 1 }}</td>
+                      <td style="vertical-align: middle;">
+                        <ul style="padding-left: 20px;">
+                          @if(strpos($verif->jenis_kesalahan, "nama_pembeli") !== false)
+                            <li>Nama Pembeli tidak sesuai dengan KTP</li>
+                          @endif
+                  
+                          @if(strpos($verif->jenis_kesalahan, "pekerjaan") !== false)
+                            <li>Pekerjaan tidak sesuai dengan KTP</li>
+                          @endif
+                  
+                          @if(strpos($verif->jenis_kesalahan, "foto") !== false)
+                            <li>Foto tidak terlihat jelas atau salah upload</li>
+                          @endif
+                        </ul>
+                      </td>
+                      <td style="vertical-align: middle;">{{ $verif->komentar }}</td>
+                      <td style="vertical-align: middle;">
+                        <a href="https://wa.me/62{{ $pembeli->no_telepon }}?text=Terjadi%20kesalahan%20dalam%20input%20data%20pada%20website%20Penjualan%20Langsung%20Barang%20Rampasan%20Negara%20Kejaksaan%20negara.%0A%0ASilahkan%20masuk%20kembali%20ke%20dalam%20website%20dengan%20username%20dan%20password%20yang%20sudah%20dibuat%20sebelumnya%20untuk%20dapat%20memperbaiki%20data.%20%0A%0APesan%20kesalahan%20adalah%3A%20%0A{{ $waKomentar }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-original-title="Chat Pembeli"><i class="menu-icon fa fa-whatsapp"></i>&nbsp;Chat WhatsApp</a>
+                      </td>
+                    </tr>
+                  @endif
+                @endforeach      
 
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
