@@ -254,6 +254,16 @@
         <div class="card">
           <div class="card-header d-flex justify-content-between align-items-center"">
             <strong class="card-title mb-0">Riwayat Verifikasi</strong>
+            @if ($last_verify->status == "verified") 
+              <a href="https://wa.me/62{{ $pembeli->no_telepon }}?text=Pemberitahuan%3A%20Akun%20Anda%20telah%20berhasil%20diverifikasi.%20%0A%0AAnda%20sekarang%20dapat%20masuk%20ke%20dalam%20Sistem%20Informasi%20Penjualan%20Langsung%20Barang%20Rampasan%20Negara%20Kejaksaan%20Negeri%20Denpasar%20menggunakan%20username%20dan%20password%20yang%20telah%20dibuat%20sebelumnya.%0A%0ANikmati%20semua%20fitur%20dan%20layanan%20yang%20tersedia.%20%0A%0ATerima%20kasih.%0A" class="btn btn-success btn-sm" data-toggle="tooltip" data-original-title="Chat Pembeli"><i class="menu-icon fa fa-whatsapp"></i>&nbsp;Info WhatsApp</a>
+            @elseif ($last_verify->status == "data_salah")
+              <a href="https://wa.me/62{{ $pembeli->no_telepon }}?text=Terjadi%20kesalahan%20dalam%20input%20data%20pada%20website%20Penjualan%20Langsung%20Barang%20Rampasan%20Negara%20Kejaksaan%20negara.%0A%0ASilahkan%20masuk%20kembali%20ke%20dalam%20website%20dengan%20username%20dan%20password%20yang%20sudah%20dibuat%20sebelumnya%20untuk%20dapat%20memperbaiki%20data.%20%0A%0APesan%20kesalahan%20adalah%3A%20%0A{{ $waKomentar }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-original-title="Chat Pembeli"><i class="menu-icon fa fa-whatsapp"></i>&nbsp;Chat WhatsApp</a>
+            @else
+              <button class="btn btn-success" disabled>
+                <i class="menu-icon fa fa-whatsapp"></i>&nbsp;Chat WhatsApp
+              </button>
+            @endif
+            
           </div>
 
           <div class="card-body">
@@ -263,7 +273,6 @@
                   <th scope="col">No.</th>
                   <th scope="col">Jenis Kesalahan</th>
                   <th scope="col">Deskripsi Kesalahan</th>
-                  <th scope="col">Aksi</th>
                 </tr>
               </thead>
               <tbody>
@@ -287,9 +296,6 @@
                         </ul>
                       </td>
                       <td style="vertical-align: middle;">{{ $verif->komentar }}</td>
-                      <td style="vertical-align: middle;">
-                        <a href="https://wa.me/62{{ $pembeli->no_telepon }}?text=Terjadi%20kesalahan%20dalam%20input%20data%20pada%20website%20Penjualan%20Langsung%20Barang%20Rampasan%20Negara%20Kejaksaan%20negara.%0A%0ASilahkan%20masuk%20kembali%20ke%20dalam%20website%20dengan%20username%20dan%20password%20yang%20sudah%20dibuat%20sebelumnya%20untuk%20dapat%20memperbaiki%20data.%20%0A%0APesan%20kesalahan%20adalah%3A%20%0A{{ $waKomentar }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-original-title="Chat Pembeli"><i class="menu-icon fa fa-whatsapp"></i>&nbsp;Chat WhatsApp</a>
-                      </td>
                     </tr>
                   @endif
                 @endforeach      
