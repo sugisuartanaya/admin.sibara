@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Pembeli;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PembeliController extends Controller
 {
@@ -53,6 +54,10 @@ class PembeliController extends Controller
     
     public function destroy($id)
     {
-        //
+        Pembeli::find($id)->delete();
+        // Set flash message
+        Session::flash('success', 'pembeli berhasil dihapus.');
+
+        return redirect('/pembeli');
     }
 }
