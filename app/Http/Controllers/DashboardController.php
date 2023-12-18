@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Carbon\Carbon;
-
-use App\Models\Barang_rampasan;
 use App\Models\Jadwal;
+
+use App\Models\Pembeli;
+use Illuminate\Http\Request;
+use App\Models\Barang_rampasan;
 
 class DashboardController extends Controller
 {
@@ -15,6 +16,7 @@ class DashboardController extends Controller
     {
         $barang = Barang_rampasan::all();
         $datajadwal = Jadwal::all();
+        $pembeli = Pembeli::all();
         $jadwal = $datajadwal->last();
         foreach ($datajadwal as $jadwal) {
             $jadwal->start_date = Carbon::parse($jadwal->start_date);
@@ -25,6 +27,7 @@ class DashboardController extends Controller
             'title' => 'Dashboard',
             'active' => 'active',
             'barang' => $barang, 
+            'pembeli' => $pembeli, 
             'jadwal' => $jadwal, 
         ]);
     }

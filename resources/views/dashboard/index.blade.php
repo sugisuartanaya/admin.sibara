@@ -138,7 +138,10 @@
               </div>
               <div class="stat-content">
                 <div class="text-left dib">
-                  <div class="stat-text"><span class="count">-</span></div>
+                  <div class="stat-text">
+                    @if($pembeli && !$pembeli->isEmpty())
+                      <span class="count">{{ $pembeli->count() }}</span>
+                    @endif
                   <div class="stat-heading">Pembeli</div>
                 </div>
               </div>
