@@ -35,7 +35,7 @@
           <div class="card-body">
             <strong class="text-center">Pelaksanaan Penjualan Langsung</strong>
             <hr>
-            @if($jadwal->count() > 0)
+            @if($jadwal)
               <table class="table table-borderless table-sm table-compact">
                 <tbody>
                   {{-- @foreach($jadwal as $index => $jadwal_penjualan) --}}
