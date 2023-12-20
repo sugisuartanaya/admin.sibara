@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,7 +20,13 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
-        if (Auth::attempt($credentials)){
+        $user = User::where('role', '1')
+            ->where(function ($query) use ($credentials) {
+                $query->where('username', $credentials['username']);
+            })
+            ->first();
+
+        if ($user && Auth::attempt($credentials)){
             $request->session()->regenerate();
             return redirect()->intended('/dashboard');
         }
