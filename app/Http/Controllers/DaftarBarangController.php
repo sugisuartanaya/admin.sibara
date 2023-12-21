@@ -29,9 +29,8 @@ class DaftarBarangController extends Controller
         ->whereHas('izin')
         ->whereHas('harga_wajar')   
         ->get();
-    
-    
 
+        
         return view('daftarBarang.create')
             ->with('active', 'active')
             ->with('jadwal', $jadwal)

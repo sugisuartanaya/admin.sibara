@@ -60,6 +60,7 @@
                   {{-- membuat kondisi label kategori --}}
                   @php $kategori_awal = null @endphp
                   @php $kategori_label = [] @endphp
+
                   @foreach ($data_barang as $barang)
                     @if (!in_array($barang->kategori->nama_kategori, $kategori_label))
                       @php
@@ -67,10 +68,16 @@
                         $kategori_awal = $barang->kategori->nama_kategori;
                       @endphp
                       <optgroup label="{{ $kategori_awal }}">
+                        @foreach ($data_barang as $barang_inner)
+                          @if ($barang_inner->kategori->nama_kategori === $kategori_awal)
+                            <option value="{{ $barang_inner->id }}">{{ $barang_inner->nama_barang }}</option>
+                          @endif
+                        @endforeach
+                      </optgroup>
                     @endif
-                    <option value="{{ $barang->id }}">{{ $barang->nama_barang }}</option>
                   @endforeach
                 </select>
+
                 @error('id_barang')
                   <div class="invalid-feedback" role="alert">
                     {{ $message }}
