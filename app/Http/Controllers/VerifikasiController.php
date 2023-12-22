@@ -45,7 +45,7 @@ class VerifikasiController extends Controller
 
         Session::flash('success', 'Berhasil verifikasi akun.');
 
-        return redirect('/pembeli');
+        return back()->with('success', 'Berhasil verifikasi akun.');
     }
 
     public function verified(Request $request, $id)
@@ -58,7 +58,7 @@ class VerifikasiController extends Controller
 
         Session::flash('success', 'Berhasil verifikasi akun.');
 
-        return redirect('/pembeli');
+        return back()->with('success', 'Berhasil verifikasi akun.');
     }
 
    

@@ -88,45 +88,45 @@
                           @endif
                         </td>
                         <td style="vertical-align: middle;">
-                          @unless($latestVerification->status === 'verified')
+                          @if($latestVerification->status === 'verified')
+                            <a href="/pembeli/verifikasi/{{ $pembeli->id }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-original-title="Lihat Akun"><i class="menu-icon fa fa-eye"></i></a>
+                          @else
                             <a href="/pembeli/verifikasi/{{ $pembeli->id }}" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Verifikasi"><i class="menu-icon fa fa-check-square-o"></i></a>
-                          @endunless
-                          <form class="d-inline" action="/deletepembeli/{{ $pembeli->id }}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deletepembeli{{ $pembeli->id }}"><i class="menu-icon fa fa-trash-o"></i>
-                            </button>
+                          @endif
+                            <form class="d-inline" action="/deletepembeli/{{ $pembeli->id }}" method="post">
+                              @csrf
+                              @method('DELETE')
+                              <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deletepembeli{{ $pembeli->id }}"><i class="menu-icon fa fa-trash-o"></i>
+                              </button>
 
-                            <!-- The Modal -->
-                              <div class="modal" id="deletepembeli{{ $pembeli->id }}">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
+                              <!-- The Modal -->
+                                <div class="modal" id="deletepembeli{{ $pembeli->id }}">
+                                  <div class="modal-dialog">
+                                      <div class="modal-content">
 
-                                        <!-- Modal Header -->
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Hapus pembeli</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
+                                          <!-- Modal Header -->
+                                          <div class="modal-header">
+                                              <h4 class="modal-title">Hapus pembeli</h4>
+                                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                          </div>
 
-                                        <!-- Modal Body -->
-                                        <div class="modal-body">
-                                            <p>Apakah anda yakin akan menghapus akun {{ $pembeli->nama_pembeli }}?</p>
-                                        </div>
+                                          <!-- Modal Body -->
+                                          <div class="modal-body">
+                                              <p>Apakah anda yakin akan menghapus akun {{ $pembeli->nama_pembeli }}?</p>
+                                          </div>
 
-                                        <!-- Modal Footer -->
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="submit" name="submit" class="btn btn-danger btn-sm">Confirm
-                                            </button>
-                                        </div>
+                                          <!-- Modal Footer -->
+                                          <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                              <button type="submit" name="submit" class="btn btn-danger btn-sm">Confirm
+                                              </button>
+                                          </div>
 
-                                    </div>
-                                </div>
-                            </div>
+                                      </div>
+                                  </div>
+                              </div>
 
-
-
-                          </form>
+                            </form>
                           {{-- <a href="" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="Delete"><i class="menu-icon fa fa-trash-o"></i></a> --}}
                         </td>
                       </tr>

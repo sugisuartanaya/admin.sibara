@@ -31,6 +31,7 @@
   <div class="animated fadeIn">
     <div class="row">
       <div class="col-12">
+
         <div class="card">
 
           @if(session('success'))
@@ -68,7 +69,7 @@
                     </tr>
                     <tr>
                       <td >No Telepon: </td>
-                      <td >{{ $pembeli->no_telepon }}</td>
+                      <td >+62{{ $pembeli->no_telepon }}</td>
                     </tr>
                     <tr>
                       <td >Alamat: </td>
@@ -129,17 +130,28 @@
 
                   </tbody>
                 </table>   
-              </div>
-              
-              <div class="col-md-6 offset-md-3 d-flex justify-content-center align-items-center mt-4">
-                <div class="justify-content-center">
-                  <h4 class="text-center"><strong>Apakah terdapat kesalahan data?</strong></h4>
-                  <br>
-                  <button id="kesalahan" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalKesalahan">
-                    <i class="menu-icon fa fa-times"></i>&nbsp;Ya, terjadi kesalahan data</button>
-                  <button id="approve" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalApprove">
-                    <i class="menu-icon fa fa-check-square-o"></i>&nbsp;Tidak, data sudah benar</button>
-                </div>
+              </div>         
+            </div>
+
+          </div>
+        </div>
+        
+        @if($last_verify->status == "verified")
+          <div class="alert alert-success" role="alert">
+            <i class="fa fa-check"></i>&nbsp;Akun terverifikasi
+          </div>
+        @else
+          <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center"">
+              <strong class="card-title mb-0">Verifikasi Akun</strong>
+            </div>
+            <div class="card-body">
+              <h4>Apakah terdapat kesalahan data?</h4>
+              <br>
+              <button id="kesalahan" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalKesalahan">
+                <i class="menu-icon fa fa-times"></i>&nbsp;Ya, terjadi kesalahan data</button>
+              <button id="approve" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalApprove">
+                <i class="menu-icon fa fa-check-square-o"></i>&nbsp;Tidak, data sudah benar</button>
 
                 <!-- Modal Kesalahan-->
                 <div class="modal fade" id="modalKesalahan" tabindex="-1" aria-hidden="true">
@@ -239,18 +251,12 @@
                     </div>
                   </div>
                 </div>
-              </div>
-    
-                
-
+              
             </div>
-
+            
           </div>
-        </div>
+        @endif
 
-      </div> 
-      
-      <div class="col-md-12">
         <div class="card">
           <div class="card-header d-flex justify-content-between align-items-center"">
             <strong class="card-title mb-0">Riwayat Verifikasi</strong>
@@ -304,7 +310,8 @@
             </table>
           </div>
         </div>
-      </div>
+        
+      </div> 
     </div>  
   </div>  
 </div>  
