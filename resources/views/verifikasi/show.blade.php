@@ -136,8 +136,6 @@
           </div>
         </div>
 
-        
-
         @if($last_verify->status == "verified")
           <div class="alert alert-success" role="alert">
             <strong class="text-success"><i class="fa fa-check"></i>&nbsp;Akun terverifikasi</strong>
