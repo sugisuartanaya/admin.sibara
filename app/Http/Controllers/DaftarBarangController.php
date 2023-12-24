@@ -21,10 +21,9 @@ class DaftarBarangController extends Controller
 
         $barangRampasanData = Barang_rampasan::where(function ($query) use ($jadwal) {
             $query->whereDoesntHave('daftar_barang', function ($subQuery) use ($jadwal) {
-                $subQuery->where('id_jadwal', $jadwal->id)
-                         ->orWhere('status', 2);
+                $subQuery->where('id_jadwal', $jadwal->id);
             });
-        })
+        })->where('status', 0)
         ->with('izin', 'harga_wajar')
         ->whereHas('izin')
         ->whereHas('harga_wajar')   
@@ -44,14 +43,12 @@ class DaftarBarangController extends Controller
         $validatedData = $request->validate([
             'id_barang' => 'required',
             'id_jadwal' => 'required',
-            'status' => 'required',
         ]);
 
         foreach ($validatedData['id_barang'] as $key => $value) {
             Daftar_barang::create([
                 'id_barang' => $validatedData['id_barang'][$key],
                 'id_jadwal' => $validatedData['id_jadwal'],
-                'status' => $validatedData['status'],
             ]);
         }
         

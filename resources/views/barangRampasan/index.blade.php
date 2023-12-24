@@ -56,14 +56,15 @@
                 <table id="tabel" class="table table-striped table-bordered datatable">
                   <thead>
                     <tr>
-                      <th scope="col">No.</th>
-                      <th scope="col">Thumbnail Barang</th>
-                      <th scope="col">Nama Barang</th>
-                      <th scope="col">Nama Terdakwa</th>
-                      <th scope="col">Kategori</th>
-                      <th scope="col">No Putusan Pengadilan</th>
-                      <th scope="col">Izin Penjualan</th>
-                      <th scope="col">Aksi</th>
+                      <th style="vertical-align: middle;">No.</th>
+                      <th style="vertical-align: middle;">Thumbnail Barang</th>
+                      <th style="vertical-align: middle;">Nama Barang</th>
+                      <th style="vertical-align: middle;">Nama Terdakwa</th>
+                      <th style="vertical-align: middle;">Kategori</th>
+                      <th style="vertical-align: middle;">No Putusan Pengadilan</th>
+                      <th style="vertical-align: middle;">Izin Penjualan</th>
+                      <th style="vertical-align: middle;">Status</th>
+                      <th style="vertical-align: middle;">Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -87,7 +88,14 @@
                         @else
                           <td style="vertical-align: middle;">Belum Memiliki Izin</td>
                         @endif
-                        
+
+                        <td style="vertical-align: middle;">
+                          @if ($barang->status == '0')
+                            Belum Terjual
+                          @else
+                            Sudah Terjual
+                          @endif
+                        </td>
                         <td style="vertical-align: middle;">
                           <a href="/barang-rampasan/{{ $barang->nama_barang }}/edit" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Edit"><i class="menu-icon fa fa-pencil"></i></a>
                           <a href="/barang-rampasan/{{ $barang->id }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-original-title="Show"><i class="menu-icon fa fa-eye"></i></a>

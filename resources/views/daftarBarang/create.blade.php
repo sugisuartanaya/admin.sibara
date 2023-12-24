@@ -50,7 +50,6 @@
             @csrf
 
               <input type="hidden" name="id_jadwal" value={{ $jadwal->id }}>
-              <input type="hidden" name="status" value="1">
 
               <div class="form-group">
                 <label for="no_putusan" class=" form-control-label">Barang Rampasan Negara</label>
