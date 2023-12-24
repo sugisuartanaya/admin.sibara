@@ -51,6 +51,7 @@
 
           <div class="card-header d-flex justify-content-between align-items-center">
             <strong>Product Detail</strong>
+            <a href="/print-pdf/{{ $data_barang->id }}"><button class="btn btn-info ml-auto"><i class="fa fa-print" style="margin-right: 10px"></i>Print</button></a>
           </div>
           <div class="card-body">
             <div class="row">

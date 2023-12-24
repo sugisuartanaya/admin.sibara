@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Facades\Image;
-use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
-use App\Models\Barang_rampasan;
 use App\Models\Kategori;
 use App\Models\Harga_wajar;
+use Illuminate\Http\Request;
+use App\Models\Barang_rampasan;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 
 class BarangRampasanController extends Controller
@@ -35,8 +37,7 @@ class BarangRampasanController extends Controller
         ->with('active', 'active')
         ->with('title', 'Barang Rampasan');
     }
-
-    
+  
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -207,7 +208,6 @@ class BarangRampasanController extends Controller
 
         return redirect('/barang-rampasan');
 
-
     }
 
     public function destroy($id)
@@ -218,4 +218,23 @@ class BarangRampasanController extends Controller
 
         return redirect('/barang-rampasan');
     }
+
+    public function generateQR($id)
+    {
+        $barang = Barang_rampasan::find($id);
+        return view('qr.show',[
+            'barang' => $barang
+        ]);
+    }
+
+    public function printPdf($id)
+    {
+        $routeName = 'qr';
+        $routeUrl = route($routeName, ['id' => $id]);
+        $qrCode = QrCode::size(200)->generate($routeUrl);
+        // dd($viewData);
+        $pdf = Pdf::loadView('pdf.show', ['qrCode' => $qrCode] );
+        return $pdf->download('Informasi Barang Rampasan.pdf');
+    }
+
 }

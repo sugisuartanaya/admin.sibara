@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Daftar_barang;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IzinController;
 use App\Http\Controllers\UserController;
@@ -48,6 +47,8 @@ Route::delete('/deletepegawai/{nip}', [AdminController::class, 'destroyPegawai']
 Route::resource('kategori', KategoriController::class)->middleware('auth');
 
 Route::resource('barang-rampasan', BarangRampasanController::class)->middleware('auth');
+Route::get('generate-qr/{id}', [BarangRampasanController::class, 'generateQR'])->name('qr');
+Route::get('print-pdf/{id}', [BarangRampasanController::class, 'printPdf']);
 
 Route::get('izin/create/{id}',[ IzinController::class, 'create'])->middleware('auth');
 Route::post('izin/create/{id}',[ IzinController::class, 'store'])->middleware('auth');
@@ -75,6 +76,5 @@ Route::delete('deletepembeli/{id}', [PembeliController::class, 'destroy']);
 Route::get('pembeli/verifikasi/{username}', [VerifikasiController::class, 'show']);
 Route::put('pembeli/verifikasi/{id}/', [VerifikasiController::class, 'update']);
 Route::put('pembeli/verified/{id}/', [VerifikasiController::class, 'verified']);
-
 
 
