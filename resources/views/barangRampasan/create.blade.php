@@ -57,6 +57,8 @@
             <form action="{{ url('barang-rampasan') }}" method="post" enctype="multipart/form-data">
             @csrf
 
+              <input type="hidden" name="status" value="0">
+
               <div class="form-group">
                 <label for="no_putusan" class=" form-control-label">No Putusan Pengadilan</label>
                 <input type="text" id="no_putusan" name="no_putusan" class="form-control @error('no_putusan') is-invalid @enderror" value="{{ old('no_putusan') }}">

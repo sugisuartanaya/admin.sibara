@@ -13,7 +13,6 @@ class Daftar_barang extends Model
     protected $fillable = [
         'id_barang',
         'id_jadwal',
-        'status'
     ];
 
     public function jadwal()

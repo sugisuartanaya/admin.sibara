@@ -99,6 +99,7 @@ class BarangRampasanController extends Controller
             'deskripsi' => $validatedData['deskripsi'],
             'foto_thumbnail' => $url_foto_thumbnail,
             'foto_barang' => $url_foto_barang,
+            'status' => $request->status,
         ]);
         // Set flash message
         Session::flash('success', 'Barang rampasan berhasil ditambahkan.');
