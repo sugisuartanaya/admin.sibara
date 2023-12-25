@@ -26,6 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('daftar_barangs', function (Blueprint $table) {
+            $table->boolean('status');
         });
     }
 };
