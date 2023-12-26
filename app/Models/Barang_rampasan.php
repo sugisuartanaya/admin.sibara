@@ -29,6 +29,11 @@ class Barang_rampasan extends Model
         return $this->hasMany(Daftar_barang::class, 'id_barang');
     }
 
+    public function penawaran()
+    {
+        return $this->hasMany(Penawaran::class, 'id_barang');
+    }
+
     protected $fillable = [
         'nama_barang',
         'nama_terdakwa',

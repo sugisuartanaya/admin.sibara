@@ -186,6 +186,7 @@ jQuery(document).ready(function($) {
         });
     }
 	});
+	
 	$(document).ready(function() {
     $(".standardSelect").chosen({
         disable_search_threshold: 10,
