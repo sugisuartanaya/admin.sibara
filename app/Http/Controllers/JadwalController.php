@@ -22,10 +22,11 @@ class JadwalController extends Controller
         }
 
         //filter tanggal berakhir
-        $today = Carbon::now();
-        $filteredJadwal = $jadwal->filter(function ($item) use ($today) {
-            return $item->end_date >= $today;
+        $now = Carbon::now();
+        $filteredJadwal = $jadwal->filter(function ($item) use ($now) {
+            return $item->end_date >= $now;
         });
+
 
         return view('jadwal.index')
             ->with('data_jadwal', $jadwal)
@@ -63,15 +64,6 @@ class JadwalController extends Controller
         return redirect('/jadwal');
     }
 
-    public function show($id)
-    {
-        $jadwal = Jadwal::find($id)->first();
-        return view('jadwal.show')
-            ->with('jadwal', $jadwal)
-            ->with('active', 'active')
-            ->with('title', 'Jadwal');
-    }
-
     public function edit($id)
     {
         $jadwal = Jadwal::find($id);
@@ -107,7 +99,7 @@ class JadwalController extends Controller
     {
 
         $jadwal = Jadwal::find($id);
-        $id_daftar = Daftar_barang::where('id_jadwal', $jadwal->id)->delete();
+        Daftar_barang::where('id_jadwal', $jadwal->id)->delete();
         Jadwal::find($id)->delete();
  
 
