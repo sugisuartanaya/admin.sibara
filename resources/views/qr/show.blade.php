@@ -35,18 +35,38 @@
           <div class="card-body">
             <p class="text-secondary mb-0">Nama Barang</p>
             <h6 class="mb-3"><strong>{{ $barang->nama_barang }}</strong></h6>
+
             <p class="text-secondary mb-0">Nama Terdakwa</p>
             <h6 class="mb-3"><strong>{{ $barang->nama_terdakwa }}</strong></h6>
+            
             <p class="text-secondary mb-0">Kategori Barang</p>
             <h6 class="mb-3"><strong>{{ $barang->kategori->nama_kategori }}</strong></h6>
+            
             <p class="text-secondary mb-0">No Putusan Pengadilan</p>
             <h6 class="mb-3"><strong>{{ $barang->no_putusan }}</strong></h6>
-            <p class="text-secondary mb-0">No Surat Keterangan Izin Penjualan Barang</p>
-            <h6 class="mb-3"><strong>{{ $barang->izin->no_sk }}</strong></h6>
-            <p class="text-secondary mb-0">Tanggal Surat Keterangan Izin Penjualan Barang</p>
-            <h6 class="mb-3"><strong>{{ $barang->izin->tgl_sk }}</strong></h6>
-            <p class="text-secondary mb-0">Harga Wajar Terkini</p>
-            <h6 class="mb-3"><strong>Rp. {{ number_format($barang->harga_wajar->last()->harga, 0, ',', '.') }}</strong></h6>
+            
+            @if ($barang->izin)
+              <p class="text-secondary mb-0">No Surat Keterangan Izin Penjualan Barang</p>
+              <h6 class="mb-3"><strong>{{ $barang->izin->no_sk }}</strong></h6>
+
+              <p class="text-secondary mb-0">Tanggal Surat Keterangan Izin Penjualan Barang</p>
+              <h6 class="mb-3"><strong>{{ $barang->izin->tgl_sk }}</strong></h6>
+            @else
+              <p class="text-secondary mb-0">No Surat Keterangan Izin Penjualan Barang</p>
+              <h6 class="mb-3"><strong>-</strong></h6>
+
+              <p class="text-secondary mb-0">Tanggal Surat Keterangan Izin Penjualan Barang</p>
+              <h6 class="mb-3"><strong>-</strong></h6>
+            @endif
+
+            @if ($barang->harga_wajar && $barang->harga_wajar->last())
+              <p class="text-secondary mb-0">Harga Wajar Terkini</p>
+              <h6 class="mb-3"><strong>Rp. {{ number_format($barang->harga_wajar->last()->harga, 0, ',', '.') }}</strong></h6>
+            @else
+              <p class="text-secondary mb-0">Harga Wajar Terkini</p>
+              <h6 class="mb-3"><strong>-</strong></h6>
+            @endif
+            
           </div>
         </div>
       </div>
