@@ -18,4 +18,16 @@ class Penawaran extends Model
     {
         return $this->belongsTo(Barang_rampasan::class, 'id_barang');
     }
+
+    public function jadwal()
+    {
+        return $this->belongsTo(Jadwal::class, 'id_jadwal');
+    }
+
+    protected $fillable = [
+        'id_barang',
+        'id_pembeli',
+        'harga_bid',
+        'tanggal',
+    ];
 }
