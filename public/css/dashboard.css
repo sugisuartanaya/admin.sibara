@@ -2542,4 +2542,8 @@ footer.site-footer {
     transform: scale(1.2);
   }
 
+  .table-active{
+    background-color: #D0E7D2;
+  }
+
 /*# sourceMappingURL=style.css.map */

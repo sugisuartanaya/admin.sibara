@@ -29,5 +29,10 @@ class Penawaran extends Model
         'id_pembeli',
         'harga_bid',
         'tanggal',
+        'status',
+    ];
+
+    protected $casts = [
+        'status' => 'boolean',
     ];
 }

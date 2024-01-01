@@ -10,6 +10,7 @@ use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PembeliController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PenawaranController;
 use App\Http\Controllers\HargaWajarController;
 use App\Http\Controllers\VerifikasiController;
 use App\Http\Controllers\DaftarBarangController;
@@ -76,5 +77,10 @@ Route::delete('deletepembeli/{id}', [PembeliController::class, 'destroy']);
 Route::get('pembeli/verifikasi/{username}', [VerifikasiController::class, 'show']);
 Route::put('pembeli/verifikasi/{id}/', [VerifikasiController::class, 'update']);
 Route::put('pembeli/verified/{id}/', [VerifikasiController::class, 'verified']);
+
+Route::get('penawaran', [PenawaranController::class, 'index']);
+Route::get('penawaran/{id}', [PenawaranController::class, 'show']);
+Route::get('penawaran/{jadwalId}/showbidder/{barangId}', [PenawaranController::class, 'detail']);
+
 
 

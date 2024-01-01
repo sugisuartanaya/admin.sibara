@@ -48,8 +48,13 @@
             <li class="{{ ($title === "Barang Rampasan") ? 'active' : '' }}">
               <a href="/barang-rampasan"><i class="menu-icon fa fa-cube"></i>Barang Rampasan</a>
             </li>
-            <li {{ ($title === "Transaksi") ? 'active' : '' }}>
-              <a href=""><i class="menu-icon fa fa-shopping-bag"></i>Transaksi</a>
+            <li class="menu-item-has-children dropdown {{ ($title === "Transaksi") ? 'active' : '' }}">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="menu-icon fa fa-shopping-cart"></i>Transaksi</a>
+              <ul class="sub-menu children dropdown-menu">
+                <li><i class="fa fa-gavel"></i><a href="/penawaran">Penawaran</a></li>
+                <li><i class="fa fa-credit-card"></i><a href="#">Pembayaran</a></li>
+              </ul>
             </li>
             <li {{ ($title === "Laporan Penjualan") ? 'active' : '' }}>
               <a href=""><i class="menu-icon fa fa-table"></i>Laporan Penjualan</a>
