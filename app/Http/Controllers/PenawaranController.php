@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Jadwal;
 use App\Models\Penawaran;
-use App\Models\Barang_rampasan;
 use Illuminate\Http\Request;
+use App\Models\Barang_rampasan;
+use Illuminate\Support\Facades\URL;
 
 class PenawaranController extends Controller
 {
@@ -69,12 +70,14 @@ class PenawaranController extends Controller
         $penawaran = Penawaran::with('jadwal')
             ->where('id_jadwal', $id_jadwal)
             ->where('id_barang', $barangId)
+            ->whereNotIn('status', ['wanprestasi'])
             ->orderBy('harga_bid', 'desc')
             ->get();
             
         $penawarTertinggi = Penawaran::with('jadwal')
             ->where('id_jadwal', $id_jadwal)
             ->where('id_barang', $barangId)
+            ->whereNotIn('status', ['wanprestasi'])
             ->orderBy('harga_bid', 'desc')
             ->first();
 
@@ -87,6 +90,29 @@ class PenawaranController extends Controller
             'penawarTertinggi' => $penawarTertinggi
         ]);
         
+    }
+
+    public function updateWinner($jadwalId, $barangId, $penawarId){
+        
+        Penawaran::where('id_jadwal', $jadwalId)
+            ->where('id_barang', $barangId)
+            ->whereIn('status', ['pending', 'kalah'])
+            ->update(['status' => 'kalah']);
+        
+        $penawar = Penawaran::find($penawarId);
+        $penawar->status = 'menang';
+        $penawar->save();
+        
+        return back()->with('message', 'Berhasil konfirmasi penawaran.');
+    }
+
+    public function updateWanprestasi($penawarId){
+        
+        $penawar = Penawaran::find($penawarId);
+        $penawar->status = 'wanprestasi';
+        $penawar->save();
+        
+        return back()->with('message', 'Berhasil konfirmasi wanprestasi.');
     }
 
     

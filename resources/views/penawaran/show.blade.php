@@ -41,7 +41,7 @@
                 <tr>
                   <th scope="col">No.</th>
                   <th scope="col">Nama Barang</th>
-                  <th scope="col">Jumlah Penawar</th>
+                  <th scope="col">Jumlah Peserta</th>
                   <th scope="col">Harga Tertinggi</th>
                   <th scope="col">Aksi</th>
                 </tr>
@@ -56,13 +56,14 @@
                       <td style="vertical-align: middle;">
                         Rp. {{ number_format($penawaran[$barang->id][0]->harga_bid, 0, ',', '.') }}
                       </td>
+                      <td class="text-center align-middle">
+                        <a href="/penawaran/{{ $jadwal->no_sprint }}/showbidder/{{ $barang->id }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-original-title="Cek Tawaran"><i class="menu-icon fa fa-eye"></i></a>
+                      </td>
                     @else
                       <td style="vertical-align: middle;">-</td>
                       <td style="vertical-align: middle;">-</td>
+                      <td class="text-center align-middle">-</td>
                     @endif
-                    <td class="text-center align-middle">
-                      <a href="/penawaran/{{ $jadwal->no_sprint }}/showbidder/{{ $barang->id }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-original-title="Cek Tawaran"><i class="menu-icon fa fa-eye"></i></a>
-                    </td>
                   </tr>
                 @endforeach                   
               </tbody>

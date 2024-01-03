@@ -80,7 +80,9 @@ Route::put('pembeli/verified/{id}/', [VerifikasiController::class, 'verified']);
 
 Route::get('penawaran', [PenawaranController::class, 'index']);
 Route::get('penawaran/{id}', [PenawaranController::class, 'show']);
-Route::get('penawaran/{jadwalId}/showbidder/{barangId}', [PenawaranController::class, 'detail']);
+Route::get('penawaran/{jadwalId}/showbidder/{barangId}', [PenawaranController::class, 'detail'])->name('detailPenawaran');
+Route::put('penawaran/{jadwalId}/{barangId}/{penawarID}', [PenawaranController::class, 'updateWinner']);
+Route::put('penawaran/{penawarID}', [PenawaranController::class, 'updateWanprestasi']);
 
 
 

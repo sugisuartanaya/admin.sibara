@@ -12,7 +12,7 @@ class PembeliController extends Controller
    
     public function index()
     {
-        $pembeli = Pembeli::get();
+        $pembeli = Pembeli::orderBy('id', 'desc')->get();
 
         // Kembalikan data ke tampilan
         return view('pembeli.index', [

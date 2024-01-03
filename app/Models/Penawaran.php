@@ -9,6 +9,8 @@ class Penawaran extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     public function pembeli()
     {
         return $this->belongsTo(Pembeli::class, 'id_pembeli');
@@ -32,7 +34,4 @@ class Penawaran extends Model
         'status',
     ];
 
-    protected $casts = [
-        'status' => 'boolean',
-    ];
 }
