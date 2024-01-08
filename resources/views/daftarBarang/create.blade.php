@@ -69,7 +69,7 @@
                       <optgroup label="{{ $kategori_awal }}">
                         @foreach ($data_barang as $barang_inner)
                           @if ($barang_inner->kategori->nama_kategori === $kategori_awal)
-                            <option value="{{ $barang_inner->id }}">{{ $barang_inner->nama_barang }}</option>
+                            <option value="{{ $barang_inner->id }}">{{ $barang_inner->nama_barang }} | No. Putusan {{ $barang_inner->no_putusan }}</option>
                           @endif
                         @endforeach
                       </optgroup>
