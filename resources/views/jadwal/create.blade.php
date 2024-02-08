@@ -59,6 +59,23 @@
               </div>
               
               <div class="form-group">
+                <label for="type" class="form-control-label">Tipe Penawaran</label>
+                <div class="form-check">
+                  <input type="radio" id="radio1" name="type" value="open" class="form-check-input @error('type') is-invalid @enderror" {{ old('type') == 'open' ? 'checked' : '' }}>
+                  <label for="radio1" class="form-check-label">Open Bidding</label>
+                  <br>
+                  <input type="radio" id="radio2" name="type" value="close" class="form-check-input @error('type') is-invalid @enderror" {{ old('type') == 'close' ? 'checked' : '' }}>
+                  <label for="radio2" class="form-check-label">Close Bidding</label>
+                  @error('type')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                  @enderror
+                </div>
+              </div>
+            
+              
+              <div class="form-group">
                 <label for="start_date" class=" form-control-label">Dimulai pada</label>
                 <input type="text" id="datetimepicker1" name="start_date" class="form-control datetimepicker-input @error('start_date') is-invalid @enderror" value="{{ old('start_date') }}" placeholder="Pilih Tanggal dan Waktu" data-target="#datetimepicker1" data-toggle="datetimepicker">
                 @error('start_date')

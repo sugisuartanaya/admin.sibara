@@ -50,6 +50,7 @@ class JadwalController extends Controller
             'tgl_sprint' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
+            'type' => 'required'
         ]);
 
         Jadwal::create([
@@ -57,6 +58,7 @@ class JadwalController extends Controller
             'tgl_sprint' => $validatedData['tgl_sprint'],
             'start_date' => $validatedData['start_date'],
             'end_date' => $validatedData['end_date'],
+            'type' => $validatedData['type'],
         ]);
         // Set flash message
         Session::flash('success', 'Jadwal berhasil ditambahkan.');
@@ -80,6 +82,7 @@ class JadwalController extends Controller
             'tgl_sprint' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
+            'type' => 'required'
         ]);
 
         $jadwal = Jadwal::find($id);
@@ -87,6 +90,7 @@ class JadwalController extends Controller
         $jadwal->tgl_sprint = $validatedData['tgl_sprint'];
         $jadwal->start_date = $validatedData['start_date'];
         $jadwal->end_date = $validatedData['end_date'];
+        $jadwal->type = $validatedData['type'];
         $jadwal->save();
         // Set flash message
         Session::flash('updated', 'Berhasil update jadwal.');

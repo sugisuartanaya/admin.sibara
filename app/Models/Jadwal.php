@@ -15,7 +15,8 @@ class Jadwal extends Model
         'tgl_sprint',
         'start_date',
         'end_date',
-        'status'
+        'status',
+        'type'
     ];
 
     public function daftar_barang()

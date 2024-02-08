@@ -58,6 +58,15 @@
                   </div>
                 @enderror
               </div>
+
+              <div class="form-group">
+                <label for="type" class="form-control-label">Tipe Penawaran</label>
+                <div class="form-check">
+                  <input type="radio" id="radio1" name="type" value="open" class="form-check-input @error('type') is-invalid @enderror" {{ old('type', $jadwal->type) == 'open' ? 'checked' : '' }}> Open Bidding
+                  <br>
+                  <input type="radio" id="radio2" name="type" value="close" class="form-check-input @error('type') is-invalid @enderror" {{ old('type', $jadwal->type) == 'close' ? 'checked' : '' }}> Close Bidding
+                </div>
+              </div>
               
               <div class="form-group">
                 <label for="start_date" class=" form-control-label">Dimulai pada</label>

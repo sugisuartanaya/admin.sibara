@@ -69,6 +69,7 @@
                       <th scope="col">Tanggal Dimulai</th>
                       <th scope="col">Tanggal Berakhir</th>
                       <th scope="col">Waktu</th>
+                      <th scope="col">Tipe Penawaran</th>
                       <th scope="col">Aksi</th>
                     </tr>
                   </thead>
@@ -83,6 +84,11 @@
                         <td style="vertical-align: middle;">
                           {{ $jadwal->start_date->format('H:i') }} - {{ $jadwal->end_date->format('H:i') }} WITA
                         </td>
+                        @if ($jadwal->type == 'open')
+                          <td style="vertical-align: middle;">Open Bidding</td>
+                        @else
+                          <td style="vertical-align: middle;">Closed Bidding</td>
+                        @endif
                         
                         <td style="vertical-align: middle;">
                           <a href="/jadwal/{{ $jadwal->id }}/edit" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Edit"><i class="menu-icon fa fa-pencil"></i></a>
