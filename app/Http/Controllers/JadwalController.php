@@ -14,7 +14,7 @@ class JadwalController extends Controller
     
     public function index()
     {
-        $jadwal = Jadwal::all();
+        $jadwal = Jadwal::orderBy('id', 'desc')->get();
         foreach ($jadwal as $format_jadwal) {
             $format_jadwal->start_date = Carbon::parse($format_jadwal->start_date);
             $format_jadwal->end_date = Carbon::parse($format_jadwal->end_date);
