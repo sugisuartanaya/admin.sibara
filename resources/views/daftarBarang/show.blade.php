@@ -54,6 +54,14 @@
                       <td scope="col">Tgl. Surat Perintah Penjualan langsung: </td>
                       <td scope="col">{{ $jadwal->tgl_sprint->format('j F Y') }}</td>
                     </tr>
+                    <tr>
+                      <td scope="col">Tipe Penawaran: </td>
+                      @if ($jadwal->type == 'open')
+                        <td scope="col">Open Bidding</td>
+                      @else
+                        <td scope="col">Closed Bidding</td>
+                      @endif
+                    </tr>
                     <tr><td>
                       <strong>Dilaksanakan pada</strong>
                     </td></tr>
@@ -102,7 +110,7 @@
                         <td style="vertical-align: middle;">{{ $index + 1 }}</td>
                         <td style="vertical-align: middle;">
                           @if($barang->status === 2)
-                          <span class="badge badge-success">Terjual</span>{{ $barang->barang_rampasan->nama_barang }}
+                            <span class="badge badge-success">Terjual</span>{{ $barang->barang_rampasan->nama_barang }}
                           @else 
                             {{ $barang->barang_rampasan->nama_barang }}
                           @endif

@@ -41,7 +41,7 @@
                 <tr>
                   <th scope="col">No.</th>
                   <th scope="col">Nama Barang</th>
-                  <th scope="col">Jumlah Peserta</th>
+                  <th scope="col">Jumlah Penawaran</th>
                   <th scope="col">Harga Tertinggi</th>
                   <th scope="col">Aksi</th>
                 </tr>
@@ -52,7 +52,7 @@
                     <td style="vertical-align: middle;">{{ $index + 1 }}</td>
                     <td style="vertical-align: middle;">{{ $barang->nama_barang }}</td>
                     @if(isset($penawaran[$barang->id]))
-                      <td style="vertical-align: middle;">{{ $penawaran[$barang->id]->count() }} orang</td>
+                      <td style="vertical-align: middle;">{{ $penawaran[$barang->id]->count() }} Penawaran</td>
                       <td style="vertical-align: middle;">
                         Rp. {{ number_format($penawaran[$barang->id][0]->harga_bid, 0, ',', '.') }}
                       </td>
