@@ -67,12 +67,23 @@ class PenawaranController extends Controller
 
         $barang = Barang_rampasan::find($barangId);
         
-        $penawaran = Penawaran::with('jadwal')
+        $penawaranNormal = Penawaran::with('jadwal')
             ->where('id_jadwal', $id_jadwal)
             ->where('id_barang', $barangId)
             ->whereNotIn('status', ['wanprestasi'])
             ->orderBy('harga_bid', 'desc')
             ->get();
+
+        // Mengambil penawaran dengan status 'wanprestasi'
+        $penawaranWanprestasi = Penawaran::with('jadwal')
+            ->where('id_jadwal', $id_jadwal)
+            ->where('id_barang', $barangId)
+            ->whereIn('status', ['wanprestasi'])
+            ->orderBy('status', 'asc') // 'wanprestasi' paling terakhir
+            ->get();
+
+        // Menggabungkan kedua hasil query
+        $penawaran = $penawaranNormal->concat($penawaranWanprestasi);
             
         $penawarTertinggi = Penawaran::with('jadwal')
             ->where('id_jadwal', $id_jadwal)
@@ -81,8 +92,13 @@ class PenawaranController extends Controller
             ->orderBy('harga_bid', 'desc')
             ->first();
         
-        $dataEndDate = Carbon::parse($penawarTertinggi->updated_at)->toIso8601String();
-        $countdownWinner = Carbon::parse($dataEndDate)->addHours(24)->toIso8601String();
+        if($penawarTertinggi !== null) {
+            $dataEndDate = Carbon::parse($penawarTertinggi->updated_at)->toIso8601String();
+            $countdownWinner = Carbon::parse($dataEndDate)->addHours(24)->toIso8601String();
+        } else {
+            $countdownWinner = null;
+        }
+        
         
         return view('penawaran.bidder', [
             'title' => 'Transaksi',

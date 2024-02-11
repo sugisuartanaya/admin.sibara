@@ -106,7 +106,7 @@
                   <h5>Harga Penawaran:</h5>
                   <p>Rp. {{ number_format($penawarTertinggi->harga_bid, 0, ',', '.') }}</p>
                   <h5>Tanggal Penawaran:</h5>
-                  <p>{{ \Carbon\Carbon::parse($penawarTertinggi->tanggal)->format('d M Y \J\a\m\ H:i') }} WITA</p>
+                  <p>{{ \Carbon\Carbon::parse($penawarTertinggi->created_at)->format('d M Y \J\a\m\ H:i') }} WITA</p>
                   
                   <form action="/penawaran/{{ $jadwal->id }}/{{ $barang->id }}/{{ $penawarTertinggi->id }}" method="post">
                   @csrf
@@ -116,6 +116,11 @@
                 @endif
             
               </div>
+            @else
+              <div class="col-md-4">
+                <h3 style="font-weight: bold; margin-bottom:10px">Tidak ada pemenang lelang</h3> 
+                <h5>Penawaran yang masuk wanprestasi</h5>
+              </div> 
             @endif
 
             
@@ -132,12 +137,12 @@
                 </thead>
                 <tbody>
                   @foreach ($data_penawaran as $index => $penawaran)
-                    <tr class="{{ $penawaran->status == 'menang' ? 'table-active' : '' }}">
+                    <tr class="{{ $penawaran->status == 'menang' ? 'table-active' : ($penawaran->status == 'wanprestasi' ? 'table-danger' : '') }}">
                       <td style="vertical-align: middle;">{{ $index + 1 }}</td>
                       <td style="vertical-align: middle;">{{ $penawaran->pembeli->nama_pembeli }}</td>
                       <td style="vertical-align: middle;">Rp. {{ number_format($penawaran->harga_bid, 0, ',', '.') }}</td>
                       <td style="vertical-align: middle;">
-                          {{ \Carbon\Carbon::parse($penawaran->tanggal)->format('d M Y \J\a\m\ H:i') }} WITA
+                          {{ \Carbon\Carbon::parse($penawaran->created_at)->format('d M Y \J\a\m\ H:i') }} WITA
                       </td>
                     </tr>
                   @endforeach
