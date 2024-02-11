@@ -54,7 +54,12 @@
                   <h5>Harga Penawaran:</h5>
                   <p>Rp. {{ number_format($penawarTertinggi->harga_bid, 0, ',', '.') }}</p>
                   <h5>Tanggal Penawaran:</h5>
-                  <p>{{ \Carbon\Carbon::parse($penawarTertinggi->tanggal)->format('d M Y \J\a\m\ H:i') }} WITA</p>
+                  <p>{{ \Carbon\Carbon::parse($penawarTertinggi->created_at)->format('d M Y \J\a\m\ H:i') }} WITA</p>
+
+                  <h5>Batas Waktu Pembayaran:</h5>
+                  <p><strong id="countdown" class="text-danger"></strong></p>
+                  <p id="end_date" dataEndDate= {{ $countdownWinner }}></p>
+
                   <div class="d-flex">
                     <a href="https://wa.me/62{{ $penawarTertinggi->pembeli->no_telepon }}?text=Selamat!%0A%0AAnda%20berhasil%20memenangkan%20lelang%20pada%20website%20Sistem%20Informasi%20Penjualan%20Langsung%20Barang%20Rampasan%20Negara%20Kejaksaan%20Negeri%20Denpasar%20dengan%20item%20barang%3A%20%0A%0A{{ $penawarTertinggi->barang_rampasan->nama_barang }}%0A%0ASegera%20lakukan%20pembayaran%20dengan%20klik%20link%20berikut%20http%3A%2F%2Fsibara.test%2F%0AKami%20tunggu%20dalam%201x24%20jam.%20Jika%20tidak%20melakukan%20pembayaran%2C%20maka%20kami%20anggap%20Anda%20Wanprestasi.%0A%0ATerima%20kasih" class="btn btn-success" data-toggle="tooltip" data-original-title="Chat Pembeli"><i class="menu-icon fa fa-whatsapp"></i>&nbsp;Hubungi</a>
                     &nbsp;&nbsp;

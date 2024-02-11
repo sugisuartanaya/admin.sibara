@@ -151,6 +151,7 @@
 
 
     <!-- Your Custom Script -->
+    <script src="{{ asset('js/yscountdown.min.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
     <script src="{{ asset('js/chosen.jquery.min.js') }}"></script>
 

@@ -80,14 +80,18 @@ class PenawaranController extends Controller
             ->whereNotIn('status', ['wanprestasi'])
             ->orderBy('harga_bid', 'desc')
             ->first();
-
+        
+        $dataEndDate = Carbon::parse($penawarTertinggi->updated_at)->toIso8601String();
+        $countdownWinner = Carbon::parse($dataEndDate)->addHours(24)->toIso8601String();
+        
         return view('penawaran.bidder', [
             'title' => 'Transaksi',
             'active' => 'active',
             'jadwal' => $jadwal,
             'barang' => $barang,
             'data_penawaran' => $penawaran,
-            'penawarTertinggi' => $penawarTertinggi
+            'penawarTertinggi' => $penawarTertinggi,
+            'countdownWinner' => $countdownWinner
         ]);
         
     }
@@ -101,6 +105,7 @@ class PenawaranController extends Controller
         
         $penawar = Penawaran::find($penawarId);
         $penawar->status = 'menang';
+        $penawar->updated_at = Carbon::now();
         $penawar->save();
         
         return back()->with('message', 'Berhasil konfirmasi penawaran.');
