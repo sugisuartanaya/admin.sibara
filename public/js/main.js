@@ -200,9 +200,9 @@ jQuery(document).ready(function($) {
         var myCountDown = new ysCountDown(endDate, function (remaining, finished) {
 				console.log(myCountDown);
 				if (finished) {
-						document.getElementsByClassName("badge-container")[0].style.display = "none"; 
-						document.getElementById("hide_countdown").style.display = "none"; 
+						console.log('testing');
 						document.getElementById("end_event").style.display = "block";
+						document.getElementById("hide_whatsapp").style.display = "none";
 				} else {
 						document.getElementById("countdown").innerHTML = remaining.hours + "h : " + remaining.minutes + "m : " + remaining.seconds + "s";
 				}
