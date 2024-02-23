@@ -11,10 +11,12 @@ use App\Http\Controllers\PembeliController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PenawaranController;
+use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\HargaWajarController;
 use App\Http\Controllers\VerifikasiController;
 use App\Http\Controllers\DaftarBarangController;
 use App\Http\Controllers\BarangRampasanController;
+use App\Models\Transaksi;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,5 +86,5 @@ Route::get('penawaran/{jadwalId}/showbidder/{barangId}', [PenawaranController::c
 Route::put('penawaran/{jadwalId}/{barangId}/{penawarID}', [PenawaranController::class, 'updateWinner']);
 Route::put('penawaran/{penawarID}', [PenawaranController::class, 'updateWanprestasi']);
 
-
-
+Route::put('pembayaran/verified/{id}', [TransaksiController::class, 'update']);
+Route::put('pembayaran/salah/{id}', [TransaksiController::class, 'updateSalah']);

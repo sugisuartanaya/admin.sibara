@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Jadwal;
 use App\Models\Penawaran;
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use App\Models\Barang_rampasan;
 use Illuminate\Support\Facades\URL;
@@ -95,10 +96,12 @@ class PenawaranController extends Controller
         if($penawarTertinggi !== null) {
             $dataEndDate = Carbon::parse($penawarTertinggi->updated_at)->toIso8601String();
             $countdownWinner = Carbon::parse($dataEndDate)->addHours(24)->toIso8601String();
+            $transaksi = Transaksi::where('id_penawaran', $penawarTertinggi->id)->first();
         } else {
             $countdownWinner = null;
+            $transaksi = null;
         }
-        
+
         
         return view('penawaran.bidder', [
             'title' => 'Transaksi',
@@ -107,7 +110,8 @@ class PenawaranController extends Controller
             'barang' => $barang,
             'data_penawaran' => $penawaran,
             'penawarTertinggi' => $penawarTertinggi,
-            'countdownWinner' => $countdownWinner
+            'countdownWinner' => $countdownWinner,
+            'transaksi' => $transaksi
         ]);
         
     }

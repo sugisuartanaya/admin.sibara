@@ -158,6 +158,109 @@
           
         </div>
       </div>
+
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <strong class="card-title mb-0">Pembayaran</strong>
+        </div>
+        <div class="card-body">
+          <h4 style="font-weight: bold; margin-bottom:10px">Pembayaran Pemenang Lelang</h4>
+          <table id="tabel" class="table table-bordered datatable">
+            <thead>
+              <tr>
+                <th style="vertical-align: middle;">Nama Pembeli</th>
+                <th style="vertical-align: middle;">Total Pembayaran</th>
+                <th style="vertical-align: middle;">Status</th>
+                <th style="vertical-align: middle;">Waktu Pembayaran</th>
+                <th style="vertical-align: middle;">Bukti Pembayaran</th>
+                <th style="vertical-align: middle;">Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              @if (!isset($transaksi))
+                <tr>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+              @else
+                <tr>
+                  <td style="vertical-align: middle;">{{ $transaksi->pembeli->nama_pembeli }}</td>
+                  <td style="vertical-align: middle;">Rp. {{ number_format($transaksi->penawaran->harga_bid, 0, ',', '.') }}</td>
+                  <td style="vertical-align: middle">
+                    @if($transaksi->status == 'review')
+                      <span class="badge badge-secondary">Menunggu Konfirmasi</span>
+                    @elseif ($transaksi->status == 'data_salah')
+                      <span class="badge badge-danger">Transaksi Salah</span>
+                    @else 
+                      <span class="badge badge-success">Sukses</span>
+                    @endif
+                  </td>
+                  <td style="vertical-align: middle">{{ \Carbon\Carbon::parse($transaksi->tanggal)->format('d M Y \J\a\m\ H:i') }}</td>
+                  <td><button class="btn btn-info btn-sm" href="#" data-toggle="modal" data-target="#bukti">Lihat Bukti</button></td>
+                  
+                  <div class="modal" id="bukti">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Bukti Pembayaran</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                          <img class="img-fluid" src="http://sibara.test/{{ $transaksi->foto_bukti }}" alt="Foto Pembeli" style="object-fit: contain; width: 100%; height: 100%;">
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <form action="/pembayaran/verified/{{ $transaksi->id }}" method="post">
+                    @csrf
+                    @method('PUT')
+                    <td class="text-center align-middle"><button type="submit" class="btn btn-success btn-sm" data-toggle="tooltip" data-original-title="Konfirmasi"><i class="fa fa-check"></i></button>
+                  </form>
+                  <form class="d-inline" action="/pembayaran/salah/{{ $transaksi->id }}" method="post">
+                    @csrf
+                    @method('PUT')
+                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#data_salah"><i class="menu-icon fa fa-trash-o"></i>
+                    </button>
+                    <div class="modal" id="data_salah">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h4 class="modal-title">Pembayaran Salah</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          </div>
+                          <div class="modal-body">
+                            <p>Apakah anda yakin pembayarannya salah?</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" name="submit" class="btn btn-danger btn-sm">Confirm</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  </td>
+                </tr>
+              @endif
+            </tbody>
+          </table>
+          @if(isset($transaksi))
+            @if($transaksi->status == 'data_salah')
+              <a href="https://wa.me/62{{ $penawarTertinggi->pembeli->no_telepon }}?text=Maaf!%0ADengan%20hormat%2C%20kami%20memberitahukan%20bahwa%20pembayaran%20lelang%20untuk%20barang%20dengan%20nama%20{{ $penawarTertinggi->barang_rampasan->nama_barang }}%20belum%20berhasil%20kami%20konfirmasi.%0A%0ASilahkan%20mengunggah%20ulang%20bukti%20transfer%20pembayaran%20lelang%20melalui%20link%20berikut%3A%20http%3A%2F%2Fsibara.test%0A%0AKami%20sangat%20mengharapkan%20Anda%20dapat%20segera%20mengunggah%20bukti%20transfer%20pembayaran%20lelang%20guna%20menghindari%20kemungkinan%20dianggap%20sebagai%20wanprestasi.%0A%0ATerima%20kasih%20atas%20perhatian%20dan%20kerjasamanya." class="btn btn-success" data-toggle="tooltip" data-original-title="Chat Pembeli"><i class="menu-icon fa fa-whatsapp"></i>&nbsp;Hubungi</a>
+            @elseif($transaksi->status == 'verified')
+              <a href="https://wa.me/62{{ $penawarTertinggi->pembeli->no_telepon }}?text=Selamat!%0APembayaran%20lelang%20pada%20{{ $penawarTertinggi->barang_rampasan->nama_barang }}%20sudah%20berhasil%20terkonfirmasi%0A%0ASilahkan%20tunjukkan%20bukti%20pembayaran%20ini%20kepada%20admin%20barang%20bukti%20dan%20barang%20lelang%20dapat%20diambil%20di%20Kantor%20Kejaksaan%20Negeri%20Denpasar.%0A%0ABukti%20pembayaran%20dapat%20diunduh%20pada%20link%20berikut%20ini%3A%20http%3A%2F%2Fsibara.test%0A%0ATerima%20kasih!" class="btn btn-success" data-toggle="tooltip" data-original-title="Chat Pembeli"><i class="menu-icon fa fa-whatsapp"></i>&nbsp;Hubungi</a>
+            @else
+              <button class="btn btn-success btn-md" disabled><i class="menu-icon fa fa-whatsapp"></i>&nbsp;Hubungi</button>
+            @endif
+          @endif
+        </div>
+      </div>
     </div>
   </div>
 </div>
