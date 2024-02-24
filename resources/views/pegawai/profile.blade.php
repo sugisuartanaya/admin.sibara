@@ -101,7 +101,15 @@
                 <tr>
                   <td>Jabatan</td>
                   <td></td>
-                  <td>{{ auth()->user()->pegawai->jabatan }}</td>
+                  <td>
+                    @if(auth()->user()->pegawai->jabatan == 'petugas')
+                      Petugas Barang Bukti
+                    @elseif(auth()->user()->pegawai->jabatan == 'bendahara')
+                      Bendahara Penerimaan
+                    @else
+                      Kepala Seksi Barang Bukti dan Barang Rampasan
+                    @endif
+                  </td>
                 </tr>
                 <tr>
                   <td>Pangkat</td>
@@ -163,7 +171,14 @@
                   </div>
                   <div class="form-group">
                     <label for="jabatan" class=" form-control-label">Jabatan</label>
-                    <input type="text" id="jabatan" name="jabatan" class="form-control @error('jabatan') is-invalid @enderror" value="{{ auth()->user()->pegawai->jabatan }}">
+                    <select name="jabatan" id="jabatan" class="form-control @error('jabatan') is-invalid @enderror">
+                      <option value="petugas" {{ auth()->user()->pegawai->jabatan === 'petugas' ? 'selected' : '' }}>
+                        Petugas Barang Bukti</option>
+                      <option value="bendahara" {{ auth()->user()->pegawai->jabatan === 'bendahara' ? 'selected' : '' }}>
+                        Bendahara Penerimaan</option>
+                      <option value="kasi" {{ auth()->user()->pegawai->jabatan === 'kasi' ? 'selected' : '' }}>
+                        Kepala Seksi Pengelolaan Barang Bukti dan Barang Rampasan</option>
+                    </select>
                     @error('jabatan')
                       <div class="invalid-feedback">
                         {{ $message }}

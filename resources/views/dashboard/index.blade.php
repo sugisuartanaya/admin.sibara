@@ -23,7 +23,15 @@
             <hr>
             <p>Kejaksaan Negeri Denpasar</p>
             <hr>
-            <p>{{ auth()->user()->pegawai->jabatan }}</p>
+            <p>
+              @if(auth()->user()->pegawai->jabatan == 'petugas')
+                Petugas Barang Bukti
+              @elseif(auth()->user()->pegawai->jabatan == 'bendahara')
+                Bendahara Penerimaan
+              @else
+                Kepala Seksi Barang Bukti dan Barang Rampasan
+              @endif
+            </p>
             <hr>
             <p>{{ auth()->user()->pegawai->pangkat }}</p>
           </div>
