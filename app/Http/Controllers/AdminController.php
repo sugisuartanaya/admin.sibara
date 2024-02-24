@@ -21,7 +21,12 @@ class AdminController extends Controller
             'nama_pegawai' => 'required',
             'nip' => 'required|unique:pegawais',
             'pangkat' => 'required',
-            'jabatan' => 'required',
+            'jabatan' => ['required',
+                            function ($attribute, $value, $fail) {
+                                if ($value === '0') {
+                                    $fail('Please select a valid jabatan.');
+                                }
+                            },],
             'foto_pegawai' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 

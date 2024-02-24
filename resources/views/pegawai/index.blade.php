@@ -91,7 +91,15 @@
                         </td>
                         <td style="vertical-align: middle;">{{ $pegawai->nip }}</td>
                         <td style="vertical-align: middle;">{{ $pegawai->pangkat }}</td>
-                        <td style="vertical-align: middle;">{{ $pegawai->jabatan }}</td>
+                        <td style="vertical-align: middle;">
+                          @if($pegawai->jabatan == 'petugas')
+                            Petugas Barang Bukti
+                          @elseif($pegawai->jabatan == 'bendahara')
+                            Bendahara Penerimaan
+                          @else
+                            Kepala Seksi PB3R
+                          @endif
+                        </td>
                         <td style="vertical-align: middle;">
                           <a href="/editpegawai/{{ $pegawai->nip }}/edit" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Edit"><i class="menu-icon fa fa-pencil"></i></a>
                           <form class="d-inline" action="/deletepegawai/{{ $pegawai->nip }}" method="post">

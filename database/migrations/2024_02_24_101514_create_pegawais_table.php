@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('nama_pegawai');
             $table->string('nip');
             $table->string('pangkat');
-            $table->string('jabatan');
+            $table->enum('jabatan', ['petugas', 'bendahara', 'kasi']);
             $table->string('foto_pegawai');
             $table->boolean('is_admin');
         });
