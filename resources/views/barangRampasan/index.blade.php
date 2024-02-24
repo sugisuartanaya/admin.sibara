@@ -58,37 +58,49 @@
                     <tr>
                       <th style="vertical-align: middle;">No.</th>
                       <th style="vertical-align: middle;">Thumbnail Barang</th>
-                      <th style="vertical-align: middle;">Nama Barang</th>
-                      <th style="vertical-align: middle;">Nama Terdakwa</th>
+                      {{-- <th style="vertical-align: middle;">Nama Terdakwa</th> --}}
                       <th style="vertical-align: middle;">Kategori</th>
                       <th style="vertical-align: middle;">No Putusan Pengadilan</th>
                       <th style="vertical-align: middle;">Izin Penjualan</th>
+                      <th style="vertical-align: middle;">Harga Wajar</th>
                       <th style="vertical-align: middle;">Status</th>
                       <th style="vertical-align: middle;">Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
                     @foreach ($data_barang as $index => $barang)
+                    @php
+                      $latestHarga = isset($harga[$barang->id]) ? $harga[$barang->id] : null;
+                    @endphp
                       <tr>
                         <td style="vertical-align: middle;">{{ $index + 1 }}</td>
                         <td style="vertical-align: middle;">
                           @if ($barang->foto_thumbnail)
-                            <a href="#"><img style="width: 200px; height: 150px;"
+                            <a href="#"><img style="width: 150px; height: 150px;"
                             src="{{ asset($barang->foto_thumbnail) }}" alt="{{ $barang->nama_barang }}"></a>
                           @else
                             <p>Tidak Ada Foto</p>
                           @endif  
                         </td>
-                        <td style="vertical-align: middle;">{{ $barang->nama_barang }}</td>
-                        <td style="vertical-align: middle;">{{ $barang->nama_terdakwa }}</td>
+                        {{-- <td style="vertical-align: middle;">{{ $barang->nama_terdakwa }}</td> --}}
                         <td style="vertical-align: middle;">{{ $barang->kategori->nama_kategori }}</td>
                         <td style="vertical-align: middle;">{{ $barang->no_putusan }}</td>
                         @if ($barang->izin)
                           <td style="vertical-align: middle;">{{ $barang->izin->no_sk }}</td>
                         @else
-                          <td style="vertical-align: middle;">Belum Memiliki Izin</td>
+                          <td style="vertical-align: middle;">-</td>
                         @endif
 
+                        @if ($latestHarga)
+                          @if($latestHarga->expired == true)
+                            <td style="vertical-align: middle;"><span class="badge badge-danger">Expired</span></td>
+                          @else
+                            <td style="vertical-align: middle;">Rp. {{ number_format($latestHarga->harga, 0, ',', '.') }}</td>
+                          @endif
+                        @else
+                          <td style="vertical-align: middle;">-</td>
+                        @endif
+                        
                         <td style="vertical-align: middle;">
                           @if ($barang->status == '0')
                             Belum Terjual

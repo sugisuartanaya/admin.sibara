@@ -23,9 +23,28 @@ class BarangRampasanController extends Controller
      */
     public function index()
     {
-        $barang = Barang_rampasan::with('kategori')->get();
-        return view('barangRampasan.index')->with('data_barang', $barang)
+        $barang = Barang_rampasan::with('kategori')
+                    // ->where('status', 0)
+                    ->orderBy('status')
+                    ->get();
+        
+        $id_barang = $barang->pluck('id')->toArray();
+        $harga_terakhir = Harga_wajar::whereIn('id_barang', $id_barang)
+                            ->orderBy('tgl_laporan_penilaian', 'desc')  
+                            ->get()
+                            ->groupBy('id_barang')
+                            ->map(function ($group) {
+                                $latest = $group->first(); // per group
+                                $selisih_bulan = Carbon::now()->diffInMonths(Carbon::parse($latest->tgl_laporan_penilaian));
+                                $expired = $selisih_bulan >= 6 ? true : false;
+                                $latest->expired = $expired;
+                                return $latest;
+                            });
+
+        return view('barangRampasan.index')
+        ->with('data_barang', $barang)
         ->with('active', 'active')
+        ->with('harga', $harga_terakhir)
         ->with('title', 'Barang Rampasan');
     }
 
