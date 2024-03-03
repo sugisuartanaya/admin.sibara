@@ -56,53 +56,104 @@
                   <h5>Tanggal Penawaran:</h5>
                   <p>{{ \Carbon\Carbon::parse($penawarTertinggi->created_at)->format('d M Y \J\a\m\ H:i') }} WITA</p>
 
-                  <h5>Batas Waktu Pembayaran:</h5>
-                  <p><strong id="countdown" class="text-danger"></strong></p>
-                  <p id="end_date" dataEndDate= {{ $countdownWinner }}></p>
-                  <div id="end_event" style="display: none">
-                    <p class="text-danger">Kadaluarsa</p>
-                  </div>
-
-                  <div class="d-flex">
-                    <form action="/penawaran/{{ $penawarTertinggi->id }}" method="post">
-                      @csrf
-                      @method('PUT')
-                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#wanprestasi{{ $penawarTertinggi->id }}"><i class="fa fa-times-circle"></i>&nbsp;Wanprestasi</button>
-
-                      <!-- The Modal -->
-                      <div class="modal" id="wanprestasi{{ $penawarTertinggi->id }}">
-                        <div class="modal-dialog modal-dialog-centered mt-2">
-                          <div class="modal-content">
-    
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                              <h4 class="modal-title">Konfirmasi Penawaran</h4>
-                              <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
-
-                            <!-- Modal Body -->
-                            <div class="modal-body">
-                              <p>Apakah anda yakin pemenang lelang wanprestasi?</p>
-                            </div>
-
-                            <!-- Modal Footer -->
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                              <button type="submit" name="submit" class="btn btn-danger btn-sm">Confirm
-                              </button>
-                            </div>
-    
-                          </div>
-                        </div>
+                  @if($transaksi)
+                    @if($transaksi->status != 'verified')
+                      <h5>Batas Waktu Pembayaran:</h5>
+                      <p><strong id="countdown" class="text-danger"></strong></p>
+                      <p id="end_date" dataEndDate="{{ $countdownWinner }}"></p>
+                      <div id="end_event" style="display: none">
+                          <p class="text-danger">Kadaluarsa</p>
                       </div>
 
-                    </form>
-                    &nbsp;&nbsp;
-                    <div id="hide_whatsapp">
-                      <a href="https://wa.me/62{{ $penawarTertinggi->pembeli->no_telepon }}?text=Selamat!%0A%0AAnda%20berhasil%20memenangkan%20lelang%20pada%20website%20Sistem%20Informasi%20Penjualan%20Langsung%20Barang%20Rampasan%20Negara%20Kejaksaan%20Negeri%20Denpasar%20dengan%20item%20barang%3A%20%0A%0A{{ $penawarTertinggi->barang_rampasan->nama_barang }}%0A%0ASegera%20lakukan%20pembayaran%20dengan%20klik%20link%20berikut%20http%3A%2F%2Fsibara.test%2F%0AKami%20tunggu%20dalam%201x24%20jam.%20Jika%20tidak%20melakukan%20pembayaran%2C%20maka%20kami%20anggap%20Anda%20Wanprestasi.%0A%0ATerima%20kasih" class="btn btn-success" data-toggle="tooltip" data-original-title="Chat Pembeli"><i class="menu-icon fa fa-whatsapp"></i>&nbsp;Hubungi</a>
+                      <div class="d-flex">
+                        <form action="/penawaran/{{ $penawarTertinggi->id }}" method="post">
+                          @csrf
+                          @method('PUT')
+                          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#wanprestasi{{ $penawarTertinggi->id }}"><i class="fa fa-times-circle"></i>&nbsp;Wanprestasi</button>
+
+                          <!-- The Modal -->
+                          <div class="modal" id="wanprestasi{{ $penawarTertinggi->id }}">
+                            <div class="modal-dialog modal-dialog-centered mt-2">
+                              <div class="modal-content">
+        
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                  <h4 class="modal-title">Konfirmasi Penawaran</h4>
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+
+                                <!-- Modal Body -->
+                                <div class="modal-body">
+                                  <p>Apakah anda yakin pemenang lelang wanprestasi?</p>
+                                </div>
+
+                                <!-- Modal Footer -->
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                  <button type="submit" name="submit" class="btn btn-danger btn-sm">Confirm
+                                  </button>
+                                </div>
+        
+                              </div>
+                            </div>
+                          </div>
+
+                        </form>
+                        &nbsp;&nbsp;
+                        <div id="hide_whatsapp">
+                          <a href="https://wa.me/62{{ $penawarTertinggi->pembeli->no_telepon }}?text=Selamat!%0A%0AAnda%20berhasil%20memenangkan%20lelang%20pada%20website%20Sistem%20Informasi%20Penjualan%20Langsung%20Barang%20Rampasan%20Negara%20Kejaksaan%20Negeri%20Denpasar%20dengan%20item%20barang%3A%20%0A%0A{{ $penawarTertinggi->barang_rampasan->nama_barang }}%0A%0ASegera%20lakukan%20pembayaran%20dengan%20klik%20link%20berikut%20http%3A%2F%2Fsibara.test%2F%0AKami%20tunggu%20dalam%201x24%20jam.%20Jika%20tidak%20melakukan%20pembayaran%2C%20maka%20kami%20anggap%20Anda%20Wanprestasi.%0A%0ATerima%20kasih" class="btn btn-success" data-toggle="tooltip" data-original-title="Chat Pembeli"><i class="menu-icon fa fa-whatsapp"></i>&nbsp;Hubungi</a>
+                        </div>
+                      </div>
+                    @endif
+                  @else
+                    <h5>Batas Waktu Pembayaran:</h5>
+                    <p><strong id="countdown" class="text-danger"></strong></p>
+                    <p id="end_date" dataEndDate="{{ $countdownWinner }}"></p>
+                    <div id="end_event" style="display: none">
+                        <p class="text-danger">Kadaluarsa</p>
                     </div>
 
-                  </div>
+                    <div class="d-flex">
+                      <form action="/penawaran/{{ $penawarTertinggi->id }}" method="post">
+                        @csrf
+                        @method('PUT')
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#wanprestasi{{ $penawarTertinggi->id }}"><i class="fa fa-times-circle"></i>&nbsp;Wanprestasi</button>
+
+                        <!-- The Modal -->
+                        <div class="modal" id="wanprestasi{{ $penawarTertinggi->id }}">
+                          <div class="modal-dialog modal-dialog-centered mt-2">
+                            <div class="modal-content">
+      
+                              <!-- Modal Header -->
+                              <div class="modal-header">
+                                <h4 class="modal-title">Konfirmasi Penawaran</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              </div>
+
+                              <!-- Modal Body -->
+                              <div class="modal-body">
+                                <p>Apakah anda yakin pemenang lelang wanprestasi?</p>
+                              </div>
+
+                              <!-- Modal Footer -->
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" name="submit" class="btn btn-danger btn-sm">Confirm
+                                </button>
+                              </div>
+      
+                            </div>
+                          </div>
+                        </div>
+
+                      </form>
+                      &nbsp;&nbsp;
+                      <div id="hide_whatsapp">
+                        <a href="https://wa.me/62{{ $penawarTertinggi->pembeli->no_telepon }}?text=Selamat!%0A%0AAnda%20berhasil%20memenangkan%20lelang%20pada%20website%20Sistem%20Informasi%20Penjualan%20Langsung%20Barang%20Rampasan%20Negara%20Kejaksaan%20Negeri%20Denpasar%20dengan%20item%20barang%3A%20%0A%0A{{ $penawarTertinggi->barang_rampasan->nama_barang }}%0A%0ASegera%20lakukan%20pembayaran%20dengan%20klik%20link%20berikut%20http%3A%2F%2Fsibara.test%2F%0AKami%20tunggu%20dalam%201x24%20jam.%20Jika%20tidak%20melakukan%20pembayaran%2C%20maka%20kami%20anggap%20Anda%20Wanprestasi.%0A%0ATerima%20kasih" class="btn btn-success" data-toggle="tooltip" data-original-title="Chat Pembeli"><i class="menu-icon fa fa-whatsapp"></i>&nbsp;Hubungi</a>
+                      </div>
+                    </div>
+                  @endif
+                  
                   
                 @else
                   <h3 style="font-weight: bold; margin-bottom:10px">Penawar Lelang tertinggi</h3>
@@ -159,6 +210,14 @@
         </div>
       </div>
 
+      @if($transaksi)
+        @if($transaksi->status == 'verified')
+          <div class="alert alert-success">
+            <i class="fa fa-info-circle" aria-hidden="true"></i> Pembayaran Terkonfirmasi
+          </div>
+        @endif
+      @endif
+
       <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
           <strong class="card-title mb-0">Pembayaran</strong>
@@ -173,7 +232,11 @@
                 <th style="vertical-align: middle;">Status</th>
                 <th style="vertical-align: middle;">Waktu Pembayaran</th>
                 <th style="vertical-align: middle;">Bukti Pembayaran</th>
-                <th style="vertical-align: middle;">Aksi</th>
+                @if($transaksi)
+                  @if($transaksi->status != 'verified')
+                    <th style="vertical-align: middle;">Aksi</th>
+                  @endif
+                @endif
               </tr>
             </thead>
             <tbody>
@@ -217,35 +280,36 @@
                       </div>
                     </div>
                   </div>
-                  <form action="/pembayaran/verified/{{ $transaksi->id }}" method="post">
-                    @csrf
-                    @method('PUT')
-                    <td class="text-center align-middle"><button type="submit" class="btn btn-success btn-sm" data-toggle="tooltip" data-original-title="Konfirmasi"><i class="fa fa-check"></i></button>
-                  </form>
-                  <form class="d-inline" action="/pembayaran/salah/{{ $transaksi->id }}" method="post">
-                    @csrf
-                    @method('PUT')
-                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#data_salah"><i class="menu-icon fa fa-trash-o"></i>
-                    </button>
-                    <div class="modal" id="data_salah">
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h4 class="modal-title">Pembayaran Salah</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                          </div>
-                          <div class="modal-body">
-                            <p>Apakah anda yakin pembayarannya salah?</p>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" name="submit" class="btn btn-danger btn-sm">Confirm</button>
+                  @if($transaksi->status != 'verified')
+                    <form action="/pembayaran/verified/{{ $transaksi->id }}" method="post">
+                      @csrf
+                      @method('PUT')
+                      <td class="text-center align-middle"><button type="submit" class="btn btn-success btn-sm" data-toggle="tooltip" data-original-title="Konfirmasi"><i class="fa fa-check"></i></button>
+                    </form>
+                    <form class="d-inline" action="/pembayaran/salah/{{ $transaksi->id }}" method="post">
+                      @csrf
+                      @method('PUT')
+                      <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#data_salah"><i class="menu-icon fa fa-trash-o"></i>
+                      </button>
+                      <div class="modal" id="data_salah">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h4 class="modal-title">Pembayaran Salah</h4>
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                              <p>Apakah anda yakin pembayarannya salah?</p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button type="submit" name="submit" class="btn btn-danger btn-sm">Confirm</button>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </form>
-                  </td>
+                    </form>
+                  @endif
                 </tr>
               @endif
             </tbody>

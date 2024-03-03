@@ -25,6 +25,7 @@ class BarangRampasanController extends Controller
     {
         $barang = Barang_rampasan::with('kategori')
                     // ->where('status', 0)
+                    ->orderByDesc('id')
                     ->orderBy('status')
                     ->get();
         

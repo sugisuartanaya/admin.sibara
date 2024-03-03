@@ -102,7 +102,6 @@ class PenawaranController extends Controller
             $transaksi = null;
         }
 
-        
         return view('penawaran.bidder', [
             'title' => 'Transaksi',
             'active' => 'active',

@@ -58,7 +58,7 @@
                     <tr>
                       <th style="vertical-align: middle;">No.</th>
                       <th style="vertical-align: middle;">Thumbnail Barang</th>
-                      {{-- <th style="vertical-align: middle;">Nama Terdakwa</th> --}}
+                      <th style="vertical-align: middle;">Nama Barang</th>
                       <th style="vertical-align: middle;">Kategori</th>
                       <th style="vertical-align: middle;">No Putusan Pengadilan</th>
                       <th style="vertical-align: middle;">Izin Penjualan</th>
@@ -82,7 +82,7 @@
                             <p>Tidak Ada Foto</p>
                           @endif  
                         </td>
-                        {{-- <td style="vertical-align: middle;">{{ $barang->nama_terdakwa }}</td> --}}
+                        <td style="vertical-align: middle;">{{ $barang->nama_barang }}</td>
                         <td style="vertical-align: middle;">{{ $barang->kategori->nama_kategori }}</td>
                         <td style="vertical-align: middle;">{{ $barang->no_putusan }}</td>
                         @if ($barang->izin)
