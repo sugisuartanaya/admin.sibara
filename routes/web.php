@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Transaksi;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IzinController;
 use App\Http\Controllers\UserController;
@@ -14,9 +15,9 @@ use App\Http\Controllers\PenawaranController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\HargaWajarController;
 use App\Http\Controllers\VerifikasiController;
+use App\Http\Controllers\CheckPaymentController;
 use App\Http\Controllers\DaftarBarangController;
 use App\Http\Controllers\BarangRampasanController;
-use App\Models\Transaksi;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,3 +89,6 @@ Route::put('penawaran/{penawarID}', [PenawaranController::class, 'updateWanprest
 
 Route::put('pembayaran/verified/{id}', [TransaksiController::class, 'update']);
 Route::put('pembayaran/salah/{id}', [TransaksiController::class, 'updateSalah']);
+
+Route::get('check-payment', [CheckPaymentController::class, 'index']);
+Route::get('payment/{id}', [CheckPaymentController::class, 'show']);

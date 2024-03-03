@@ -53,7 +53,7 @@
                 <i class="menu-icon fa fa-shopping-cart"></i>Transaksi</a>
               <ul class="sub-menu children dropdown-menu">
                 <li><i class="fa fa-gavel"></i><a href="/penawaran">Penawaran</a></li>
-                <li><i class="fa fa-credit-card"></i><a href="#">Pembayaran</a></li>
+                <li><i class="fa fa-credit-card"></i><a href="/check-payment">Pembayaran</a></li>
               </ul>
             </li>
             <li {{ ($title === "Laporan Penjualan") ? 'active' : '' }}>
