@@ -88,7 +88,11 @@
               </div>
               <div class="stat-content">
                 <div class="text-left dib">
-                  <div class="stat-text"><span class="count">-</span></div>
+                  @if($pendapatan)
+                    <span>Rp. {{ number_format($pendapatan, 0, ',', '.') }}</span>
+                  @else
+                    <span class="count">0</span>
+                  @endif
                   <div class="stat-heading">Pendapatan Kas Negara</div>
                 </div>
               </div>
@@ -106,7 +110,13 @@
               </div>
               <div class="stat-content">
                 <div class="text-left dib">
-                  <div class="stat-text"><span class="count">-</span></div>
+                  <div class="stat-text">
+                    @if($terjual)
+                      <span class="count">{{ $terjual }}</span>
+                    @else
+                      <span class="count">0</span>
+                    @endif
+                  </div>
                   <div class="stat-heading">Terjual</div>
                 </div>
               </div>
