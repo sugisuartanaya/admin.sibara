@@ -14,6 +14,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PenawaranController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\HargaWajarController;
+use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\VerifikasiController;
 use App\Http\Controllers\CheckPaymentController;
 use App\Http\Controllers\DaftarBarangController;
@@ -81,14 +82,15 @@ Route::get('pembeli/verifikasi/{username}', [VerifikasiController::class, 'show'
 Route::put('pembeli/verifikasi/{id}/', [VerifikasiController::class, 'update']);
 Route::put('pembeli/verified/{id}/', [VerifikasiController::class, 'verified']);
 
-Route::get('penawaran', [PenawaranController::class, 'index']);
+
+Route::get('transaksi', [TransaksiController::class, 'index']);
+
 Route::get('penawaran/{id}', [PenawaranController::class, 'show']);
 Route::get('penawaran/{jadwalId}/showbidder/{barangId}', [PenawaranController::class, 'detail'])->name('detailPenawaran');
 Route::put('penawaran/{jadwalId}/{barangId}/{penawarID}', [PenawaranController::class, 'updateWinner']);
 Route::put('penawaran/{penawarID}', [PenawaranController::class, 'updateWanprestasi']);
 
-Route::put('pembayaran/verified/{id}', [TransaksiController::class, 'update']);
-Route::put('pembayaran/salah/{id}', [TransaksiController::class, 'updateSalah']);
+Route::get('pembayaran/{id}', [PembayaranController::class, 'show']);
+Route::put('pembayaran/verified/{id}', [PembayaranController::class, 'update']);
+Route::put('pembayaran/salah/{id}', [PembayaranController::class, 'updateSalah']);
 
-Route::get('check-payment', [CheckPaymentController::class, 'index']);
-Route::get('payment/{id}', [CheckPaymentController::class, 'show']);

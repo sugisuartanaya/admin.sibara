@@ -2,70 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Barang_rampasan;
+use Carbon\Carbon;
 use App\Models\Jadwal;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
+use App\Models\Barang_rampasan;
 
 class transaksiController extends Controller
 {
+    public function index(){
+        $jadwal = Jadwal::orderBy('tgl_sprint', 'desc')->get();
+
+        foreach ($jadwal as $format_jadwal) {
+            $format_jadwal->start_date = Carbon::parse($format_jadwal->start_date);
+            $format_jadwal->end_date = Carbon::parse($format_jadwal->end_date);
+            $format_jadwal->tgl_sprint = Carbon::parse($format_jadwal->tgl_sprint);
+        }
+        return view('transaksi.index', [
+            'title' => 'Transaksi',
+            'active' => 'active',
+            'data_jadwal' => $jadwal
+        ]);
+    }
     
-    public function index()
-    {
-        //
-    }
-
-    
-    public function create()
-    {
-        //
-    }
-
-    
-    public function store(Request $request)
-    {
-        //
-    }
-
-    
-    public function show($id)
-    {
-        
-    }
-
-   
-    public function edit($id)
-    {
-        //
-    }
-
-    
-    public function update($id)
-    {
-        $transaksi = Transaksi::find($id);
-        $transaksi->status = 'verified';
-        $transaksi->save();
-
-        $barangID = $transaksi->penawaran->barang_rampasan->id;
-        $barang = Barang_rampasan::find($barangID);
-        $barang->status = 1;
-        $barang->save();
-
-        return back()->with('message', 'Berhasil konfirmasi pembayaran.');
-    }
-
-    
-    public function updateSalah($id)
-    {
-        $transaksi = Transaksi::find($id);
-        $transaksi->status = 'data_salah';
-        $transaksi->save();
-
-        $barangID = $transaksi->penawaran->barang_rampasan->id;
-        $barang = Barang_rampasan::find($barangID);
-        $barang->status = 0;
-        $barang->save();
-
-        return back()->with('message', 'Berhasil konfirmasi data pembayaran salah.');
-    }
 }

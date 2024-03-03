@@ -89,7 +89,8 @@
               <div class="stat-content">
                 <div class="text-left dib">
                   @if($pendapatan)
-                    <span>Rp. {{ number_format($pendapatan, 0, ',', '.') }}</span>
+                    {{-- Rp. <span>{{ number_format($pendapatan, 0, ',', '.') }}</span> --}}
+                    Rp. <span class="count">{{ $pendapatan }}</span>
                   @else
                     <span class="count">0</span>
                   @endif

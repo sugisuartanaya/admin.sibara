@@ -17,8 +17,8 @@
                   <div class="page-title">
                       <ol class="breadcrumb text-right">
                           <li><a href="/dashboard">Dashboard</a></li>
-                          <li><a href="/penawaran">Penawaran</a></li>
-                          <li class="active"><a href="/transaksi"></a>{{ $jadwal->no_sprint }}</li>
+                          <li><a href="/transaksi">Transaksi</a></li>
+                          <li class="active">Penawaran</li>
                       </ol>
                   </div>
               </div>

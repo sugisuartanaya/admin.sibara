@@ -13,23 +13,6 @@ use Illuminate\Support\Facades\URL;
 class PenawaranController extends Controller
 {
     
-    public function index()
-    {
-        $jadwal = Jadwal::orderBy('tgl_sprint', 'desc')->get();
-
-        foreach ($jadwal as $format_jadwal) {
-            $format_jadwal->start_date = Carbon::parse($format_jadwal->start_date);
-            $format_jadwal->end_date = Carbon::parse($format_jadwal->end_date);
-            $format_jadwal->tgl_sprint = Carbon::parse($format_jadwal->tgl_sprint);
-        }
-
-        return view('penawaran.index', [
-            'title' => 'Transaksi',
-            'active' => 'active',
-            'data_jadwal' => $jadwal
-        ]);
-    }
-    
     public function show($id)
     {
         $jadwal = Jadwal::find($id);
@@ -139,21 +122,4 @@ class PenawaranController extends Controller
         return back()->with('message', 'Berhasil konfirmasi wanprestasi.');
     }
 
-    
-    public function edit($id)
-    {
-        //
-    }
-
-    
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    
-    public function destroy($id)
-    {
-        //
-    }
 }

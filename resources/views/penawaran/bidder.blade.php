@@ -16,10 +16,10 @@
               <div class="page-header float-right">
                   <div class="page-title">
                       <ol class="breadcrumb text-right">
-                          <li><a href="/dashboard">Dashboard</a></li>
-                          <li><a href="/penawaran">Penawaran</a></li>
-                          <li><a href="/penawaran/{{ $jadwal->id }}">{{ $jadwal->no_sprint }}</a></li>
-                          <li class="active">Detail Penawaran</li>
+                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="/transaksi">Transaksi</a></li>
+                        <li><a href="/penawaran/{{ $jadwal->id }}">Penawaran</a></li>
+                        <li class="active">Detail Penawaran</li>
                       </ol>
                   </div>
               </div>

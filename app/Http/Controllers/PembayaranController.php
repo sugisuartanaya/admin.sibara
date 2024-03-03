@@ -2,29 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-use App\Models\Jadwal;
-use App\Models\Penawaran;
 use App\Models\Transaksi;
+use App\Models\Barang_rampasan;
 use Illuminate\Http\Request;
 
-class CheckPaymentController extends Controller
+class PembayaranController extends Controller
 {
-    public function index(){
-        $jadwal = Jadwal::orderBy('tgl_sprint', 'desc')->get();
-
-        foreach ($jadwal as $format_jadwal) {
-            $format_jadwal->start_date = Carbon::parse($format_jadwal->start_date);
-            $format_jadwal->end_date = Carbon::parse($format_jadwal->end_date);
-            $format_jadwal->tgl_sprint = Carbon::parse($format_jadwal->tgl_sprint);
-        }
-        return view('pembayaran.index', [
-            'title' => 'Transaksi',
-            'active' => 'active',
-            'data_jadwal' => $jadwal
-        ]);
-    }
-
     public function show($id){
         $payment = Transaksi::join('penawarans', 'transaksis.id_penawaran', '=', 'penawarans.id')
             ->join('barang_rampasans', 'penawarans.id_barang', '=', 'barang_rampasans.id')
@@ -44,5 +27,34 @@ class CheckPaymentController extends Controller
             'active' => 'active',
             'payment' => $payment
         ]);
+    }
+
+    public function update($id)
+    {
+        $transaksi = Transaksi::find($id);
+        $transaksi->status = 'verified';
+        $transaksi->save();
+
+        $barangID = $transaksi->penawaran->barang_rampasan->id;
+        $barang = Barang_rampasan::find($barangID);
+        $barang->status = 1;
+        $barang->save();
+
+        return back()->with('message', 'Berhasil konfirmasi pembayaran.');
+    }
+
+    
+    public function updateSalah($id)
+    {
+        $transaksi = Transaksi::find($id);
+        $transaksi->status = 'data_salah';
+        $transaksi->save();
+
+        $barangID = $transaksi->penawaran->barang_rampasan->id;
+        $barang = Barang_rampasan::find($barangID);
+        $barang->status = 0;
+        $barang->save();
+
+        return back()->with('message', 'Berhasil konfirmasi data pembayaran salah.');
     }
 }

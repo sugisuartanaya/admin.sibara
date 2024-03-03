@@ -18,8 +18,8 @@
                   <div class="page-title">
                       <ol class="breadcrumb text-right">
                           <li><a href="/dashboard">Dashboard</a></li>
-                          <li><a href="/check-payment">Pembayaran</a></li>
-                          <li class="active"><a href="/penawaran"></a>Detail</li>
+                          <li><a href="/transaksi">Transaksi</a></li>
+                          <li class="active">Detail</li>
                       </ol>
                   </div>
               </div>
