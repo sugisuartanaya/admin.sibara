@@ -289,7 +289,7 @@
                     <form class="d-inline" action="/pembayaran/salah/{{ $transaksi->id }}" method="post">
                       @csrf
                       @method('PUT')
-                      <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#data_salah"><i class="menu-icon fa fa-trash-o"></i>
+                      <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#data_salah"><i class="menu-icon fa fa-times"></i>
                       </button>
                       <div class="modal" id="data_salah">
                         <div class="modal-dialog">

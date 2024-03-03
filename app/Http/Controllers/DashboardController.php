@@ -29,7 +29,7 @@ class DashboardController extends Controller
         
         if ($jadwal)
             $jumlah_harga_bid = Transaksi::join('penawarans', 'transaksis.id_penawaran', '=', 'penawarans.id')
-            ->where('penawarans.status', 'menang')
+            ->where('transaksis.status', 'verified')
             ->where('penawarans.id_jadwal', $jadwal->id)
             ->sum('penawarans.harga_bid');
         else
