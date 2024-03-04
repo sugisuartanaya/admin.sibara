@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PembeliController;
 use App\Http\Controllers\KategoriController;
@@ -93,4 +94,8 @@ Route::put('penawaran/{penawarID}', [PenawaranController::class, 'updateWanprest
 Route::get('pembayaran/{id}', [PembayaranController::class, 'show']);
 Route::put('pembayaran/verified/{id}', [PembayaranController::class, 'update']);
 Route::put('pembayaran/salah/{id}', [PembayaranController::class, 'updateSalah']);
+
+Route::get('report', [ReportController::class, 'index']);
+Route::get('report/{tahun}', [ReportController::class, 'filter']);
+Route::post('report/{tahun}/detail', [ReportController::class, 'filterByJadwal']);
 

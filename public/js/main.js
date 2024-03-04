@@ -209,6 +209,33 @@ jQuery(document).ready(function($) {
 			});
 	});
 
+	$(document).ready(function() {
+		$('#tahun').change(function() {
+			var selectedValue = $(this).val();
+			var newUrl = "/report/" + selectedValue;
+			$('#terapkanLink').attr('href', newUrl);
+		});
+	});
+
+	$(document).ready(function() {
+		$('#tahun').change(function() {
+				$('#terapkanButton').prop('disabled', false); // Menghapus atribut disabled saat memilih tahun
+		});
+	});
+
+	$(document).ready(function() {
+		var reportForm = $('#reportForm');
+		var jadwalSelect = $('#jadwal');
+
+		jadwalSelect.change(function() {
+				var selectedJadwalId = $(this).val();
+				var selectedOption = $(this).find('option:selected');
+				var selectedTahun = selectedOption.data('tahun');
+				var actionUrl = "/report/" + selectedTahun + "/" + selectedJadwalId + "/detail";
+				reportForm.attr('action', actionUrl);
+		});
+	});
+
 	
 });
 

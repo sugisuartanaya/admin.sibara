@@ -51,8 +51,8 @@
             <li class="{{ ($title === "Transaksi") ? 'active' : '' }}">
               <a href="/transaksi"><i class="menu-icon fa fa-shopping-cart"></i>Transaksi</a>
             </li>
-            <li {{ ($title === "Laporan Penjualan") ? 'active' : '' }}>
-              <a href=""><i class="menu-icon fa fa-table"></i>Laporan Penjualan</a>
+            <li class="{{ ($title === "Laporan") ? 'active' : '' }}">
+              <a href="/report"><i class="menu-icon fa fa-table"></i>Laporan Penjualan</a>
             </li>
           </ul>
         </div><!-- /.navbar-collapse -->
