@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Transaksi;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IzinController;
 use App\Http\Controllers\UserController;
@@ -11,13 +10,13 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PembeliController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\PrintPdfController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PenawaranController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\HargaWajarController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\VerifikasiController;
-use App\Http\Controllers\CheckPaymentController;
 use App\Http\Controllers\DaftarBarangController;
 use App\Http\Controllers\BarangRampasanController;
 
@@ -98,4 +97,6 @@ Route::put('pembayaran/salah/{id}', [PembayaranController::class, 'updateSalah']
 Route::get('report', [ReportController::class, 'index']);
 Route::get('report/{tahun}', [ReportController::class, 'filter']);
 Route::post('report/{tahun}/detail', [ReportController::class, 'filterByJadwal']);
+
+Route::get('cetak-kwitansi/{id}', [PrintPdfController::class, 'cetak_kwitansi']);
 

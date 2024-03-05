@@ -18,6 +18,7 @@ class PembayaranController extends Controller
                     'barang_rampasans.id',
                     'barang_rampasans.no_putusan',
                     'jadwals.no_sprint', 
+                    'penawarans.id',
                     'penawarans.harga_bid')
             ->where('penawarans.id_jadwal', $id)
             ->get();
