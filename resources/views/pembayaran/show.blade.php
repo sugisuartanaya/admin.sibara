@@ -42,6 +42,7 @@
                   <thead>
                     <tr>
                       <th scope="col">No.</th>
+                      <th scope="col">Nama Pemenang</th>
                       <th scope="col">Tgl. Transaksi</th>
                       <th scope="col">Nama Barang</th>
                       <th scope="col">No. Putusan Pengadilan</th>
@@ -53,6 +54,7 @@
                     @foreach ($payment as $index => $pay )
                       <tr>
                         <td>{{ $index + 1 }}</td>
+                        <td>{{ $pay->nama_pembeli }}</td>
                         <td>{{ \Carbon\Carbon::parse($pay->tanggal)->format('d M Y \J\a\m\ H:i') }}</td>
                         <td>{{ $pay->nama_barang }}</td>
                         <td>{{ $pay->no_putusan }}</td>
