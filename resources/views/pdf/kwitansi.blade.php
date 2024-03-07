@@ -114,7 +114,7 @@
       </tr>
       <tr>
         <td>Terbilang</td>
-        <td>: *** {{ ucwords($terbilang) . " rupiah ***" }}</td>
+        <td>: *** {{ ucfirst($terbilang) . " rupiah ***" }}</td>
       </tr>
       <tr>
         <td>Untuk Pembayaran</td>

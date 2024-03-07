@@ -68,7 +68,7 @@
                           <td><span class="badge badge-success">Sukses</span></td>
                           <td>
                             <a href="/cetak-kwitansi/{{ $pay->id }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-original-title="Cetak Kwitansi"><i class="fa fa-file-text"></i></a>
-                            <a href="/cetak-bukti" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Cetak Bukti"><i class="menu-icon fa fa-print"></i></a>
+                            <a href="/cetak-bukti/{{ $pay->id }}" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Cetak Bukti"><i class="menu-icon fa fa-print"></i></a>
                           </td>
                         @endif
                       </tr>
