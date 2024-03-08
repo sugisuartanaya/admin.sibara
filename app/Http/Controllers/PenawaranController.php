@@ -46,7 +46,7 @@ class PenawaranController extends Controller
 
     public function detail($jadwalId, $barangId){
 
-        $jadwal = Jadwal::where('no_sprint', $jadwalId)->first();
+        $jadwal = Jadwal::find($jadwalId);
         $id_jadwal = $jadwal->id;
 
         $barang = Barang_rampasan::find($barangId);

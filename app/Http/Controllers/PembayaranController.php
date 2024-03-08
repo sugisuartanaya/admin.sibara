@@ -17,11 +17,11 @@ class PembayaranController extends Controller
             ->select('transaksis.status as transaksi_status', 
                     'transaksis.tanggal', 
                     'barang_rampasans.nama_barang',
-                    'barang_rampasans.id',
+                    'barang_rampasans.id as id_barang',
                     'barang_rampasans.no_putusan',
-                    'jadwals.no_sprint', 
+                    'jadwals.id as id_jadwal', 
                     'pembelis.nama_pembeli', 
-                    'penawarans.id',
+                    'penawarans.id as id_penawaran',
                     'penawarans.harga_bid')
             ->where('penawarans.id_jadwal', $id)
             ->get();

@@ -82,11 +82,11 @@
                             <p>Tidak Ada Foto</p>
                           @endif  
                         </td>
-                        <td style="vertical-align: middle;">{{ $barang->nama_barang }}</td>
+                        <td style="vertical-align: middle; width: 10%;">{{ $barang->nama_barang }}</td>
                         <td style="vertical-align: middle;">{{ $barang->kategori->nama_kategori }}</td>
                         <td style="vertical-align: middle;">{{ $barang->no_putusan }}</td>
                         @if ($barang->izin)
-                          <td style="vertical-align: middle;">{{ $barang->izin->no_sk }}</td>
+                          <td style="vertical-align: middle; width: 10%;">{{ $barang->izin->no_sk }}</td>
                         @else
                           <td style="vertical-align: middle;">-</td>
                         @endif
@@ -101,7 +101,7 @@
                           <td style="vertical-align: middle;">-</td>
                         @endif
                         
-                        <td style="vertical-align: middle;">
+                        <td style="vertical-align: middle; width: 5%;">
                           @if ($barang->status == '0')
                             Belum Terjual
                           @else

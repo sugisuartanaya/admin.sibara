@@ -53,22 +53,22 @@
                   <tbody>
                     @foreach ($payment as $index => $pay )
                       <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td>{{ $pay->nama_pembeli }}</td>
-                        <td>{{ \Carbon\Carbon::parse($pay->tanggal)->format('d M Y \J\a\m\ H:i') }}</td>
-                        <td>{{ $pay->nama_barang }}</td>
-                        <td>{{ $pay->no_putusan }}</td>
+                        <td style="vertical-align: middle;">{{ $index + 1 }}</td>
+                        <td style="vertical-align: middle;">{{ $pay->nama_pembeli }}</td>
+                        <td style="vertical-align: middle;">{{ \Carbon\Carbon::parse($pay->tanggal)->format('d M Y \J\a\m\ H:i') }}</td>
+                        <td style="vertical-align: middle; width: 25%;">{{ $pay->nama_barang }}</td>
+                        <td style="vertical-align: middle;">{{ $pay->no_putusan }}</td>
                         @if($pay->transaksi_status == 'review')
-                          <td><span class="badge badge-secondary">Menunggu Konfirmasi</span></td>
-                          <td><a href="/penawaran/{{ $pay->no_sprint }}/showbidder/{{ $pay->id }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-original-title="Cek Transaksi"><i class="menu-icon fa fa-eye"></i></a></td>
+                          <td style="vertical-align: middle;"><span class="badge badge-secondary">Menunggu Konfirmasi</span></td>
+                          <td style="vertical-align: middle;"><a href="/penawaran/{{ $pay->id_jadwal }}/showbidder/{{ $pay->id_barang }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-original-title="Cek Transaksi"><i class="menu-icon fa fa-eye"></i></a></td>
                         @elseif ($pay->transaksi_status == 'data_salah')
-                          <td><span class="badge badge-danger">Transaksi Salah</span></td>
-                          <td><a href="/penawaran/{{ $pay->no_sprint }}/showbidder/{{ $pay->id }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-original-title="Cek Transaksi"><i class="menu-icon fa fa-eye"></i></a></td>
+                          <td style="vertical-align: middle;"><span class="badge badge-danger">Transaksi Salah</span></td>
+                          <td style="vertical-align: middle;"><a href="/penawaran/{{ $pay->id_jadwal }}/showbidder/{{ $pay->id_barang }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-original-title="Cek Transaksi"><i class="menu-icon fa fa-eye"></i></a></td>
                         @else 
-                          <td><span class="badge badge-success">Sukses</span></td>
-                          <td>
-                            <a href="/cetak-kwitansi/{{ $pay->id }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-original-title="Cetak Kwitansi"><i class="fa fa-file-text"></i></a>
-                            <a href="/cetak-bukti/{{ $pay->id }}" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Cetak Bukti"><i class="menu-icon fa fa-print"></i></a>
+                          <td style="vertical-align: middle;"><span class="badge badge-success">Sukses</span></td>
+                          <td style="vertical-align: middle;">
+                            <a href="/cetak-kwitansi/{{ $pay->id_penawaran }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-original-title="Cetak Kwitansi"><i class="fa fa-file-text"></i></a>
+                            <a href="/cetak-bukti/{{ $pay->id_penawaran }}" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Cetak Bukti"><i class="menu-icon fa fa-print"></i></a>
                           </td>
                         @endif
                       </tr>

@@ -57,7 +57,7 @@
                         Rp. {{ number_format($penawaran[$barang->id][0]->harga_bid, 0, ',', '.') }}
                       </td>
                       <td class="text-center align-middle">
-                        <a href="/penawaran/{{ $jadwal->no_sprint }}/showbidder/{{ $barang->id }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-original-title="Cek Tawaran"><i class="menu-icon fa fa-eye"></i></a>
+                        <a href="/penawaran/{{ $jadwal->id }}/showbidder/{{ $barang->id }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-original-title="Cek Tawaran"><i class="menu-icon fa fa-eye"></i></a>
                       </td>
                     @else
                       <td style="vertical-align: middle;">-</td>
