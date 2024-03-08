@@ -63,31 +63,31 @@
                 <table id="tabel" class="table table-striped table-bordered datatable">
                   <thead>
                     <tr>
-                      <th scope="col">No.</th>
-                      <th scope="col">No Surat Perintah</th>
-                      <th scope="col">Tgl Surat Perintah</th>
-                      <th scope="col">Tanggal Dimulai</th>
-                      <th scope="col">Tanggal Berakhir</th>
-                      <th scope="col">Waktu</th>
-                      <th scope="col">Tipe Penawaran</th>
-                      <th scope="col">Aksi</th>
+                      <th style="vertical-align: middle;">No.</th>
+                      <th style="vertical-align: middle;">No Surat Perintah</th>
+                      <th style="vertical-align: middle;">Tgl Surat Perintah</th>
+                      <th style="vertical-align: middle;">Tanggal Dimulai</th>
+                      <th style="vertical-align: middle;">Tanggal Berakhir</th>
+                      <th style="vertical-align: middle;">Waktu</th>
+                      <th style="vertical-align: middle;">Tipe Penawaran</th>
+                      <th style="vertical-align: middle;">Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
                     @foreach ($data_jadwal as $index => $jadwal)
                       <tr>
                         <td style="vertical-align: middle;">{{ $index + 1 }}</td>
-                        <td style="vertical-align: middle;">{{ $jadwal->no_sprint }}</td>
+                        <td style="vertical-align: middle; ">{{ $jadwal->no_sprint }}</td>
                         <td style="vertical-align: middle;">{{ $jadwal->tgl_sprint->format('j F Y') }}</td>
-                        <td style="vertical-align: middle;">{{ $jadwal->start_date->format('j F Y') }}</td>
-                        <td style="vertical-align: middle;">{{ $jadwal->end_date->format('j F Y') }}</td>
-                        <td style="vertical-align: middle;">
+                        <td style="vertical-align: middle; width: 10%;">{{ $jadwal->start_date->format('j F Y') }}</td>
+                        <td style="vertical-align: middle; width: 10%;">{{ $jadwal->end_date->format('j F Y') }}</td>
+                        <td style="vertical-align: middle; width: 10%;">
                           {{ $jadwal->start_date->format('H:i') }} - {{ $jadwal->end_date->format('H:i') }} WITA
                         </td>
                         @if ($jadwal->type == 'open')
-                          <td style="vertical-align: middle;">Open Bidding</td>
+                          <td style="vertical-align: middle; width: 10%;">Open Bidding</td>
                         @else
-                          <td style="vertical-align: middle;">Closed Bidding</td>
+                          <td style="vertical-align: middle; width: 10%;">Closed Bidding</td>
                         @endif
                         
                         <td style="vertical-align: middle;">
