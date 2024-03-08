@@ -118,7 +118,7 @@
       </tr>
       <tr>
         <td>Untuk Pembayaran</td>
-        <td>: Penjualan langsung barang rampasan berupa terlampir:</td>
+        <td>: Penjualan langsung barang rampasan berupa sesuai dengan terlampir:</td>
       </tr>
     </table>
     <h4></h4>

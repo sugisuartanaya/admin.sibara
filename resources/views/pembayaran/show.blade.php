@@ -96,7 +96,7 @@
                       <td>{{ $p->first()->pembeli->nama_pembeli }}</td>
                       <td>
                         <a href="/batch-kwitansi/{{ $p->first()->id_pembeli }}/{{ $p->first()->id_jadwal }}" class="btn btn-primary btn-sm"><i class="fa fa-file-text"></i> Kwitansi</a>
-                        <button class="btn btn-sm btn-warning"><i class="fa fa-print"></i> Bukti</button>
+                        <a href="/batch-bukti/{{ $p->first()->id_pembeli }}/{{ $p->first()->id_jadwal }}" class="btn btn-warning btn-sm"><i class="fa fa-print"></i> Bukti</a>
                       </td>
                     </tr>
                   @endforeach

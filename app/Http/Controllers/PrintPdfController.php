@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Izin;
+use App\Models\Jadwal;
 use App\Models\Pegawai;
 use App\Models\Pembeli;
 use App\Models\Penawaran;
 use App\Models\Transaksi;
-use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class PrintPdfController extends Controller
@@ -114,8 +114,10 @@ class PrintPdfController extends Controller
         $month = strtolower($month);
         $year = strtolower(substr($year, 0, 1)) . substr($year, 1);
 
-        $tgl_sk = Izin::where('id_barang', $penawaran->id_barang)->first();
-        $tgl_sk = Carbon::parse($today)->translatedFormat('j F Y');
+        $id_jadwal = $penawaran->id_jadwal;
+        $jadwal = Jadwal::find($id_jadwal);
+        $tgl_sprint = $jadwal->tgl_sprint;
+        $tgl_sprint = Carbon::parse($tgl_sprint)->translatedFormat('j F Y');
 
         $petugas = Pegawai::where('jabatan', 'petugas')
                             ->where('is_admin', 0)
@@ -129,7 +131,54 @@ class PrintPdfController extends Controller
             'day' => $day,
             'month' => $month,
             'year' => $year,
-            'tgl_sk' => $tgl_sk,
+            'tgl_sprint' => $tgl_sprint,
+            'pembeli' => $pembeli,
+            'petugas' => $petugas,
+            'kasi' => $kasi
+        ]);
+
+        return $pdf->download('BA ' . $pembeli->nama_pembeli . '.pdf');
+    }
+
+    public function batch_bukti($pembeliID, $jadwalID){
+        $penawaran = Transaksi::where('id_jadwal', $jadwalID)
+                            ->where('id_pembeli', $pembeliID)
+                            ->where('status', 'verified')
+                            ->with('penawaran')
+                            ->get();
+
+        $pembeli = Pembeli::find($pembeliID);
+
+        $totalHargaBid = $penawaran->sum(function ($transaksi) {
+            return $transaksi->penawaran->harga_bid;
+        });
+        $terbilang = $this->terbilang($totalHargaBid);
+
+        $today = Carbon::now();
+        $day = $this->terbilang($today->format('j'));
+        $month = $today->translatedFormat('F');
+        $year = $this->terbilang($today->format('Y'));
+        $month = strtolower($month);
+        $year = strtolower(substr($year, 0, 1)) . substr($year, 1);
+
+        $jadwal = Jadwal::find($jadwalID);
+        $tgl_sprint = $jadwal->tgl_sprint;
+        $tgl_sprint = Carbon::parse($tgl_sprint)->translatedFormat('j F Y');
+
+        $petugas = Pegawai::where('jabatan', 'petugas')
+                            ->where('is_admin', 0)
+                            ->get();
+        $kasi = Pegawai::where('jabatan', 'kasi')
+                            ->first();
+
+        $pdf = PDF::loadView('pdf.batchBukti', 
+            ['penawaran' => $penawaran, 
+            'terbilang' =>$terbilang, 
+            'day' => $day,
+            'month' => $month,
+            'year' => $year,
+            'jadwal' => $jadwal,
+            'tgl_sprint' => $tgl_sprint,
             'pembeli' => $pembeli,
             'petugas' => $petugas,
             'kasi' => $kasi

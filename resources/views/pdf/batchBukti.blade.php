@@ -149,11 +149,7 @@
       </div>
     @endforeach
     <br>
-    <p style="text-align: justify;">Dilakukan penjualan langsung, dan telah menyerahkan Barang Rampasan berdasarkan Surat Perintah Penjualan Langsung Barang Rampasan Negara Nomor: {{ $penawaran->jadwal->no_sprint }} tanggal {{ $tgl_sprint }} berupa :</p>
-
-    <ul style="list-style-position: inside;">
-      <li class="indent" style="text-indent: -20px;"><em>{{ $penawaran->barang_rampasan->nama_barang }}</em></li>
-    </ul>
+    <p style="text-align: justify;">Dilakukan penjualan langsung, dan telah menyerahkan Barang Rampasan berdasarkan Surat Perintah Penjualan Langsung Barang Rampasan Negara Nomor: {{ $jadwal->no_sprint }} tanggal {{ $tgl_sprint }} berupa sesuai dengan terlampir.</p>
 
     <p class="mb-0">kepada Pembeli:</p>
 
@@ -179,7 +175,7 @@
       <div class="left-signature" >
           <p>Yang menerima,</p>
           <br><br><br><br>
-          <p style="text-decoration: underline">{{ $penawaran->pembeli->nama_pembeli }}</p>
+          <p style="text-decoration: underline">{{ $pembeli->nama_pembeli }}</p>
       </div>
       <div class="right-signature">
           <p style="margin-bottom:1px">Yang menyerahkan</p>
