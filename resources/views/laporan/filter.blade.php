@@ -115,7 +115,7 @@
               <strong class="card-title mb-0">Data Transaksi Tahun {{ $data_tahun }}</strong>
             @else
               <strong class="card-title mb-0">Data Transaksi No. Sprint Jadwal: {{ $header->no_sprint }}</strong>
-              <a href="#"><button class="btn btn-success ml-auto"><i class="fa fa-print" style="margin-right: 10px"></i>Cetak</button></a>
+              <a href="/cetak-report/{{ $header->id }}"><button class="btn btn-success ml-auto"><i class="fa fa-print" style="margin-right: 10px"></i>Cetak</button></a>
             @endif
           </div>
           <div class="card-body">

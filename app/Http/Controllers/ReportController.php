@@ -74,7 +74,7 @@ class ReportController extends Controller
             ->where('jadwals.id', $request->jadwal)
             ->where('transaksis.status', 'verified')
             ->get();
-        
+       
         $total_pendapatan = $transaksi->sum('harga_bid');
         
         foreach ($transaksi as $format_transaksi) {

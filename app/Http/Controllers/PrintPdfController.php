@@ -87,6 +87,7 @@ class PrintPdfController extends Controller
 
         $petugas = Pegawai::where('jabatan', 'petugas')
                             ->where('is_admin', 0)
+                            ->limit(2)
                             ->first();
         $kasi = Pegawai::where('jabatan', 'kasi')
                             ->first();
@@ -122,6 +123,7 @@ class PrintPdfController extends Controller
 
         $petugas = Pegawai::where('jabatan', 'petugas')
                             ->where('is_admin', 0)
+                            ->limit(2)
                             ->get();
         $kasi = Pegawai::where('jabatan', 'kasi')
                             ->first();
@@ -168,6 +170,7 @@ class PrintPdfController extends Controller
 
         $petugas = Pegawai::where('jabatan', 'petugas')
                             ->where('is_admin', 0)
+                            ->limit(2)
                             ->get();
         $kasi = Pegawai::where('jabatan', 'kasi')
                             ->first();
@@ -208,5 +211,76 @@ class PrintPdfController extends Controller
         return response()->download($pdfFileName)->deleteFileAfterSend();
     }
 
+    public function cetak_report($id){
+        $penawaran = Transaksi::where('id_jadwal', $id)
+                            ->where('status', 'verified')
+                            ->with('penawaran')
+                            ->get();
+
+        $totalHargaBid = $penawaran->sum(function ($transaksi) {
+            return $transaksi->penawaran->harga_bid;
+        });
+        $terbilang = $this->terbilang($totalHargaBid);
+
+        $today = Carbon::now();
+        $day = $this->terbilang($today->format('j'));
+        $month = $today->translatedFormat('F');
+        $year = $this->terbilang($today->format('Y'));
+        $month = strtolower($month);
+        $year = strtolower(substr($year, 0, 1)) . substr($year, 1);
+
+        $jadwal = Jadwal::find($id);
+        $tgl_sprint = $jadwal->tgl_sprint;
+        $start_date = $jadwal->start_date;
+        $tgl_sprint = Carbon::parse($tgl_sprint)->translatedFormat('j F Y');
+        $start_date = Carbon::parse($start_date)->translatedFormat('j F Y');
+
+        $petugas = Pegawai::where('jabatan', 'petugas')
+                            ->where('is_admin', 0)
+                            ->limit(2)
+                            ->get();
+        $bendahara = Pegawai::where('jabatan', 'bendahara')
+                            ->where('is_admin', 0)
+                            ->get();
+        $kasi = Pegawai::where('jabatan', 'kasi')
+                            ->first();
+
+        // Buat PDF dengan halaman potret
+        $pdfPortrait = PDF::loadView('pdf.report', [
+            'penawaran' => $penawaran, 
+            'totalHargaBid' =>$totalHargaBid, 
+            'terbilang' =>$terbilang, 
+            'day' => $day,
+            'month' => $month,
+            'year' => $year,
+            'jadwal' => $jadwal,
+            'tgl_sprint' => $tgl_sprint,
+            'start_date' => $start_date,
+            'petugas' => $petugas,
+            'bendahara' => $bendahara,
+            'kasi' => $kasi
+        ]);
+        $pdfPortrait->setPaper('A4', 'portrait'); // Atur orientasi halaman potret
+
+        // Buat PDF dengan halaman lanskap
+        $pdfLandscape = PDF::loadView('pdf.reportLandscape', [
+            'penawaran' => $penawaran, 
+            'totalHargaBid' => $totalHargaBid, 
+            'kasi' => $kasi
+        ]);
+        $pdfLandscape->setPaper('A4', 'landscape'); // Atur orientasi halaman lanskap
+
+        // Menggabungkan dua objek PDF
+        $merger = new Merger;
+        $merger->addRaw($pdfPortrait->output());
+        $merger->addRaw($pdfLandscape->output());
+
+        // Simpan konten PDF ke dalam file
+        $pdfFileName = 'BA_Penyerahan.pdf';
+        file_put_contents($pdfFileName, $merger->merge());
+
+        // Unduh file
+        return response()->download($pdfFileName)->deleteFileAfterSend();
+    }
 
 }

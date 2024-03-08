@@ -75,31 +75,33 @@ Route::get('/jadwal/detail/create/{id}', [DaftarBarangController::class, 'create
 Route::post('/jadwal/detail/create', [DaftarBarangController::class, 'store'])->middleware('auth');
 Route::delete('daftar-barang/{id}', [DaftarBarangController::class, 'destroy'])->middleware('auth');
 
-Route::get('pembeli', [PembeliController::class, 'index']);
-Route::delete('deletepembeli/{id}', [PembeliController::class, 'destroy']);
+Route::get('pembeli', [PembeliController::class, 'index'])->middleware('auth');;
+Route::delete('deletepembeli/{id}', [PembeliController::class, 'destroy'])->middleware('auth');
 
-Route::get('pembeli/verifikasi/{username}', [VerifikasiController::class, 'show']);
-Route::put('pembeli/verifikasi/{id}/', [VerifikasiController::class, 'update']);
-Route::put('pembeli/verified/{id}/', [VerifikasiController::class, 'verified']);
+Route::get('pembeli/verifikasi/{username}', [VerifikasiController::class, 'show'])->middleware('auth');;
+Route::put('pembeli/verifikasi/{id}/', [VerifikasiController::class, 'update'])->middleware('auth');;
+Route::put('pembeli/verified/{id}/', [VerifikasiController::class, 'verified'])->middleware('auth');;
 
 
-Route::get('transaksi', [TransaksiController::class, 'index']);
+Route::get('transaksi', [TransaksiController::class, 'index'])->middleware('auth');;
 
-Route::get('penawaran/{id}', [PenawaranController::class, 'show']);
-Route::get('penawaran/{jadwalId}/showbidder/{barangId}', [PenawaranController::class, 'detail'])->name('detailPenawaran');
-Route::put('penawaran/{jadwalId}/{barangId}/{penawarID}', [PenawaranController::class, 'updateWinner']);
-Route::put('penawaran/{penawarID}', [PenawaranController::class, 'updateWanprestasi']);
+Route::get('penawaran/{id}', [PenawaranController::class, 'show'])->middleware('auth');;
+Route::get('penawaran/{jadwalId}/showbidder/{barangId}', [PenawaranController::class, 'detail'])->name('detailPenawaran')->middleware('auth');;
+Route::put('penawaran/{jadwalId}/{barangId}/{penawarID}', [PenawaranController::class, 'updateWinner'])->middleware('auth');;
+Route::put('penawaran/{penawarID}', [PenawaranController::class, 'updateWanprestasi'])->middleware('auth');;
 
-Route::get('pembayaran/{id}', [PembayaranController::class, 'show']);
-Route::put('pembayaran/verified/{id}', [PembayaranController::class, 'update']);
-Route::put('pembayaran/salah/{id}', [PembayaranController::class, 'updateSalah']);
+Route::get('pembayaran/{id}', [PembayaranController::class, 'show'])->middleware('auth');;
+Route::put('pembayaran/verified/{id}', [PembayaranController::class, 'update'])->middleware('auth');;
+Route::put('pembayaran/salah/{id}', [PembayaranController::class, 'updateSalah'])->middleware('auth');;
 
-Route::get('report', [ReportController::class, 'index']);
-Route::get('report/{tahun}', [ReportController::class, 'filter']);
-Route::post('report/{tahun}/detail', [ReportController::class, 'filterByJadwal']);
+Route::get('report', [ReportController::class, 'index'])->middleware('auth');;
+Route::get('report/{tahun}', [ReportController::class, 'filter'])->middleware('auth');;
+Route::post('report/{tahun}/detail', [ReportController::class, 'filterByJadwal'])->middleware('auth');;
 
-Route::get('cetak-kwitansi/{id}', [PrintPdfController::class, 'cetak_kwitansi']);
-Route::get('cetak-bukti/{id}', [PrintPdfController::class, 'cetak_bukti']);
-Route::get('batch-kwitansi/{pembeliID}/{jadwalID}', [PrintPdfController::class, 'batch_kwitansi']);
-Route::get('batch-bukti/{pembeliID}/{jadwalID}', [PrintPdfController::class, 'batch_bukti']);
+Route::get('cetak-kwitansi/{id}', [PrintPdfController::class, 'cetak_kwitansi'])->middleware('auth');;
+Route::get('cetak-bukti/{id}', [PrintPdfController::class, 'cetak_bukti'])->middleware('auth');;
+Route::get('batch-kwitansi/{pembeliID}/{jadwalID}', [PrintPdfController::class, 'batch_kwitansi'])->middleware('auth');;
+Route::get('batch-bukti/{pembeliID}/{jadwalID}', [PrintPdfController::class, 'batch_bukti'])->middleware('auth');;
+
+Route::get('/cetak-report/{id}', [PrintPdfController::class, 'cetak_report'])->middleware('auth');;
 
