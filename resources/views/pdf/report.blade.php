@@ -179,26 +179,6 @@
           <p class="mt-0">{{ $petugas->last()->pangkat }} NIP. {{ $petugas->last()->nip }}</p>
       </div>
     </div>
-  
-
-    
-    {{-- <br><br><br><br><br>
-    <p>Saksi-saksi</p>
-    @foreach ($petugas as $index => $p)
-      <div class="mb-3">
-        <div style="float: left; width: 5px;">{{ $index + 1 }}.</div>
-        <div style="margin-left: 18px;">
-          <table class="mt-0">
-            <tr>
-              <td style="width: 65%;">{{ $p->nama_pegawai }}</td>
-              <td>........................</td>
-            </tr>
-            <tr>
-          </table>
-        </div>
-        <div style="clear: both;"></div>
-      </div>
-    @endforeach  --}}
   </body>
     
 </html>
