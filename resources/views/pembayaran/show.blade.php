@@ -80,30 +80,32 @@
           </div>
       </div>
 
-      {{-- <div class="col-12">
-        <div class="card">
-          <div class="card-header"><strong>Pembelian lebih dari 1 barang rampasan</strong></div>
-          <div class="card-body">
-            <table class="table table-striped table-bordered">
-              <thead>
-                <th>Nama Pemenang</th>
-                <th>Cetak</th>
-              </thead>
-              <tbody>
-                @foreach($batch as $index => $list)
-                  <tr>
-                    <td>{{ $list }}</td>
-                    <td>
-                      <button class="btn btn-sm btn-primary"><i class="fa fa-file-text"></i> Kwitansi</button>
-                      <button class="btn btn-sm btn-warning"><i class="fa fa-print"></i> Bukti</button>
-                    </td>
-                  </tr>
-                @endforeach
-              </tbody>
-            </table>
+      @if($pembeli)
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header"><strong>Pembelian lebih dari 1 barang rampasan</strong></div>
+            <div class="card-body">
+              <table class="table table-striped table-bordered">
+                <thead>
+                  <th>Nama Pemenang</th>
+                  <th>Cetak</th>
+                </thead>
+                <tbody>
+                  @foreach($pembeli as $index => $p)
+                    <tr>
+                      <td>{{ $p->nama_pembeli }}</td>
+                      <td>
+                        <button class="btn btn-sm btn-primary"><i class="fa fa-file-text"></i> Kwitansi</button>
+                        <button class="btn btn-sm btn-warning"><i class="fa fa-print"></i> Bukti</button>
+                      </td>
+                    </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
-      </div> --}}
+      @endif
       
     </div>
   </div>

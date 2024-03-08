@@ -21,11 +21,25 @@ class PembayaranController extends Controller
                             ->where('transaksis.id_jadwal', $id)
                             ->get();
         
+        $transaksi = Transaksi::where('id_jadwal', $id)
+                        ->where('status', 'verified')
+                        ->get();
+
+        $pembelis = $transaksi->groupBy('id_pembeli')->filter(function ($group) {
+            return $group->count() > 1;
+        })->keys()->toArray();
         
+        if (!empty($pembelis)) {
+            $pembeli = Pembeli::whereIn('id', $pembelis)->get();
+        } else {
+            $pembeli = null;
+        }
+                        
         return view('pembayaran.show', [
             'title' => 'Transaksi',
             'active' => 'active',
             'payment' => $payment,
+            'pembeli' => $pembeli
         ]);
     }
 
