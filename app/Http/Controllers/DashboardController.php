@@ -24,18 +24,20 @@ class DashboardController extends Controller
             $jadwal->start_date = Carbon::parse($jadwal->start_date);
             $jadwal->end_date = Carbon::parse($jadwal->end_date);
         }
-
-        $terjual = Barang_rampasan::where('status', 1)->count();
+        
+        $jumlah_harga_bid = null;
         
         if ($jadwal)
             $jumlah_harga_bid = Transaksi::join('penawarans', 'transaksis.id_penawaran', '=', 'penawarans.id')
-            ->where('transaksis.status', 'verified')
-            ->where('penawarans.id_jadwal', $jadwal->id)
-            ->sum('penawarans.harga_bid');
-        else
-            $jumlah_harga_bid = null;
-        
+                                        ->where('transaksis.status', 'verified')
+                                        ->where('penawarans.id_jadwal', $jadwal->id)
+                                        ->sum('penawarans.harga_bid');
 
+            $terjual = Transaksi::join('penawarans', 'transaksis.id_penawaran', '=', 'penawarans.id')
+                                ->where('transaksis.status', 'verified')
+                                ->where('penawarans.id_jadwal', $jadwal->id)
+                                ->count();
+            
         return view('dashboard.index',[
             'title' => 'Dashboard',
             'active' => 'active',
