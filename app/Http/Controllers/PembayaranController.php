@@ -29,17 +29,22 @@ class PembayaranController extends Controller
             return $group->count() > 1;
         })->keys()->toArray();
         
+        $pembeliTransaksi = [];
+
         if (!empty($pembelis)) {
-            $pembeli = Pembeli::whereIn('id', $pembelis)->get();
+            foreach ($pembelis as $pembeliId) {
+                $transaksiPembeli = Transaksi::where('id_pembeli', $pembeliId)->get();
+                $pembeliTransaksi[$pembeliId] = $transaksiPembeli;
+            }
         } else {
-            $pembeli = null;
+            $pembeliTransaksi = null;
         }
-                        
+
         return view('pembayaran.show', [
             'title' => 'Transaksi',
             'active' => 'active',
             'payment' => $payment,
-            'pembeli' => $pembeli
+            'pembeli' => $pembeliTransaksi
         ]);
     }
 

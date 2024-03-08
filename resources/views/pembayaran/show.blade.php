@@ -93,9 +93,9 @@
                 <tbody>
                   @foreach($pembeli as $index => $p)
                     <tr>
-                      <td>{{ $p->nama_pembeli }}</td>
+                      <td>{{ $p->first()->pembeli->nama_pembeli }}</td>
                       <td>
-                        <button class="btn btn-sm btn-primary"><i class="fa fa-file-text"></i> Kwitansi</button>
+                        <a href="/batch-kwitansi/{{ $p->first()->id_pembeli }}/{{ $p->first()->id_jadwal }}" class="btn btn-primary btn-sm"><i class="fa fa-file-text"></i> Kwitansi</a>
                         <button class="btn btn-sm btn-warning"><i class="fa fa-print"></i> Bukti</button>
                       </td>
                     </tr>

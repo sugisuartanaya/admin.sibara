@@ -100,4 +100,6 @@ Route::post('report/{tahun}/detail', [ReportController::class, 'filterByJadwal']
 
 Route::get('cetak-kwitansi/{id}', [PrintPdfController::class, 'cetak_kwitansi']);
 Route::get('cetak-bukti/{id}', [PrintPdfController::class, 'cetak_bukti']);
+Route::get('batch-kwitansi/{pembeliID}/{jadwalID}', [PrintPdfController::class, 'batch_kwitansi']);
+Route::get('batch-bukti/{id}', [PrintPdfController::class, 'batch_bukti']);
 
