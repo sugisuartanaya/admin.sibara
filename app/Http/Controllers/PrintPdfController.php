@@ -9,6 +9,7 @@ use App\Models\Pegawai;
 use App\Models\Pembeli;
 use App\Models\Penawaran;
 use App\Models\Transaksi;
+use iio\libmergepdf\Merger;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class PrintPdfController extends Controller
@@ -171,8 +172,9 @@ class PrintPdfController extends Controller
         $kasi = Pegawai::where('jabatan', 'kasi')
                             ->first();
 
-        $pdf = PDF::loadView('pdf.batchBukti', 
-            ['penawaran' => $penawaran, 
+        // Buat PDF dengan halaman potret
+        $pdfPortrait = PDF::loadView('pdf.batchBukti', [
+            'penawaran' => $penawaran, 
             'terbilang' =>$terbilang, 
             'day' => $day,
             'month' => $month,
@@ -183,8 +185,27 @@ class PrintPdfController extends Controller
             'petugas' => $petugas,
             'kasi' => $kasi
         ]);
+        $pdfPortrait->setPaper('A4', 'portrait'); // Atur orientasi halaman potret
 
-        return $pdf->download('BA ' . $pembeli->nama_pembeli . '.pdf');
+        // Buat PDF dengan halaman lanskap
+        $pdfLandscape = PDF::loadView('pdf.batchBuktiLandscape', [
+            'penawaran' => $penawaran, 
+            'totalHargaBid' => $totalHargaBid, 
+            'kasi' => $kasi
+        ]);
+        $pdfLandscape->setPaper('A4', 'landscape'); // Atur orientasi halaman lanskap
+
+        // Menggabungkan dua objek PDF
+        $merger = new Merger;
+        $merger->addRaw($pdfPortrait->output());
+        $merger->addRaw($pdfLandscape->output());
+
+        // Simpan konten PDF ke dalam file
+        $pdfFileName = 'BA_' . $pembeli->nama_pembeli . '.pdf';
+        file_put_contents($pdfFileName, $merger->merge());
+
+        // Unduh file
+        return response()->download($pdfFileName)->deleteFileAfterSend();
     }
 
 
