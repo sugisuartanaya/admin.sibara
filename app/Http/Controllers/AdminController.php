@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
-use App\Models\pegawai;
+use App\Models\Pegawai;
 
 class AdminController extends Controller
 {
@@ -40,10 +40,20 @@ class AdminController extends Controller
         // Simpan foto
         if ($request->hasFile('foto_pegawai')) {
             $image = $request->file('foto_pegawai');
-            $path = $image->storeAs('public/photos', time() . '.' . $image->getClientOriginalExtension());
+            $fileName = time() . '.' . $image->getClientOriginalExtension();
+
+            // Path untuk menyimpan gambar di dalam folder storage
+            $storagePath = $image->storeAs('public/photos/', $fileName);
+
+            // Path untuk menyimpan gambar di dalam folder public
+            $publicPath = public_path('storage/photos/' . $fileName);
+
             // Resize gambar sebelum disimpan
-            Image::make($image)->fit(150, 150)->save(storage_path('app/' . $path));
-            $url = Storage::url($path);
+            $resizedImage = Image::make($image)->fit(150, 150);
+            $resizedImage->save($publicPath); // Simpan gambar di folder public
+
+            // URL gambar yang akan disimpan di database
+            $url = asset('storage/photos/' . $fileName);
         }
 
         // Simpan data ke tabel 'pegawai' dengan user_id yang terkait
@@ -94,10 +104,20 @@ class AdminController extends Controller
 
         if ($request->hasFile('foto_pegawai')) {
             $image = $request->file('foto_pegawai');
-            $path = $image->storeAs('public/photos', time() . '.' . $image->getClientOriginalExtension());
+            $fileName = time() . '.' . $image->getClientOriginalExtension();
+
+            // Path untuk menyimpan gambar di dalam folder storage
+            $storagePath = $image->storeAs('public/photos/pegawai/', $fileName);
+
+            // Path untuk menyimpan gambar di dalam folder public
+            $publicPath = public_path('storage/photos/' . $fileName);
+
             // Resize gambar sebelum disimpan
-            Image::make($image)->fit(150, 150)->save(storage_path('app/' . $path));
-            $url = Storage::url($path);
+            $resizedImage = Image::make($image)->fit(150, 150);
+            $resizedImage->save($publicPath); // Simpan gambar di folder public
+
+            // URL gambar yang akan disimpan di database
+            $url = asset('storage/photos/' . $fileName);
             $pegawai->foto_pegawai = $url;
         }
 

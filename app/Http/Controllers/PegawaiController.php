@@ -99,11 +99,21 @@ class PegawaiController extends Controller
 
         if ($request->hasFile('foto_pegawai')) {
             $image = $request->file('foto_pegawai');
-            $path = $image->storeAs('public/photos', time() . '.' . $image->getClientOriginalExtension());
+            $fileName = time() . '.' . $image->getClientOriginalExtension();
+
+            // Path untuk menyimpan gambar di dalam folder storage
+            $storagePath = $image->storeAs('public/photos/pegawai/', $fileName);
+
+            // Path untuk menyimpan gambar di dalam folder public
+            $publicPath = public_path('storage/photos/' . $fileName);
+
             // Resize gambar sebelum disimpan
-            Image::make($image)->fit(150, 150)->save(storage_path('app/' . $path));
-            $url = Storage::url($path);
-            $pegawai->foto_pegawai = $url;  
+            $resizedImage = Image::make($image)->fit(150, 150);
+            $resizedImage->save($publicPath); // Simpan gambar di folder public
+
+            // URL gambar yang akan disimpan di database
+            $url = asset('storage/photos/' . $fileName);
+            $pegawai->foto_pegawai = $url; 
 
         }
 

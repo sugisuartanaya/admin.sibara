@@ -26,8 +26,9 @@ class DashboardController extends Controller
         }
         
         $jumlah_harga_bid = null;
+        $terjual = null;
         
-        if ($jadwal)
+        if ($jadwal) {
             $jumlah_harga_bid = Transaksi::join('penawarans', 'transaksis.id_penawaran', '=', 'penawarans.id')
                                         ->where('transaksis.status', 'verified')
                                         ->where('penawarans.id_jadwal', $jadwal->id)
@@ -37,6 +38,7 @@ class DashboardController extends Controller
                                 ->where('transaksis.status', 'verified')
                                 ->where('penawarans.id_jadwal', $jadwal->id)
                                 ->count();
+        }
             
         return view('dashboard.index',[
             'title' => 'Dashboard',
