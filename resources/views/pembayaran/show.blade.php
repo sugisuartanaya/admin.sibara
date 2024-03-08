@@ -54,14 +54,14 @@
                     @foreach ($payment as $index => $pay )
                       <tr>
                         <td style="vertical-align: middle;">{{ $index + 1 }}</td>
-                        <td style="vertical-align: middle;">{{ $pay->nama_pembeli }}</td>
+                        <td style="vertical-align: middle;">{{ $pay->pembeli->nama_pembeli }}</td>
                         <td style="vertical-align: middle;">{{ \Carbon\Carbon::parse($pay->tanggal)->format('d M Y \J\a\m\ H:i') }}</td>
                         <td style="vertical-align: middle; width: 25%;">{{ $pay->nama_barang }}</td>
                         <td style="vertical-align: middle;">{{ $pay->no_putusan }}</td>
-                        @if($pay->transaksi_status == 'review')
+                        @if($pay->status == 'review')
                           <td style="vertical-align: middle;"><span class="badge badge-secondary">Menunggu Konfirmasi</span></td>
                           <td style="vertical-align: middle;"><a href="/penawaran/{{ $pay->id_jadwal }}/showbidder/{{ $pay->id_barang }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-original-title="Cek Transaksi"><i class="menu-icon fa fa-eye"></i></a></td>
-                        @elseif ($pay->transaksi_status == 'data_salah')
+                        @elseif ($pay->status == 'data_salah')
                           <td style="vertical-align: middle;"><span class="badge badge-danger">Transaksi Salah</span></td>
                           <td style="vertical-align: middle;"><a href="/penawaran/{{ $pay->id_jadwal }}/showbidder/{{ $pay->id_barang }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-original-title="Cek Transaksi"><i class="menu-icon fa fa-eye"></i></a></td>
                         @else 
@@ -79,6 +79,32 @@
               
           </div>
       </div>
+
+      {{-- <div class="col-12">
+        <div class="card">
+          <div class="card-header"><strong>Pembelian lebih dari 1 barang rampasan</strong></div>
+          <div class="card-body">
+            <table class="table table-striped table-bordered">
+              <thead>
+                <th>Nama Pemenang</th>
+                <th>Cetak</th>
+              </thead>
+              <tbody>
+                @foreach($batch as $index => $list)
+                  <tr>
+                    <td>{{ $list }}</td>
+                    <td>
+                      <button class="btn btn-sm btn-primary"><i class="fa fa-file-text"></i> Kwitansi</button>
+                      <button class="btn btn-sm btn-warning"><i class="fa fa-print"></i> Bukti</button>
+                    </td>
+                  </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div> --}}
+      
     </div>
   </div>
 </div> 

@@ -2,34 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pembeli;
 use App\Models\Penawaran;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use App\Models\Barang_rampasan;
+use Illuminate\Support\Facades\DB;
 
 class PembayaranController extends Controller
 {
     public function show($id){
-        $payment = Transaksi::join('penawarans', 'transaksis.id_penawaran', '=', 'penawarans.id')
-            ->join('barang_rampasans', 'penawarans.id_barang', '=', 'barang_rampasans.id')
-            ->join('jadwals', 'penawarans.id_jadwal', '=', 'jadwals.id')
-            ->join('pembelis', 'penawarans.id_pembeli', '=', 'pembelis.id')
-            ->select('transaksis.status as transaksi_status', 
-                    'transaksis.tanggal', 
-                    'barang_rampasans.nama_barang',
-                    'barang_rampasans.id as id_barang',
-                    'barang_rampasans.no_putusan',
-                    'jadwals.id as id_jadwal', 
-                    'pembelis.nama_pembeli', 
-                    'penawarans.id as id_penawaran',
-                    'penawarans.harga_bid')
-            ->where('penawarans.id_jadwal', $id)
-            ->get();
+        $payment = Transaksi::select('transaksis.*', 
+                                     'barang_rampasans.id as id_barang', 
+                                     'barang_rampasans.nama_barang', 
+                                     'barang_rampasans.no_putusan')
+                            ->join('penawarans', 'transaksis.id_penawaran', '=', 'penawarans.id')
+                            ->join('barang_rampasans', 'penawarans.id_barang', '=', 'barang_rampasans.id')
+                            ->where('transaksis.id_jadwal', $id)
+                            ->get();
+        
         
         return view('pembayaran.show', [
             'title' => 'Transaksi',
             'active' => 'active',
-            'payment' => $payment
+            'payment' => $payment,
         ]);
     }
 
