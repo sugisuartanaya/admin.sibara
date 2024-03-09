@@ -106,7 +106,9 @@
                     </tr>
                     <tr>
                       <td scope="col">Tgl Putusan Pengadilan: </td>
-                      <td scope="col">{{ $data_barang->tgl_putusan->format('d F Y')}}</td>
+                      <td scope="col">
+                        {{ \Carbon\Carbon::parse($data_barang->tgl_putusan)->translatedFormat('d F Y') }}
+                      </td>
                     </tr>
                     @if ($data_barang->izin)
                       <tr>
@@ -115,7 +117,9 @@
                       </tr>           
                       <tr>
                         <td scope="col">Tgl Izin Penjualan: </td>
-                        <td scope="col">{{ \Carbon\Carbon::createFromFormat('Y-m-d', $data_barang->izin->tgl_sk)->format('d F Y') }}</td>
+                        <td scope="col">
+                          {{ \Carbon\Carbon::parse($data_barang->izin->tgl_sk)->translatedFormat('d F Y') }}
+                        </td>
                       </tr> 
                     @else
                       <tr>
@@ -162,7 +166,8 @@
                                 <td style="vertical-align: middle;">Rp. {{ number_format($harga->harga, 0, ',', '.') }}</td>
                                 <td style="vertical-align: middle;">{{ $harga->no_laporan_penilaian }}</td>
                                 <td style="vertical-align: middle;">
-                                  {{ \Carbon\Carbon::createFromFormat('Y-m-d', $harga->tgl_laporan_penilaian)->format('d F Y') }}</td>
+                                  {{ \Carbon\Carbon::parse($harga->tgl_laporan_penilaian)->translatedFormat('d F Y') }}
+                                </td>
                                 <td style="vertical-align: middle;">
                                   <a href="/harga-wajar/{{ $harga->id }}/edit" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Edit"><i class="menu-icon fa fa-pencil"></i></a>
                                   <form class="d-inline" action="/deleteHarga/{{ $harga->id }}" method="post">
@@ -223,7 +228,7 @@
                             @if ($data_barang->izin)
                               <td style="vertical-align: middle;">{{ $data_barang->izin->no_sk }}</td>
                               <td style="vertical-align: middle;">
-                                {{ \Carbon\Carbon::createFromFormat('Y-m-d', $data_barang->izin->tgl_sk)->format('d F Y') }}
+                                {{ \Carbon\Carbon::parse($data_barang->izin->tgl_sk)->translatedFormat('d F Y') }}
                               </td>
                               <td style="vertical-align: middle;">
                                 <a href="/izin/{{ $data_barang->izin->id }}/edit" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Edit"><i class="menu-icon fa fa-pencil"></i></a>
