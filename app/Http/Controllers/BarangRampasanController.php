@@ -79,25 +79,43 @@ class BarangRampasanController extends Controller
         // Simpan foto
         if ($request->hasFile('foto_thumbnail')) {
             $image = $request->file('foto_thumbnail');
-            $path = $image->storeAs('public/photos', time() . '.' . $image->getClientOriginalExtension());
+            $fileName = time() . '.' . $image->getClientOriginalExtension();
+
+            // Path untuk menyimpan gambar di dalam folder storage
+            $storagePath = $image->storeAs('public/photos/products/thumbnail/', $fileName);
+
+            // Path untuk menyimpan gambar di dalam folder public
+            $publicPath = public_path('photos/products/thumbnail/' . $fileName);
+
             // Resize gambar sebelum disimpan
-            Image::make($image)->fit(150, 150)->save(storage_path('app/' . $path));
-            $url_foto_thumbnail = Storage::url($path);
+            $resizedImage = Image::make($image)->fit(800, 600);
+            $resizedImage->save($publicPath); // Simpan gambar di folder public
+
+            // URL gambar yang akan disimpan di database
+            $url_foto_thumbnail = asset('photos/products/thumbnail/' . $fileName);
         }
 
         if ($request->hasFile('foto_barang')) {
             if (count($request->file('foto_barang')) <= 5) {
                 $foto_paths = [];
                 foreach ($request->file('foto_barang') as $image) {
-                $path = $image->storeAs('public/photos/products', uniqid() . '.' . $image->getClientOriginalExtension());
-                // Resize gambar sebelum disimpan
-                Image::make($image)->fit(800, 650)->save(storage_path('app/' . $path));
-                $url_foto_barang = Storage::url($path);
+                    $fileName = uniqid() . '.' . $image->getClientOriginalExtension();
 
-                $foto_paths[] = $url_foto_barang;
-            }
-            $url_foto_barang = json_encode($foto_paths);
-            $url_foto_barang = stripslashes($url_foto_barang);
+                    // Path untuk menyimpan gambar di dalam folder storage
+                    $storagePath = $image->storeAs('public/photos/products/', $fileName);
+        
+                    // Path untuk menyimpan gambar di dalam folder public
+                    $publicPath = public_path('photos/products/' . $fileName);
+        
+                    // Resize gambar sebelum disimpan
+                    $resizedImage = Image::make($image)->fit(800, 600);
+                    $resizedImage->save($publicPath); // Simpan gambar di folder public
+                    $url_foto_barang = asset('photos/products/' . $fileName);
+
+                    $foto_paths[] = $url_foto_barang;
+                }
+                $url_foto_barang = json_encode($foto_paths);
+                $url_foto_barang = stripslashes($url_foto_barang);
             } else{
                 Session::flash('error', 'Foto tidak boleh lebih dari 5 file');
 
@@ -190,10 +208,20 @@ class BarangRampasanController extends Controller
 
         if ($request->hasFile('foto_thumbnail')) {
             $image = $request->file('foto_thumbnail');
-            $path = $image->storeAs('public/photos', time() . '.' . $image->getClientOriginalExtension());
+            $fileName = time() . '.' . $image->getClientOriginalExtension();
+
+            // Path untuk menyimpan gambar di dalam folder storage
+            $storagePath = $image->storeAs('public/photos/products/thumbnail/', $fileName);
+
+            // Path untuk menyimpan gambar di dalam folder public
+            $publicPath = public_path('photos/products/thumbnail/' . $fileName);
+
             // Resize gambar sebelum disimpan
-            Image::make($image)->fit(800, 600)->save(storage_path('app/' . $path));
-            $url = Storage::url($path);
+            $resizedImage = Image::make($image)->fit(800, 600);
+            $resizedImage->save($publicPath); // Simpan gambar di folder public
+
+            // URL gambar yang akan disimpan di database
+            $url = asset('photos/products/thumbnail/' . $fileName);
             $barang->foto_thumbnail = $url;
         }
 
@@ -201,10 +229,18 @@ class BarangRampasanController extends Controller
             if (count($request->file('foto_barang')) <= 5){
                 $foto_paths = [];
                 foreach ($request->file('foto_barang') as $image) {
-                    $path = $image->storeAs('public/photos/products', uniqid() . '.' . $image->getClientOriginalExtension());
+                    $fileName = uniqid() . '.' . $image->getClientOriginalExtension();
+
+                    // Path untuk menyimpan gambar di dalam folder storage
+                    $storagePath = $image->storeAs('public/photos/products/', $fileName);
+        
+                    // Path untuk menyimpan gambar di dalam folder public
+                    $publicPath = public_path('photos/products/' . $fileName);
+        
                     // Resize gambar sebelum disimpan
-                    Image::make($image)->fit(800, 600)->save(storage_path('app/' . $path));
-                    $url_foto_barang = Storage::url($path);
+                    $resizedImage = Image::make($image)->fit(800, 600);
+                    $resizedImage->save($publicPath); // Simpan gambar di folder public
+                    $url_foto_barang = asset('photos/products/' . $fileName);
 
                     $foto_paths[] = $url_foto_barang;
                 }
