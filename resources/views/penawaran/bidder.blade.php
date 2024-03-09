@@ -101,7 +101,7 @@
                         </form>
                         &nbsp;&nbsp;
                         <div id="hide_whatsapp">
-                          <a href="https://wa.me/62{{ $penawarTertinggi->pembeli->no_telepon }}?text=Selamat!%0A%0AAnda%20berhasil%20memenangkan%20lelang%20pada%20website%20Sistem%20Informasi%20Penjualan%20Langsung%20Barang%20Rampasan%20Negara%20Kejaksaan%20Negeri%20Denpasar%20dengan%20item%20barang%3A%20%0A%0A{{ $penawarTertinggi->barang_rampasan->nama_barang }}%0A%0ASegera%20lakukan%20pembayaran%20dengan%20klik%20link%20berikut%20http%3A%2F%2Fsibara.test%2F%0AKami%20tunggu%20dalam%201x24%20jam.%20Jika%20tidak%20melakukan%20pembayaran%2C%20maka%20kami%20anggap%20Anda%20Wanprestasi.%0A%0ATerima%20kasih" class="btn btn-success" data-toggle="tooltip" data-original-title="Chat Pembeli"><i class="menu-icon fa fa-whatsapp"></i>&nbsp;Hubungi</a>
+                          <a href="https://wa.me/62{{ $penawarTertinggi->pembeli->no_telepon }}?text=Selamat!%0A%0AAnda%20berhasil%20memenangkan%20lelang%20pada%20website%20Sistem%20Informasi%20Penjualan%20Langsung%20Barang%20Rampasan%20Negara%20Kejaksaan%20Negeri%20Denpasar%20dengan%20item%20barang%3A%20%0A%0A{{ $penawarTertinggi->barang_rampasan->nama_barang }}%0A%0ASegera%20lakukan%20pembayaran%20dengan%20klik%20link%20berikut%20https%3A%2F%2Fsipbaran.com%2F%0AKami%20tunggu%20dalam%201x24%20jam.%20Jika%20tidak%20melakukan%20pembayaran%2C%20maka%20kami%20anggap%20Anda%20Wanprestasi.%0A%0ATerima%20kasih" class="btn btn-success" data-toggle="tooltip" data-original-title="Chat Pembeli"><i class="menu-icon fa fa-whatsapp"></i>&nbsp;Hubungi</a>
                         </div>
                       </div>
                     @endif
@@ -149,7 +149,7 @@
                       </form>
                       &nbsp;&nbsp;
                       <div id="hide_whatsapp">
-                        <a href="https://wa.me/62{{ $penawarTertinggi->pembeli->no_telepon }}?text=Selamat!%0A%0AAnda%20berhasil%20memenangkan%20lelang%20pada%20website%20Sistem%20Informasi%20Penjualan%20Langsung%20Barang%20Rampasan%20Negara%20Kejaksaan%20Negeri%20Denpasar%20dengan%20item%20barang%3A%20%0A%0A{{ $penawarTertinggi->barang_rampasan->nama_barang }}%0A%0ASegera%20lakukan%20pembayaran%20dengan%20klik%20link%20berikut%20http%3A%2F%2Fsibara.test%2F%0AKami%20tunggu%20dalam%201x24%20jam.%20Jika%20tidak%20melakukan%20pembayaran%2C%20maka%20kami%20anggap%20Anda%20Wanprestasi.%0A%0ATerima%20kasih" class="btn btn-success" data-toggle="tooltip" data-original-title="Chat Pembeli"><i class="menu-icon fa fa-whatsapp"></i>&nbsp;Hubungi</a>
+                        <a href="https://wa.me/62{{ $penawarTertinggi->pembeli->no_telepon }}?text=Selamat!%0A%0AAnda%20berhasil%20memenangkan%20lelang%20pada%20website%20Sistem%20Informasi%20Penjualan%20Langsung%20Barang%20Rampasan%20Negara%20Kejaksaan%20Negeri%20Denpasar%20dengan%20item%20barang%3A%20%0A%0A{{ $penawarTertinggi->barang_rampasan->nama_barang }}%0A%0ASegera%20lakukan%20pembayaran%20dengan%20klik%20link%20berikut%20https%3A%2F%2Fsipbaran.com%2F%0AKami%20tunggu%20dalam%201x24%20jam.%20Jika%20tidak%20melakukan%20pembayaran%2C%20maka%20kami%20anggap%20Anda%20Wanprestasi.%0A%0ATerima%20kasih" class="btn btn-success" data-toggle="tooltip" data-original-title="Chat Pembeli"><i class="menu-icon fa fa-whatsapp"></i>&nbsp;Hubungi</a>
                       </div>
                     </div>
                   @endif
@@ -272,7 +272,7 @@
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
                         <div class="modal-body">
-                          <img class="img-fluid" src="http://sibara.test/{{ $transaksi->foto_bukti }}" alt="Foto Pembeli" style="object-fit: contain; width: 100%; height: 100%;">
+                          <img class="img-fluid" src="{{ $transaksi->foto_bukti }}" alt="Foto Pembeli" style="object-fit: contain; width: 100%; height: 100%;">
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -316,9 +316,9 @@
           </table>
           @if(isset($transaksi))
             @if($transaksi->status == 'data_salah')
-              <a href="https://wa.me/62{{ $penawarTertinggi->pembeli->no_telepon }}?text=Maaf!%0ADengan%20hormat%2C%20kami%20memberitahukan%20bahwa%20pembayaran%20lelang%20untuk%20barang%20dengan%20nama%20{{ $penawarTertinggi->barang_rampasan->nama_barang }}%20belum%20berhasil%20kami%20konfirmasi.%0A%0ASilahkan%20mengunggah%20ulang%20bukti%20transfer%20pembayaran%20lelang%20melalui%20link%20berikut%3A%20http%3A%2F%2Fsibara.test%0A%0AKami%20sangat%20mengharapkan%20Anda%20dapat%20segera%20mengunggah%20bukti%20transfer%20pembayaran%20lelang%20guna%20menghindari%20kemungkinan%20dianggap%20sebagai%20wanprestasi.%0A%0ATerima%20kasih%20atas%20perhatian%20dan%20kerjasamanya." class="btn btn-success" data-toggle="tooltip" data-original-title="Chat Pembeli"><i class="menu-icon fa fa-whatsapp"></i>&nbsp;Hubungi</a>
+              <a href="https://wa.me/62{{ $penawarTertinggi->pembeli->no_telepon }}?text=Maaf!%0ADengan%20hormat%2C%20kami%20memberitahukan%20bahwa%20pembayaran%20lelang%20untuk%20barang%20dengan%20nama%20{{ $penawarTertinggi->barang_rampasan->nama_barang }}%20belum%20berhasil%20kami%20konfirmasi.%0A%0ASilahkan%20mengunggah%20ulang%20bukti%20transfer%20pembayaran%20lelang%20melalui%20link%20berikut%3A%20https%3A%2F%2Fsipbaran.com%0A%0AKami%20sangat%20mengharapkan%20Anda%20dapat%20segera%20mengunggah%20bukti%20transfer%20pembayaran%20lelang%20guna%20menghindari%20kemungkinan%20dianggap%20sebagai%20wanprestasi.%0A%0ATerima%20kasih%20atas%20perhatian%20dan%20kerjasamanya." class="btn btn-success" data-toggle="tooltip" data-original-title="Chat Pembeli"><i class="menu-icon fa fa-whatsapp"></i>&nbsp;Hubungi</a>
             @elseif($transaksi->status == 'verified')
-              <a href="https://wa.me/62{{ $penawarTertinggi->pembeli->no_telepon }}?text=Selamat!%0APembayaran%20lelang%20pada%20{{ $penawarTertinggi->barang_rampasan->nama_barang }}%20sudah%20berhasil%20terkonfirmasi%0A%0ASilahkan%20tunjukkan%20bukti%20pembayaran%20ini%20kepada%20admin%20barang%20bukti%20dan%20barang%20lelang%20dapat%20diambil%20di%20Kantor%20Kejaksaan%20Negeri%20Denpasar.%0A%0ABukti%20pembayaran%20dapat%20diunduh%20pada%20link%20berikut%20ini%3A%20http%3A%2F%2Fsibara.test%0A%0ATerima%20kasih!" class="btn btn-success" data-toggle="tooltip" data-original-title="Chat Pembeli"><i class="menu-icon fa fa-whatsapp"></i>&nbsp;Hubungi</a>
+              <a href="https://wa.me/62{{ $penawarTertinggi->pembeli->no_telepon }}?text=Selamat!%0APembayaran%20lelang%20pada%20{{ $penawarTertinggi->barang_rampasan->nama_barang }}%20sudah%20berhasil%20terkonfirmasi%0A%0ASilahkan%20tunjukkan%20bukti%20pembayaran%20ini%20kepada%20admin%20barang%20bukti%20dan%20barang%20lelang%20dapat%20diambil%20di%20Kantor%20Kejaksaan%20Negeri%20Denpasar.%0A%0ABukti%20pembayaran%20dapat%20diunduh%20pada%20link%20berikut%20ini%3A%20https%3A%2F%2Fsipbaran.com%0A%0ATerima%20kasih!" class="btn btn-success" data-toggle="tooltip" data-original-title="Chat Pembeli"><i class="menu-icon fa fa-whatsapp"></i>&nbsp;Hubungi</a>
             @else
               <button class="btn btn-success btn-md" disabled><i class="menu-icon fa fa-whatsapp"></i>&nbsp;Hubungi</button>
             @endif
