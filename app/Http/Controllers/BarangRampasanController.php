@@ -153,6 +153,7 @@ class BarangRampasanController extends Controller
         $harga = Harga_wajar::where('id_barang', $id)
             ->orderBy('tgl_laporan_penilaian', 'desc')    
             ->first();
+        $barang->tgl_putusan = Carbon::parse($barang->tgl_putusan);
 
         //cek apakah harga ada
         if ($harga){
