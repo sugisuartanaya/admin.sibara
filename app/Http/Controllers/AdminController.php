@@ -43,17 +43,17 @@ class AdminController extends Controller
             $fileName = time() . '.' . $image->getClientOriginalExtension();
 
             // Path untuk menyimpan gambar di dalam folder storage
-            $storagePath = $image->storeAs('public/photos/', $fileName);
+            $storagePath = $image->storeAs('public/photos/pegawai/', $fileName);
 
             // Path untuk menyimpan gambar di dalam folder public
-            $publicPath = public_path('storage/photos/' . $fileName);
+            $publicPath = public_path('photos/pegawai/' . $fileName);
 
             // Resize gambar sebelum disimpan
             $resizedImage = Image::make($image)->fit(150, 150);
             $resizedImage->save($publicPath); // Simpan gambar di folder public
 
             // URL gambar yang akan disimpan di database
-            $url = asset('storage/photos/' . $fileName);
+            $url = asset('photos/pegawai/' . $fileName);
         }
 
         // Simpan data ke tabel 'pegawai' dengan user_id yang terkait
@@ -110,15 +110,15 @@ class AdminController extends Controller
             $storagePath = $image->storeAs('public/photos/pegawai/', $fileName);
 
             // Path untuk menyimpan gambar di dalam folder public
-            $publicPath = public_path('storage/photos/' . $fileName);
+            $publicPath = public_path('photos/pegawai/' . $fileName);
 
             // Resize gambar sebelum disimpan
             $resizedImage = Image::make($image)->fit(150, 150);
             $resizedImage->save($publicPath); // Simpan gambar di folder public
 
             // URL gambar yang akan disimpan di database
-            $url = asset('storage/photos/' . $fileName);
-            $pegawai->foto_pegawai = $url;
+            $url = asset('photos/pegawai/' . $fileName);
+            $pegawai->foto_pegawai = $url; 
         }
 
         // Update data pada tabel pegawai
