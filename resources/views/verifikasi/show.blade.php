@@ -18,7 +18,7 @@
                       <ol class="breadcrumb text-right">
                           <li><a href="/dashboard">Dashboard</a></li>
                           <li><a href="/pembeli">Pembeli</a></li>
-                          <li class="active">Pembeli</li>
+                          <li class="active">Detail</li>
                       </ol>
                   </div>
               </div>
