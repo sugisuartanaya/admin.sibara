@@ -60,23 +60,66 @@
                 <table class="table table-borderless">
                   <tbody>
                     <tr>
-                      <td >Nama Pembeli: </td>
-                      <td >{{ $pembeli->nama_pembeli }}</td>
+                      <td >Username</td>
+                      <td >: {{ $pembeli->user->username }}</td>
                     </tr>
                     <tr>
-                      <td >Pekerjaan: </td>
-                      <td >{{ $pembeli->pekerjaan }}</td>
+                      <td >Email</td>
+                      <td >: {{ $pembeli->user->email }}</td>
                     </tr>
                     <tr>
-                      <td >No Telepon: </td>
-                      <td >+62{{ $pembeli->no_telepon }}</td>
+                      <td >Nama</td>
+                      <td >: {{ $pembeli->nama_pembeli }}</td>
                     </tr>
                     <tr>
-                      <td >Alamat: </td>
-                      <td >{{ $pembeli->alamat }}</td>
+                      <td >Pekerjaan</td>
+                      <td >: {{ $pembeli->pekerjaan }}</td>
+                    </tr>
+                    <tr>
+                      <td >No Telepon</td>
+                      <td >: +62{{ $pembeli->no_telepon }} 
+                        <button class="btn btn-sm btn-success btn-outline-success" data-toggle="modal" data-target="#telepon">
+                        <i class="menu-icon fa fa-pencil"></i> </button>
+                       
+                        {{-- Modal Edit Telepon  --}}
+                        <div class="modal fade" id="telepon" tabindex="-1">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title">Ubah No Telepon</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <form action="/pembeli/verifikasi-notelp/{{ $pembeli->id }}" method="post">
+                                  @csrf
+                                  @method('PUT')
+                                  <label class="form-label">Masukkan No. Telepon yang baru</label>
+                                  <div class="input-group">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text" id="basic-addon1">+62</span>
+                                    </div>
+                                    <input type="number" name="no_telepon" class="form-control" value="{{ $pembeli->no_telepon }}">
+                                  </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-sm btn-success">Simpan</button>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                      </td>
+                    </tr>
+                    <tr>
+                      <td >Alamat</td>
+                      <td >: {{ $pembeli->alamat }}</td>
                     </tr>
                   </tbody>
-                </table>  
+                </table>
               </div>
               <div class="col-md-6">
                 <table class="table table-borderless">

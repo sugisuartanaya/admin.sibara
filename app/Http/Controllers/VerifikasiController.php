@@ -62,8 +62,13 @@ class VerifikasiController extends Controller
     }
 
    
-    public function destroy($id)
+    public function updateTelp(Request $request, $id)
     {
-        //
+        $pembeli = Pembeli::find($id);
+        $pembeli->no_telepon = $request->no_telepon;
+        $pembeli->save();
+
+        Session::flash('success', 'Berhasil Update No. Telepon');
+        return back();
     }
 }

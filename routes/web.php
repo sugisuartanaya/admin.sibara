@@ -81,7 +81,7 @@ Route::delete('deletepembeli/{id}', [PembeliController::class, 'destroy'])->midd
 Route::get('pembeli/verifikasi/{username}', [VerifikasiController::class, 'show'])->middleware('auth');;
 Route::put('pembeli/verifikasi/{id}/', [VerifikasiController::class, 'update'])->middleware('auth');;
 Route::put('pembeli/verified/{id}/', [VerifikasiController::class, 'verified'])->middleware('auth');;
-
+Route::put('pembeli/verifikasi-notelp/{id}/', [VerifikasiController::class, 'updateTelp'])->middleware('auth');;
 
 Route::get('transaksi', [TransaksiController::class, 'index'])->middleware('auth');;
 
