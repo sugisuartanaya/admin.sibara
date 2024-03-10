@@ -84,6 +84,11 @@
                   <td>{{ auth()->user()->username }}</td>
                 </tr>
                 <tr>
+                  <td>Email</td>
+                  <td></td>
+                  <td>{{ auth()->user()->email }}</td>
+                </tr>
+                <tr>
                   <td>Nama</td>
                   <td></td>
                   <td>{{ auth()->user()->pegawai->nama_pegawai }}</td>
