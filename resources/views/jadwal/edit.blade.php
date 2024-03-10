@@ -62,9 +62,11 @@
               <div class="form-group">
                 <label for="type" class="form-control-label">Tipe Penawaran</label>
                 <div class="form-check">
-                  <input type="radio" id="radio1" name="type" value="open" class="form-check-input @error('type') is-invalid @enderror" {{ old('type', $jadwal->type) == 'open' ? 'checked' : '' }}> Open Bidding
+                  <input type="radio" id="radio1" name="type" value="open" class="form-check-input @error('type') is-invalid @enderror" {{ old('type', $jadwal->type) == 'open' ? 'checked' : '' }}> 
+                  <label for="radio1" class="form-check-label">Open Bidding</label>
                   <br>
-                  <input type="radio" id="radio2" name="type" value="close" class="form-check-input @error('type') is-invalid @enderror" {{ old('type', $jadwal->type) == 'close' ? 'checked' : '' }}> Close Bidding
+                  <input type="radio" id="radio2" name="type" value="close" class="form-check-input @error('type') is-invalid @enderror" {{ old('type', $jadwal->type) == 'close' ? 'checked' : '' }}> 
+                  <label for="radio2" class="form-check-label">Close Bidding</label>
                 </div>
               </div>
               

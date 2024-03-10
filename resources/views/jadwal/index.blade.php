@@ -78,9 +78,13 @@
                       <tr>
                         <td style="vertical-align: middle;">{{ $index + 1 }}</td>
                         <td style="vertical-align: middle; ">{{ $jadwal->no_sprint }}</td>
-                        <td style="vertical-align: middle;">{{ $jadwal->tgl_sprint->format('j F Y') }}</td>
-                        <td style="vertical-align: middle; width: 10%;">{{ $jadwal->start_date->format('j F Y') }}</td>
-                        <td style="vertical-align: middle; width: 10%;">{{ $jadwal->end_date->format('j F Y') }}</td>
+                        <td style="vertical-align: middle;">{{ \Carbon\Carbon::parse($jadwal->tgl_sprint)->translatedFormat('j F Y') }}</td>
+                        <td style="vertical-align: middle; width: 10%;">
+                          {{ \Carbon\Carbon::parse($jadwal->start_date)->translatedFormat('j F Y') }}
+                        </td>
+                        <td style="vertical-align: middle; width: 10%;">
+                          {{ \Carbon\Carbon::parse($jadwal->end_date)->translatedFormat('j F Y') }}  
+                        </td>
                         <td style="vertical-align: middle; width: 10%;">
                           {{ $jadwal->start_date->format('H:i') }} - {{ $jadwal->end_date->format('H:i') }} WITA
                         </td>

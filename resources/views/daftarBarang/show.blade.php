@@ -52,7 +52,7 @@
                     </tr>
                     <tr>
                       <td scope="col">Tgl. Surat Perintah Penjualan langsung: </td>
-                      <td scope="col">{{ $jadwal->tgl_sprint->format('j F Y') }}</td>
+                      <td scope="col">{{ \Carbon\Carbon::parse($jadwal->tgl_sprint)->translatedFormat('j F Y') }}</td>
                     </tr>
                     <tr>
                       <td scope="col">Tipe Penawaran: </td>
@@ -67,15 +67,15 @@
                     </td></tr>
                     <tr>
                       <td scope="col">Tgl Dimulai: </td>
-                      <td scope="col">{{ $jadwal->start_date->format('j F Y') }}</td>
+                      <td scope="col">{{ \Carbon\Carbon::parse($jadwal->start_date)->translatedFormat('j F Y') }}</td>
                     </tr>
                     <tr>
                       <td scope="col">Tgl Berakhir: </td>
-                      <td scope="col">{{ $jadwal->end_date->format('j F Y') }}</td>
+                      <td scope="col">{{ \Carbon\Carbon::parse($jadwal->end_date)->translatedFormat('j F Y') }}</td>
                     </tr>
                     <tr>
                       <td scope="col">Waktu: </td>
-                      <td scope="col">{{ $jadwal->start_date->format('H:i') }} - {{ $jadwal->end_date->format('H:i') }}</td>
+                      <td scope="col">{{ $jadwal->start_date->format('H:i') }} - {{ $jadwal->end_date->format('H:i') }} WITA</td>
                     </tr>
                 </table>
                 <br>
