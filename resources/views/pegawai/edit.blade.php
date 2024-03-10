@@ -35,7 +35,7 @@
             <strong>Edit Pegawai</strong>
           </div>
           <div class="card-body card-block">           
-            <form action="/updatepegawai/{{ $data_pegawai->nip }}" method="post" enctype="multipart/form-data">
+            <form action="/updatepegawai/{{ $data_pegawai->id }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -51,6 +51,15 @@
             <div class="form-group">
               <label for="password" class=" form-control-label">Password</label>
               <input type="password" id="password" name="password" class="form-control" style="font-style: italic" placeholder="biarkan kosong jika tidak ingin mengubah password">
+            </div>
+            <div class="form-group">
+              <label for="email" class=" form-control-label">Email</label>
+              <input type="text" id="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ $data_pegawai->user->email }}">
+              @error('email')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+              @enderror
             </div>
             
             <div class="form-group">

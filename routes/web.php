@@ -46,7 +46,7 @@ Route::put('updateUser/{id}', [UserController::class, 'updateUser'])->middleware
 
 Route::post('/admin/tambahPegawai', [AdminController::class, 'storePegawai'])->middleware('auth');
 Route::get('/editpegawai/{nip}/edit', [AdminController::class, 'editPegawai'])->middleware('auth');
-Route::put('/updatepegawai/{nip}', [AdminController::class, 'updatePegawai'])->middleware('auth');
+Route::put('/updatepegawai/{id}', [AdminController::class, 'updatePegawai'])->middleware('auth');
 Route::delete('/deletepegawai/{nip}', [AdminController::class, 'destroyPegawai'])->middleware('auth');
 
 Route::resource('kategori', KategoriController::class)->middleware('auth');

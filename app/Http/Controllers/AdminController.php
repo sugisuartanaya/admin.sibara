@@ -15,7 +15,8 @@ class AdminController extends Controller
     {
         // Validasi 
         $validatedData = $request->validate([
-            'username' => 'required',
+            'username' => 'required|unique:users',
+            'email' => 'required|unique:users',
             'password' => 'required|min:3',
             'role' => 'required',
             'nama_pegawai' => 'required',
@@ -33,6 +34,7 @@ class AdminController extends Controller
         // Simpan data ke tabel 'users'
         $user = User::create([
             'username' => $validatedData['username'],
+            'email' => $validatedData['email'],
             'password' => bcrypt($validatedData['password']),
             'role' => $validatedData['role'],
         ]);
@@ -84,9 +86,10 @@ class AdminController extends Controller
     public function updatePegawai(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'username' => 'required',
+            'username' => 'required|unique:users,username,' . $id,
+            'email' => 'required|unique:users,email,' . $id,
             'nama_pegawai' => 'required',
-            'nip' => 'required',
+            'nip' => 'required|unique:pegawais,nip,' . $id,
             'pangkat' => 'required',
             'jabatan' => 'required',
             'password' => 'nullable|min:3',
@@ -94,9 +97,10 @@ class AdminController extends Controller
         ]);
 
         // Update data pada tabel user
-        $pegawai = Pegawai::where('nip', $id)->first();
+        $pegawai = Pegawai::find($id);
         $user = User::find($pegawai->user_id);
         $user->username = $validatedData['username'];
+        $user->email = $validatedData['email'];
         if (!empty($validatedData['password'])) {
             $user->password = bcrypt($validatedData['password']);
         }

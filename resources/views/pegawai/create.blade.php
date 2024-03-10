@@ -58,6 +58,16 @@
                 @enderror
               </div>
               
+              <div class="form-group">
+                <label for="email" class=" form-control-label">Email</label>
+                <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}">
+                @error('email')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                @enderror
+              </div>
+              
               <input type="text" style="display:none;" id="role" name="role" class="form-control" value="1">
               {{-- <input type="text" style="display:none;" id="is_admin" name="is_admin" class="form-control" value="false"> --}}
               {{-- <input type="text" style="display:none;" id="user_id" name="user_id" class="form-control"> --}}
