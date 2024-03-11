@@ -26,26 +26,24 @@
   </style>
 </head>
 <body>
-	<div class="container">
+	
+  <div class="container">
     <div class="row">
       <div class="col-md-12 text-center">
-        <div class="row justify-content-center align-items-center py-5">
-          <div class="col-md-6">
-            <img src="{{ asset('images/403.png') }}" alt="">
-          </div>
-          <div class="col-md-6">
-            <h1 class="text-3xl font-medium">
-              <strong>Access Denied</strong>
-            </h1>
-            <p class="text-xl mt-4 mb-0">
-              The page you are trying to access has restricted access.
-            </p>
-            <p class="mt-0">Please refer to the system administrator.</p>
-            <a href="https://admin.sipbaran.com" class="btn btn-success">Back Home</a>
-          </div>
-        </div>
+        <img src="{{ asset('images/403.png') }}" alt="" style="max-width: 200px; display: block; margin: 0 auto;">
+      </div>
+      <div class="col-md-12 text-center">
+        <h1 class="text-3xl font-medium">
+          <strong>Access Denied</strong>
+        </h1>
+        <p class="text-xl mt-4 mb-0">
+          The page you are trying to access has restricted access.
+        </p>
+        <p class="mt-0">Please refer to the system administrator.</p>
+        <a href="https://admin.sipbaran.com" class="btn btn-success">Back Home</a>
       </div>
     </div>
   </div>
+
 </body>
 </html>
