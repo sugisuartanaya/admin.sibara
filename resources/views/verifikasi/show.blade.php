@@ -181,7 +181,11 @@
 
         @if($last_verify->status == "verified")
           <div class="alert alert-success" role="alert">
-            <strong class="text-success"><i class="fa fa-check"></i>&nbsp;Akun terverifikasi</strong>
+            <strong class="text-success"><i class="fa fa-info-circle"></i>&nbsp;&nbsp;Akun terverifikasi</strong>
+          </div>
+        @elseif($last_verify->status == "data_salah")
+          <div class="alert alert-danger" role="alert">
+            <strong><i class="fa fa-info-circle"></i>&nbsp;&nbsp;Verifikasi Data: Terdapat kesalahan pengisian data</strong>
           </div>
         @else
           <div class="card">
