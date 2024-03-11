@@ -18,8 +18,8 @@ class DashboardController extends Controller
     public function index()
     {
         $notif = DashboardController::notification();
-        $verifikasi = $notif['verifikasi'];
-        $transaksi = $notif['transaksi'];
+        $verifikasi_count = $notif['verifikasi_count'];
+        $transaksi_count = $notif['transaksi_count'];
         $sum = $notif['sum'];
 
         $barang = Barang_rampasan::all();
@@ -55,17 +55,17 @@ class DashboardController extends Controller
             'terjual' => $terjual,
             'pendapatan' => $jumlah_harga_bid,
             'sum' => $sum,
-            'transaksi' => $transaksi,
-            'verifikasi' => $verifikasi
+            'transaksi_count' => $transaksi_count,
+            'verifikasi_count' => $verifikasi_count
         ]);
     }
 
     public static function notification()
     {
-        $verifikasi = Verifikasi::where('status', 'belum_verified')->count();
-        $transaksi = Transaksi::where('status', 'review')->count();
-        $sum = $verifikasi + $transaksi;
+        $verifikasi_count = Verifikasi::where('status', 'belum_verified')->orWhere('status', 'revisi')->count();
+        $transaksi_count = Transaksi::where('status', 'review')->count();
+        $sum = $verifikasi_count + $transaksi_count;
 
-        return ['transaksi' => $transaksi, 'verifikasi' => $verifikasi, 'sum' => $sum];
+        return ['transaksi_count' => $transaksi_count, 'verifikasi_count' => $verifikasi_count, 'sum' => $sum];
     } 
 }

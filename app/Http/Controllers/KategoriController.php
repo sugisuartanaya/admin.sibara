@@ -16,8 +16,17 @@ class KategoriController extends Controller
      */
     public function index()
     {
+        $notif = DashboardController::notification();
+        $verifikasi_count = $notif['verifikasi_count'];
+        $transaksi_count = $notif['transaksi_count'];
+        $sum = $notif['sum'];
+
         $kategori = Kategori::all();
-        return view('kategori.index')->with('data_kategori', $kategori)
+        return view('kategori.index')
+        ->with('verifikasi_count', $verifikasi_count)
+        ->with('transaksi_count', $transaksi_count)
+        ->with('sum', $sum)
+        ->with('data_kategori', $kategori)
         ->with('active', 'active')
         ->with('title', 'Kategori');
     }
@@ -25,9 +34,17 @@ class KategoriController extends Controller
    
     public function create()
     {
+        $notif = DashboardController::notification();
+        $verifikasi_count = $notif['verifikasi_count'];
+        $transaksi_count = $notif['transaksi_count'];
+        $sum = $notif['sum'];
+
         return view('kategori.create', [
             'active' => 'active',
             'title' => 'Kategori',
+            'verifikasi_count' => $verifikasi_count,
+            'transaksi_count' => $transaksi_count,
+            'sum' => $sum,
         ]);
     }
 
@@ -57,8 +74,17 @@ class KategoriController extends Controller
     
     public function edit($id)
     {
+        $notif = DashboardController::notification();
+        $verifikasi_count = $notif['verifikasi_count'];
+        $transaksi_count = $notif['transaksi_count'];
+        $sum = $notif['sum'];
+
         $kategori = Kategori::where('nama_kategori', $id)->first();
-        return view('kategori.edit')->with('data_kategori', $kategori)
+        return view('kategori.edit')
+        ->with('verifikasi_count', $verifikasi_count)
+        ->with('transaksi_count', $transaksi_count)
+        ->with('sum', $sum)
+        ->with('data_kategori', $kategori)
         ->with('active', 'active')
         ->with('title', 'Kategori');  
     }

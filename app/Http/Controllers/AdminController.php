@@ -77,10 +77,18 @@ class AdminController extends Controller
 
     public function editPegawai($id)
     {
+        $notif = DashboardController::notification();
+        $verifikasi_count = $notif['verifikasi_count'];
+        $transaksi_count = $notif['transaksi_count'];
+        $sum = $notif['sum'];
+
         $pegawai = Pegawai::where('nip',$id)->first();
         return view('pegawai.edit')->with('data_pegawai', $pegawai)
         ->with('active', 'active')
-        ->with('title', 'Pegawai');        
+        ->with('title', 'Pegawai')       
+        ->with('verifikasi_count', $verifikasi_count)        
+        ->with('transaksi_count', $transaksi_count)    
+        ->with('sum', $sum);        
     }
 
     public function updatePegawai(Request $request, $id)

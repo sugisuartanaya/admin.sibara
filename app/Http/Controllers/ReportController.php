@@ -10,14 +10,27 @@ use Illuminate\Http\Request;
 class ReportController extends Controller
 {
     public function index(){
+        $notif = DashboardController::notification();
+        $verifikasi_count = $notif['verifikasi_count'];
+        $transaksi_count = $notif['transaksi_count'];
+        $sum = $notif['sum'];
+
         return view('laporan.index',[
             'title' => 'Laporan',
             'active' => 'active',
+            'verifikasi_count' => $verifikasi_count,
+            'transaksi_count' => $transaksi_count,
+            'sum' => $sum,
             'report' => null
         ]);
     }
 
     public function filter($tahun){
+        $notif = DashboardController::notification();
+        $verifikasi_count = $notif['verifikasi_count'];
+        $transaksi_count = $notif['transaksi_count'];
+        $sum = $notif['sum'];
+
         $jadwal = Jadwal::whereYear('tgl_sprint', $tahun)->get();
         foreach ($jadwal as $format_jadwal) {
             $format_jadwal->tgl_sprint = Carbon::parse($format_jadwal->tgl_sprint);
@@ -45,6 +58,9 @@ class ReportController extends Controller
         return view('laporan.filter',[
             'title' => 'Laporan',
             'active' => 'active',
+            'verifikasi_count' => $verifikasi_count,
+            'transaksi_count' => $transaksi_count,
+            'sum' => $sum,
             'data_tahun' => $tahun,
             'data_jadwal' => $jadwal,
             'data_transaksi' => $transaksi,
@@ -54,6 +70,11 @@ class ReportController extends Controller
     }
 
     public function filterByJadwal(Request $request, $tahun){
+        $notif = DashboardController::notification();
+        $verifikasi_count = $notif['verifikasi_count'];
+        $transaksi_count = $notif['transaksi_count'];
+        $sum = $notif['sum'];
+
         $jadwal = Jadwal::whereYear('tgl_sprint', $tahun)->get();
         foreach ($jadwal as $format_jadwal) {
             $format_jadwal->tgl_sprint = Carbon::parse($format_jadwal->tgl_sprint);
@@ -84,6 +105,9 @@ class ReportController extends Controller
         return view('laporan.filter',[
             'title' => 'Laporan',
             'active' => 'active',
+            'verifikasi_count' => $verifikasi_count,
+            'transaksi_count' => $transaksi_count,
+            'sum' => $sum,
             'data_tahun' => $tahun,
             'data_jadwal' => $jadwal,
             'data_transaksi' => $transaksi,

@@ -11,25 +11,50 @@ class PegawaiController extends Controller
 {
     public function myProfile()
     {
+        $notif = DashboardController::notification();
+        $verifikasi_count = $notif['verifikasi_count'];
+        $transaksi_count = $notif['transaksi_count'];
+        $sum = $notif['sum'];
+
         return view('pegawai.profile', [
             'active' => 'active',
             'title' => 'Profile',
+            'verifikasi_count' => $verifikasi_count,
+            'transaksi_count' => $transaksi_count,
+            'sum' => $sum,
         ]);
     }
 
     public function index()
     {
+        $notif = DashboardController::notification();
+        $verifikasi_count = $notif['verifikasi_count'];
+        $transaksi_count = $notif['transaksi_count'];
+        $sum = $notif['sum'];
+
         $pegawai = Pegawai::all();
-        return view('pegawai.index')->with('data_pegawai', $pegawai)
+        return view('pegawai.index')
+        ->with('verifikasi_count', $verifikasi_count)
+        ->with('transaksi_count', $transaksi_count)
+        ->with('sum', $sum)
+        ->with('data_pegawai', $pegawai)
         ->with('active', 'active')
         ->with('title', 'Pegawai');
     }
 
     public function create()
     {
+        $notif = DashboardController::notification();
+        $verifikasi_count = $notif['verifikasi_count'];
+        $transaksi_count = $notif['transaksi_count'];
+        $sum = $notif['sum'];
+        
         return view('pegawai.create', [
             'active' => 'active',
             'title' => 'Pegawai',
+            'verifikasi_count' => $verifikasi_count,
+            'transaksi_count' => $transaksi_count,
+            'sum' => $sum,
         ]);
     }
 

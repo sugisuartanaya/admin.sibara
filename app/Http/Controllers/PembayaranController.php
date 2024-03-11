@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\DB;
 class PembayaranController extends Controller
 {
     public function show($id){
+        $notif = DashboardController::notification();
+        $verifikasi_count = $notif['verifikasi_count'];
+        $transaksi_count = $notif['transaksi_count'];
+        $sum = $notif['sum'];
+
         $payment = Transaksi::select('transaksis.*', 
                                      'barang_rampasans.id as id_barang', 
                                      'barang_rampasans.nama_barang', 
@@ -43,6 +48,9 @@ class PembayaranController extends Controller
         return view('pembayaran.show', [
             'title' => 'Transaksi',
             'active' => 'active',
+            'verifikasi_count' => $verifikasi_count,
+            'transaksi_count' => $transaksi_count,
+            'sum' => $sum,
             'payment' => $payment,
             'pembeli' => $pembeliTransaksi
         ]);

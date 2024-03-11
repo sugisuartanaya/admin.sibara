@@ -12,46 +12,23 @@ class PembeliController extends Controller
    
     public function index()
     {
+        $notif = DashboardController::notification();
+        $verifikasi_count = $notif['verifikasi_count'];
+        $transaksi_count = $notif['transaksi_count'];
+        $sum = $notif['sum'];
+
         $pembeli = Pembeli::orderBy('id', 'desc')->get();
 
         // Kembalikan data ke tampilan
         return view('pembeli.index', [
             'title' => 'Pembeli',
             'active' => 'active',
+            'verifikasi_count' => $verifikasi_count,
+            'transaksi_count' => $transaksi_count,
+            'sum' => $sum,
             'daftarPembeli' => $pembeli,
         ]);
     }
-
-    
-    public function create()
-    {
-        //
-    }
-
-    
-    public function store(Request $request)
-    {
-        //
-    }
-
-    
-    public function show($id)
-    {
-        //
-    }
-
-    
-    public function edit($id)
-    {
-        //
-    }
-
-   
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
     
     public function destroy($id)
     {

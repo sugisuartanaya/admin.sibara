@@ -15,6 +15,11 @@ class PenawaranController extends Controller
     
     public function show($id)
     {
+        $notif = DashboardController::notification();
+        $verifikasi_count = $notif['verifikasi_count'];
+        $transaksi_count = $notif['transaksi_count'];
+        $sum = $notif['sum'];
+
         $jadwal = Jadwal::find($id);
         $id_jadwal = $jadwal->id;
 
@@ -38,13 +43,22 @@ class PenawaranController extends Controller
         return view('penawaran.show',[
             'title' => 'Transaksi',
             'active' => 'active',
+            'verifikasi_count' => $verifikasi_count,
+            'transaksi_count' => $transaksi_count,
+            'sum' => $sum,
             'jadwal' => $jadwal,
             'daftar_barang' => $barangs,
             'penawaran' => $penawaran
         ]);
     }
 
-    public function detail($jadwalId, $barangId){
+    public function detail($jadwalId, $barangId)
+    {
+
+        $notif = DashboardController::notification();
+        $verifikasi_count = $notif['verifikasi_count'];
+        $transaksi_count = $notif['transaksi_count'];
+        $sum = $notif['sum'];
 
         $jadwal = Jadwal::find($jadwalId);
         $id_jadwal = $jadwal->id;
@@ -88,6 +102,9 @@ class PenawaranController extends Controller
         return view('penawaran.bidder', [
             'title' => 'Transaksi',
             'active' => 'active',
+            'verifikasi_count' => $verifikasi_count,
+            'transaksi_count' => $transaksi_count,
+            'sum' => $sum,
             'jadwal' => $jadwal,
             'barang' => $barang,
             'data_penawaran' => $penawaran,

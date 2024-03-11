@@ -23,6 +23,11 @@ class BarangRampasanController extends Controller
      */
     public function index()
     {
+        $notif = DashboardController::notification();
+        $verifikasi_count = $notif['verifikasi_count'];
+        $transaksi_count = $notif['transaksi_count'];
+        $sum = $notif['sum'];
+
         $barang = Barang_rampasan::with('kategori')
                     // ->where('status', 0)
                     ->orderByDesc('id')
@@ -46,16 +51,27 @@ class BarangRampasanController extends Controller
         ->with('data_barang', $barang)
         ->with('active', 'active')
         ->with('harga', $harga_terakhir)
-        ->with('title', 'Barang Rampasan');
+        ->with('title', 'Barang Rampasan')
+        ->with('verifikasi_count', $verifikasi_count)
+        ->with('transaksi_count', $transaksi_count)
+        ->with('sum', $sum);
     }
 
     
     public function create()
     {
+        $notif = DashboardController::notification();
+        $verifikasi_count = $notif['verifikasi_count'];
+        $transaksi_count = $notif['transaksi_count'];
+        $sum = $notif['sum'];
+
         $kategori = Kategori::all();
         return view('barangRampasan.create')->with('data_kategori', $kategori)
         ->with('active', 'active')
-        ->with('title', 'Barang Rampasan');
+        ->with('title', 'Barang Rampasan')
+        ->with('verifikasi_count', $verifikasi_count)
+        ->with('transaksi_count', $transaksi_count)
+        ->with('sum', $sum);
     }
   
     public function store(Request $request)
@@ -148,6 +164,11 @@ class BarangRampasanController extends Controller
    
     public function show($id)
     {
+        $notif = DashboardController::notification();
+        $verifikasi_count = $notif['verifikasi_count'];
+        $transaksi_count = $notif['transaksi_count'];
+        $sum = $notif['sum'];
+        
         $barang = Barang_rampasan::find($id);
         $fotoBarangArray = json_decode($barang->foto_barang, true);
         $harga = Harga_wajar::where('id_barang', $id)
@@ -165,6 +186,9 @@ class BarangRampasanController extends Controller
         }
 
         return view('barangRampasan.show')
+            ->with('verifikasi_count', $verifikasi_count)
+            ->with('transaksi_count', $transaksi_count)
+            ->with('sum', $sum)
             ->with('data_barang', $barang)
             ->with('foto_barang', $fotoBarangArray)
             ->with('expired', $expired)
@@ -175,9 +199,17 @@ class BarangRampasanController extends Controller
     
     public function edit($id)
     {
+        $notif = DashboardController::notification();
+        $verifikasi_count = $notif['verifikasi_count'];
+        $transaksi_count = $notif['transaksi_count'];
+        $sum = $notif['sum'];
+
         $kategori = Kategori::all();
         $barang = Barang_rampasan::where('nama_barang', $id)->first();
         return view('barangRampasan.edit')
+            ->with('verifikasi_count', $verifikasi_count)
+            ->with('transaksi_count', $transaksi_count)
+            ->with('sum', $sum)
             ->with('data_barang', $barang)
             ->with('data_kategori', $kategori)
             ->with('active', 'active')

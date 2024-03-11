@@ -17,6 +17,11 @@ class DaftarBarangController extends Controller
        
     public function create($id)
     {
+        $notif = DashboardController::notification();
+        $verifikasi_count = $notif['verifikasi_count'];
+        $transaksi_count = $notif['transaksi_count'];
+        $sum = $notif['sum'];
+
         $jadwal = Jadwal::find($id);
 
         $barangRampasanData = Barang_rampasan::where(function ($query) use ($jadwal) {
@@ -33,6 +38,9 @@ class DaftarBarangController extends Controller
         return view('daftarBarang.create')
             ->with('active', 'active')
             ->with('jadwal', $jadwal)
+            ->with('verifikasi_count', $verifikasi_count)
+            ->with('transaksi_count', $transaksi_count)
+            ->with('sum', $sum)
             ->with('data_barang', $barangRampasanData)
             ->with('title', 'Jadwal');
     }
@@ -61,6 +69,11 @@ class DaftarBarangController extends Controller
 
     public function show($id)
     {
+        $notif = DashboardController::notification();
+        $verifikasi_count = $notif['verifikasi_count'];
+        $transaksi_count = $notif['transaksi_count'];
+        $sum = $notif['sum'];
+
         $jadwal = Jadwal::where('id', $id)->first();
         $jadwal->start_date = Carbon::parse($jadwal->start_date);
         $jadwal->end_date = Carbon::parse($jadwal->end_date);
@@ -75,6 +88,9 @@ class DaftarBarangController extends Controller
             ->with('jadwal', $jadwal)
             ->with('daftar', $daftar)
             ->with('filter', $filteredJadwal)
+            ->with('verifikasi_count', $verifikasi_count)
+            ->with('transaksi_count', $transaksi_count)
+            ->with('sum', $sum)
             ->with('active', 'active')
             ->with('title', 'Jadwal');
     }

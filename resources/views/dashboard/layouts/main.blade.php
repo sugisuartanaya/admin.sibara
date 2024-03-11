@@ -80,19 +80,19 @@
                   <div class="dropdown for-notification">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-bell"></i>
-                        @if($verifikasi > 0)
+                        @if($sum > 0)
                           <span class="count bg-danger">{{ $sum }}</span>
                         @endif
                     </button>
                     <div class="dropdown-menu" aria-labelledby="notification">
-                        <p class="red">You have {{ $verifikasi }} Notification</p>
+                        <p class="red">You have {{ $sum }} Notification</p>
                         <a class="dropdown-item media" href="/pembeli">
                             <i class="fa fa-user"></i>
-                            <p>{{ $verifikasi }} Verifikasi akun</p>
+                            <p>{{ $verifikasi_count }} Verifikasi akun</p>
                         </a>
                         <a class="dropdown-item media" href="/transaksi">
                             <i class="fa fa-shopping-cart"></i>
-                            <p>{{ $transaksi }} Verifikasi transaksi</p>
+                            <p>{{ $transaksi_count }} Verifikasi transaksi</p>
                         </a>
                     </div>
                 </div>

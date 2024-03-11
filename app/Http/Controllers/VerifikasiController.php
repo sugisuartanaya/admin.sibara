@@ -13,6 +13,11 @@ class VerifikasiController extends Controller
     
     public function show($id)
     {
+        $notif = DashboardController::notification();
+        $verifikasi_count = $notif['verifikasi_count'];
+        $transaksi_count = $notif['transaksi_count'];
+        $sum = $notif['sum'];
+        
         $pembeli = Pembeli::find($id);
         $verifikasi = Verifikasi::where('id_pembeli', $pembeli->id)->get();
         $last_verify = Verifikasi::where('id_pembeli', $pembeli->id)->orderBy('id', 'desc')->first();
@@ -21,6 +26,9 @@ class VerifikasiController extends Controller
         return view('verifikasi.show')
         ->with('active', 'active')
         ->with('title', 'Pembeli')
+        ->with('verifikasi_count', $verifikasi_count)
+        ->with('transaksi_count', $transaksi_count)
+        ->with('sum', $sum)
         ->with('verifikasi', $verifikasi)
         ->with('last_verify', $last_verify)
         ->with('waKomentar', $komentarweb)

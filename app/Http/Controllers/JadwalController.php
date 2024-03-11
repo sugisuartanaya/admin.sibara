@@ -14,6 +14,11 @@ class JadwalController extends Controller
     
     public function index()
     {
+        $notif = DashboardController::notification();
+        $verifikasi_count = $notif['verifikasi_count'];
+        $transaksi_count = $notif['transaksi_count'];
+        $sum = $notif['sum'];
+
         $jadwal = Jadwal::orderBy('id', 'desc')->get();
         foreach ($jadwal as $format_jadwal) {
             $format_jadwal->start_date = Carbon::parse($format_jadwal->start_date);
@@ -29,6 +34,9 @@ class JadwalController extends Controller
 
 
         return view('jadwal.index')
+            ->with('verifikasi_count', $verifikasi_count)
+            ->with('transaksi_count', $transaksi_count)
+            ->with('sum', $sum)
             ->with('data_jadwal', $jadwal)
             ->with('filter', $filteredJadwal)
             ->with('active', 'active')
@@ -37,7 +45,15 @@ class JadwalController extends Controller
 
     public function create()
     {
+        $notif = DashboardController::notification();
+        $verifikasi_count = $notif['verifikasi_count'];
+        $transaksi_count = $notif['transaksi_count'];
+        $sum = $notif['sum'];
+
         return view('jadwal.create',[
+            'verifikasi_count' => $verifikasi_count,
+            'transaksi_count' => $transaksi_count,
+            'sum' => $sum,
             'title' => 'Jadwal',
             'active' => 'active'
         ]);
@@ -68,8 +84,16 @@ class JadwalController extends Controller
 
     public function edit($id)
     {
+        $notif = DashboardController::notification();
+        $verifikasi_count = $notif['verifikasi_count'];
+        $transaksi_count = $notif['transaksi_count'];
+        $sum = $notif['sum'];
+
         $jadwal = Jadwal::find($id);
         return view('jadwal.edit')
+            ->with('verifikasi_count', $verifikasi_count)
+            ->with('transaksi_count', $transaksi_count)
+            ->with('sum', $sum)
             ->with('jadwal', $jadwal)
             ->with('active', 'active')
             ->with('title', 'Jadwal');

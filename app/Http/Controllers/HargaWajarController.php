@@ -12,8 +12,16 @@ class HargaWajarController extends Controller
     
     public function create($id)
     {
+        $notif = DashboardController::notification();
+        $verifikasi_count = $notif['verifikasi_count'];
+        $transaksi_count = $notif['transaksi_count'];
+        $sum = $notif['sum'];
+
         $barang = Barang_rampasan::find($id);
         return view('hargaWajar.create')
+            ->with('sum', $sum)
+            ->with('verifikasi_count', $verifikasi_count)
+            ->with('transaksi_count', $transaksi_count)
             ->with('data_barang', $barang)
             ->with('active', 'active')
             ->with('title', 'Barang Rampasan');
@@ -42,10 +50,18 @@ class HargaWajarController extends Controller
 
     public function edit($id)
     {
+        $notif = DashboardController::notification();
+        $verifikasi_count = $notif['verifikasi_count'];
+        $transaksi_count = $notif['transaksi_count'];
+        $sum = $notif['sum'];
+
         $harga = Harga_wajar::find($id);
         return view('hargaWajar.edit')->with('harga', $harga)
         ->with('active', 'active')
-        ->with('title', 'Barang Rampasan');
+        ->with('title', 'Barang Rampasan')
+        ->with('verifikasi_count', $verifikasi_count)
+        ->with('transaksi_count', $transaksi_count)
+        ->with('sum', $sum);
     }
 
     public function update(Request $request, $id)

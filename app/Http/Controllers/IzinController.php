@@ -12,8 +12,16 @@ class IzinController extends Controller
        
     public function create($id)
     {
+        $notif = DashboardController::notification();
+        $verifikasi_count = $notif['verifikasi_count'];
+        $transaksi_count = $notif['transaksi_count'];
+        $sum = $notif['sum'];
+
         $barang = Barang_rampasan::find($id);
         return view('izin.create')
+            ->with('verifikasi_count', $verifikasi_count)
+            ->with('transaksi_count', $transaksi_count)
+            ->with('sum', $sum)
             ->with('data_barang', $barang)
             ->with('active', 'active')
             ->with('title', 'Barang Rampasan');
@@ -42,8 +50,17 @@ class IzinController extends Controller
     
     public function edit($id)
     {
+        $notif = DashboardController::notification();
+        $verifikasi_count = $notif['verifikasi_count'];
+        $transaksi_count = $notif['transaksi_count'];
+        $sum = $notif['sum'];
+
         $izin = Izin::find($id);
-        return view('izin.edit')->with('izin', $izin)
+        return view('izin.edit')
+        ->with('verifikasi_count', $verifikasi_count)
+        ->with('transaksi_count', $transaksi_count)
+        ->with('sum', $sum)
+        ->with('izin', $izin)
         ->with('active', 'active')
         ->with('title', 'Barang Rampasan'); 
     }
