@@ -43,9 +43,7 @@
                   </div>
                   <button class="btn btn-block login-btn mb-4" type="submit"> Login </button>
               </form>
-              
-                <a href="#!" class="forgot-password-link">Forgot password?</a>
-                <br><br>
+              <br><br>
             </div>
           </div>
         </div>

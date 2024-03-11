@@ -6,16 +6,22 @@ use Carbon\Carbon;
 use App\Models\Jadwal;
 
 use App\Models\Pembeli;
+use App\Models\Penawaran;
 use App\Models\Transaksi;
+use App\Models\Verifikasi;
 use Illuminate\Http\Request;
 use App\Models\Barang_rampasan;
-use App\Models\Penawaran;
 
 class DashboardController extends Controller
 {
     
     public function index()
     {
+        $notif = DashboardController::notification();
+        $verifikasi = $notif['verifikasi'];
+        $transaksi = $notif['transaksi'];
+        $sum = $notif['sum'];
+
         $barang = Barang_rampasan::all();
         $datajadwal = Jadwal::all();
         $pembeli = Pembeli::all();
@@ -47,7 +53,19 @@ class DashboardController extends Controller
             'pembeli' => $pembeli, 
             'jadwal' => $jadwal, 
             'terjual' => $terjual,
-            'pendapatan' => $jumlah_harga_bid
+            'pendapatan' => $jumlah_harga_bid,
+            'sum' => $sum,
+            'transaksi' => $transaksi,
+            'verifikasi' => $verifikasi
         ]);
     }
+
+    public static function notification()
+    {
+        $verifikasi = Verifikasi::where('status', 'belum_verified')->count();
+        $transaksi = Transaksi::where('status', 'review')->count();
+        $sum = $verifikasi + $transaksi;
+
+        return ['transaksi' => $transaksi, 'verifikasi' => $verifikasi, 'sum' => $sum];
+    } 
 }
