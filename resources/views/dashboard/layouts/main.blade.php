@@ -35,7 +35,6 @@
               <li class="{{ ($title === "Pegawai") ? 'active' : '' }}">
                 <a href="/pegawai"><i class="menu-icon fa fa-users"></i>Pegawai</a>
               </li>
-            @else
             @endif
             
             <li class="{{ ($title === "Pembeli") ? 'active' : '' }}">
@@ -44,9 +43,11 @@
             <li class="{{ ($title === "Jadwal") ? 'active' : '' }}">
               <a href="/jadwal"><i class="menu-icon fa fa-calendar"></i>Jadwal</a>
             </li>
-            <li class="{{ ($title === "Kategori") ? 'active' : '' }}">
-              <a href="/kategori"><i class="menu-icon fa fa-tags"></i>Kategori</a>
-            </li>
+            @if(Auth::check() && Auth::user()->pegawai->is_admin == 1)
+              <li class="{{ ($title === "Kategori") ? 'active' : '' }}">
+                <a href="/kategori"><i class="menu-icon fa fa-tags"></i>Kategori</a>
+              </li>
+            @endif
             <li class="{{ ($title === "Barang Rampasan") ? 'active' : '' }}">
               <a href="/barang-rampasan"><i class="menu-icon fa fa-cube"></i>Barang Rampasan</a>
             </li>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\CheckAdmin;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IzinController;
 use App\Http\Controllers\UserController;
@@ -40,16 +41,16 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('aut
 
 Route::get('/profile', [pegawaiController::class, 'myProfile'])->middleware('auth');
 
-Route::resource('pegawai', PegawaiController::class)->middleware('checkAdmin')->middleware('auth');
-
 Route::put('updateUser/{id}', [UserController::class, 'updateUser'])->middleware('auth');
-
-Route::post('/admin/tambahPegawai', [AdminController::class, 'storePegawai'])->middleware('auth');
-Route::get('/editpegawai/{nip}/edit', [AdminController::class, 'editPegawai'])->middleware('auth');
-Route::put('/updatepegawai/{id}', [AdminController::class, 'updatePegawai'])->middleware('auth');
-Route::delete('/deletepegawai/{nip}', [AdminController::class, 'destroyPegawai'])->middleware('auth');
-
-Route::resource('kategori', KategoriController::class)->middleware('auth');
+Route::group(['middleware' => 'checkAdmin'], function () {
+  Route::resource('pegawai', PegawaiController::class)->middleware('auth');
+  Route::post('/admin/tambahPegawai', [AdminController::class, 'storePegawai'])->middleware('auth');
+  Route::get('/editpegawai/{nip}/edit', [AdminController::class, 'editPegawai'])->middleware('auth');
+  Route::put('/updatepegawai/{id}', [AdminController::class, 'updatePegawai'])->middleware('auth');
+  Route::delete('/deletepegawai/{nip}', [AdminController::class, 'destroyPegawai'])->middleware('auth');
+  
+  Route::resource('kategori', KategoriController::class)->middleware('auth');
+});
 
 Route::resource('barang-rampasan', BarangRampasanController::class)->middleware('auth');
 Route::get('generate-qr/{id}', [BarangRampasanController::class, 'generateQR'])->name('qr');
