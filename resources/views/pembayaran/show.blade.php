@@ -19,7 +19,7 @@
                       <ol class="breadcrumb text-right">
                           <li><a href="/dashboard">Dashboard</a></li>
                           <li><a href="/transaksi">Transaksi</a></li>
-                          <li class="active">Detail</li>
+                          <li class="active">Pembayaran</li>
                       </ol>
                   </div>
               </div>
