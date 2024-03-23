@@ -67,7 +67,47 @@
                         @else 
                           <td style="vertical-align: middle;"><span class="badge badge-success">Sukses</span></td>
                           <td style="vertical-align: middle;">
-                            <a href="/cetak-kwitansi/{{ $pay->id_penawaran }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-original-title="Cetak Kwitansi"><i class="fa fa-file-text"></i></a>
+                            {{-- <a href="/cetak-kwitansi/{{ $pay->id_penawaran }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-original-title="Cetak Kwitansi"><i class="fa fa-file-text"></i></a> --}}
+                            <form id="kwitansiForm" class="d-inline" action="/cetak-kwitansi/{{ $pay->id_penawaran }}" method="post">
+                              @csrf
+                              <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" 
+                                data-target="#kwitansi{{ $pay->id_penawaran }}"><i class="fa fa-file-text"></i>
+                              </button>
+
+                              <div class="modal" id="kwitansi{{ $pay->id_penawaran }}">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h4 class="modal-title">Pilih Penanda Tangan</h4>
+                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <div class="form-group">
+                                        <label class=" form-control-label">Panitia Penjualan Langsung</label>
+                                        <select name="pegawai" id="kategori_id" class="form-control">
+                                          @foreach ($pegawai as $p)
+                                            <option value="{{ $p->id }}">{{ $p->nama_pegawai }}</option>
+                                          @endforeach
+                                        </select>
+                                      </div>
+                                      <div class="form-group">
+                                        <label class="form-control-label">Kasi PB3R</label>
+                                        <input id="kasiInput" type="text" name="kasi" value="{{ $kasi->nama_pegawai }}" class="form-control" disabled>
+                                      </div>
+                                      <button type="button" class="plhButton btn btn-primary btn-sm">Terdapat Pelaksana Harian?</button>
+                                      <div class="form-group">
+                                        <input type="text" name="plh" class="plhInput form-control" placeholder="Masukkan nama Pelaksana Harian" style="display: none;">
+                                      </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                      <button type="submit" name="submit" class="btn btn-danger btn-sm">Confirm</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+
                             <a href="/cetak-bukti/{{ $pay->id_penawaran }}" class="btn btn-warning btn-sm" data-toggle="tooltip" data-original-title="Cetak Bukti"><i class="menu-icon fa fa-print"></i></a>
                           </td>
                         @endif

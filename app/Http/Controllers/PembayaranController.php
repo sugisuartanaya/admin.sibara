@@ -7,6 +7,7 @@ use App\Models\Penawaran;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use App\Models\Barang_rampasan;
+use App\Models\Pegawai;
 use Illuminate\Support\Facades\DB;
 
 class PembayaranController extends Controller
@@ -16,6 +17,10 @@ class PembayaranController extends Controller
         $verifikasi_count = $notif['verifikasi_count'];
         $transaksi_count = $notif['transaksi_count'];
         $sum = $notif['sum'];
+        $petugas = Pegawai::where('jabatan', 'petugas')
+                            ->where('is_admin', 0)
+                            ->get();
+        $kasi = Pegawai::where('jabatan', 'kasi')->first();
 
         $payment = Transaksi::select('transaksis.*', 
                                      'barang_rampasans.id as id_barang', 
@@ -52,7 +57,9 @@ class PembayaranController extends Controller
             'transaksi_count' => $transaksi_count,
             'sum' => $sum,
             'payment' => $payment,
-            'pembeli' => $pembeliTransaksi
+            'pembeli' => $pembeliTransaksi,
+            'pegawai' => $petugas,
+            'kasi' => $kasi
         ]);
     }
 

@@ -236,6 +236,16 @@ jQuery(document).ready(function($) {
 		});
 	});
 
+	$(document).ready(function(){
+		$('.plhButton').click(function(){
+				$(this).closest('.modal-body').find('.plhInput').toggle();
+				$(this).hide(); // Menghilangkan tombol "Terdapat PLH?" setelah diklik
+		});
+		$('#kwitansiForm').submit(function() {
+			$('#kasiInput').prop('disabled', false); // Mengaktifkan input sebelum form disubmit
+		});
+	});
+
 	
 });
 

@@ -99,7 +99,7 @@ Route::get('report', [ReportController::class, 'index'])->middleware('auth');;
 Route::get('report/{tahun}', [ReportController::class, 'filter'])->middleware('auth');;
 Route::post('report/{tahun}/detail', [ReportController::class, 'filterByJadwal'])->middleware('auth');;
 
-Route::get('cetak-kwitansi/{id}', [PrintPdfController::class, 'cetak_kwitansi'])->middleware('auth');;
+Route::post('cetak-kwitansi/{id}', [PrintPdfController::class, 'cetak_kwitansi'])->middleware('auth');;
 Route::get('cetak-bukti/{id}', [PrintPdfController::class, 'cetak_bukti'])->middleware('auth');;
 Route::get('batch-kwitansi/{pembeliID}/{jadwalID}', [PrintPdfController::class, 'batch_kwitansi'])->middleware('auth');;
 Route::get('batch-bukti/{pembeliID}/{jadwalID}', [PrintPdfController::class, 'batch_bukti'])->middleware('auth');;

@@ -10,6 +10,7 @@ use App\Models\Pembeli;
 use App\Models\Penawaran;
 use App\Models\Transaksi;
 use iio\libmergepdf\Merger;
+use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class PrintPdfController extends Controller
@@ -42,7 +43,7 @@ class PrintPdfController extends Controller
 
     }
 
-    public function cetak_kwitansi($id){
+    public function cetak_kwitansi(Request $request, $id){
         $penawaran = Penawaran::find($id);
         $pembeli = Pembeli::where('id', $penawaran->id_pembeli)->first();
         $nominal = $penawaran->harga_bid;
@@ -51,11 +52,13 @@ class PrintPdfController extends Controller
         $today = now();
         $today = Carbon::parse($today)->translatedFormat('j F Y');
 
-        $petugas = Pegawai::where('jabatan', 'petugas')
-                            ->where('is_admin', 0)
-                            ->first();
-        $kasi = Pegawai::where('jabatan', 'kasi')
-                            ->first();
+        $petugas = Pegawai::find($request->pegawai);
+
+        if($request->plh == null) {
+            $kasi = Pegawai::where('nama_pegawai', $request->kasi)->first();
+        } else {
+            $kasi = $request->plh;
+        }
 
         $pdf = PDF::loadView('pdf.kwitansi', 
             ['penawaran' => $penawaran, 
